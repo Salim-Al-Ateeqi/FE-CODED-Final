@@ -1,13 +1,17 @@
 import { StatusBar } from "expo-status-bar";
+import { NativeBaseProvider } from "native-base";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import Signup from "./Components/Authentication/Signup";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <View style={styles.container}>
+        <Signup />
+        <StatusBar style="auto" />
+      </View>
+    </NativeBaseProvider>
   );
 }
 
