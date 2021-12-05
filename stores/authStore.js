@@ -24,10 +24,10 @@ class AuthStore {
 		try {
 			const res = await instance.post("/register", userData);
 			this.setUser(res.data.token);
-			// navigation.replace("Tabs");
+			this.checkUserValidated(toast, navigation, true)
 			toast.show({
 				status: "success",
-				title: `Welcome`,
+				title: `Account Created`,
 			});
 		} catch (error) {
 			console.log("register error", error);
@@ -39,15 +39,40 @@ class AuthStore {
 		}
 	};
 
-	login = async (userData, navigation, toast) => {
+	checkUserValidated = (toast, navigation, showToast=false) => {
+		if (this.user.isValidated) {
+			if (showToast) {
+				toast.show({
+					status: "success",
+					title: `Account Verified!`,
+				});
+			}
+			navigation.replace("Home");
+		} else {
+			toast.show({
+				status: "error",
+				title: "Invalid Token",
+				description: "The token is incorrect",
+			});
+			navigation.replace("ValidateToken");
+		}
+	};
+
+	validateToken = async (userData, toast, navigation) => {
+		try {
+			const res = await instance.post("/verifyTwilio", userData);
+			this.setUser(res.data.token);
+			this.checkUserValidated(toast, navigation)
+		} catch (error) {
+			console.log("register error", error);
+		}
+	}
+
+	login = async (userData, toast, navigation) => {
 		try {
 			const res = await instance.post("/login", userData);
 			this.setUser(res.data.token);
-			toast.show({
-				status: "success",
-				title: `Welcome`,
-			});
-			// navigation.replace("Tabs");
+			this.checkUserValidated(toast, navigation, true)
 		} catch (error) {
 			console.log("login error", error);
 			toast.show({

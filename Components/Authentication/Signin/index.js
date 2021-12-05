@@ -8,19 +8,22 @@ import {
   Link,
   VStack,
   Text,
+  useToast
 } from "native-base";
 import React, { useState } from "react";
 import authStore from "../../../stores/authStore";
 import { observer } from "mobx-react";
 
-const Signin = () => {
+const Signin = ({ navigation }) => {
   const [credentials, setCredentials] = useState({
-    phoneNumber: "",
+    username: "",
     password: "",
   });
 
+  const toast = useToast();
+
   const handleSubmit = () => {
-    authStore.login(credentials);
+    authStore.login(credentials, toast, navigation);
   };
   return (
     <Box>
@@ -35,9 +38,8 @@ const Signin = () => {
         <FormControl>
           <FormControl.Label>Phone Number</FormControl.Label>
           <Input
-            keyboardType={"number-pad"}
-            onChangeText={(phoneNumber) =>
-              setCredentials({ ...credentials, phoneNumber })
+            onChangeText={(username) =>
+              setCredentials({ ...credentials, username })
             }
           />
         </FormControl>

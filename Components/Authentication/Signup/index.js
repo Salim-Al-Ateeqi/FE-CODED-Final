@@ -12,6 +12,7 @@ import {
 	HStack,
 	Center,
 	useToast,
+	Spinner
 } from "native-base";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -20,7 +21,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import authStore from "../../../stores/authStore";
 import { ScrollView } from "react-native-gesture-handler";
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
 	const toast = useToast();
 	const [number, setNumber] = useState("");
 
@@ -51,7 +52,7 @@ const Signup = () => {
 
 	const handleSubmit = () => {
 		handleCheckPassword();
-		authStore.register(user, toast);
+		authStore.register(user, toast, navigation);
 	};
 
 	return (
@@ -166,6 +167,7 @@ const Signup = () => {
 										fontWeight: "medium",
 										fontSize: "sm",
 									}}
+									onPress={()=>navigation.navigate("Signin")}
 								>
 									Login
 								</Link>
