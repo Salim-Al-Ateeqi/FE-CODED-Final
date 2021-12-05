@@ -1,24 +1,173 @@
 
-// import React, { useState } from "react";
-// import "react-phone-number-input/style.css";
-// import PhoneInput from "react-phone-number-input";
-// import { Container, View } from "native-base";
-// import styles from "../styles";
+import React, { useState } from "react";
+import IntlPhoneInput from "react-native-intl-phone-input";
+import {
+	Box,
+	Text,
+	Heading,
+	VStack,
+	FormControl,
+	Input,
+	Link,
+	Button,
+	HStack,
+	Center,
+	NativeBaseProvider,
+	useToast,
+} from "native-base";
 
-// const Signup = () => {
-//   const [number, setNumber] = useState();
-//   return (
-//     <View style={styles.background}>
-//       <Container style={styles.signupContainer}>
-//         <PhoneInput
-//           international
-//           defaultCountry="KW"
-//           value={number}
-//           onChange={setNumber}
-//         />
-//       </Container>
-//     </View>
-//   );
-// };
+import styles from "../styles";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-// export default Signup;
+// stores
+import authStore from "../../../stores/authStore";
+
+const Signup = () => {
+	const toast = useToast();
+	const [number, setNumber] = useState("");
+
+	const [user, setUser] = useState({
+		phoneNumber: "",
+		password: "",
+		profile: { name: "" },
+	});
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [equalPassword, setEqualPassword] = useState(false);
+
+	// To handle the IntlPhoneInput library we need to pass this function
+	const handleNumber = ({
+		dialCode,
+		unmaskedPhoneNumber,
+		phoneNumber,
+		isVerified,
+	}) => {
+		setUser({ ...user, phoneNumber: dialCode + "-" + phoneNumber });
+	};
+
+	// To show the incorrect password for Confirm password field
+	const handleCheckPassword = () => {
+		confirmPassword === user.password
+			? setEqualPassword(false)
+			: setEqualPassword(true);
+	};
+
+	const handleSubmit = () => {
+		handleCheckPassword();
+		authStore.register(user, toast);
+	};
+
+	return (
+		<Box safeArea p="2" py="8" w="90%" maxW="290">
+			<KeyboardAwareScrollView>
+				<Heading
+					size="lg"
+					fontWeight="600"
+					color="coolGray.800"
+					_dark={{
+						color: "warmGray.50",
+					}}
+				>
+					Welcome
+				</Heading>
+				<Heading
+					mt="1"
+					_dark={{
+						color: "warmGray.200",
+					}}
+					color="coolGray.600"
+					fontWeight="medium"
+					size="xs"
+				>
+					Register please to continue!
+				</Heading>
+
+				{equalPassword && (
+					<Heading mt="3" color="#dc2626" fontWeight="medium" size="xs">
+						Your password's are not the same.
+					</Heading>
+				)}
+
+				<VStack space={3} mt="5">
+					<FormControl>
+						<FormControl.Label>Phone Number</FormControl.Label>
+						<IntlPhoneInput
+							containerStyle={{
+								borderColor: "#d4d4d4",
+								borderWidth: 1,
+								height: 50,
+								borderBottomColor: "#D1D3D4",
+								borderRadius: 5,
+							}}
+							flagStyle={{ fontSize: 25 }}
+							phoneInputStyle={{
+								lineHeight: 18,
+								// if english or arabic
+								// textAlign: i18nStore.language === "en" ? "left" : "right",
+							}}
+							onChangeText={handleNumber}
+							defaultCountry="KW"
+							modalCountryItemCountryNameStyle={{
+								fontSize: 15,
+							}}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormControl.Label>Name</FormControl.Label>
+						<Input
+							type="text"
+							placeholder="Enter your Name"
+							onChangeText={(name) =>
+								setUser({ ...user, profile: { name: name } })
+							}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormControl.Label>Password</FormControl.Label>
+						<Input
+							type="password"
+							placeholder="Enter your password"
+							onChangeText={(password) => setUser({ ...user, password })}
+						/>
+					</FormControl>
+
+					<FormControl>
+						<FormControl.Label>Confirm Password</FormControl.Label>
+						<Input
+							type="password"
+							placeholder="Confirm your password"
+							onChangeText={(value) => setConfirmPassword(value)}
+						/>
+					</FormControl>
+
+					<Button mt="2" colorScheme="success" onPress={handleSubmit}>
+						Register
+					</Button>
+					<HStack mt="6" justifyContent="center">
+						<Text
+							fontSize="sm"
+							color="coolGray.600"
+							_dark={{
+								color: "warmGray.200",
+							}}
+						>
+							I already have an account.{" "}
+						</Text>
+						<Link
+							_text={{
+								color: "#404040",
+								fontWeight: "medium",
+								fontSize: "sm",
+							}}
+						>
+							Login
+						</Link>
+					</HStack>
+				</VStack>
+			</KeyboardAwareScrollView>
+		</Box>
+	);
+};
+
+ export default Signup;
