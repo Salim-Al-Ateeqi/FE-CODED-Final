@@ -6,6 +6,8 @@ import Signup from "./Components/Authentication/Signup";
 import { NavigationContainer } from "@react-navigation/native";
 import RootNavigator from "./Components/Navigation/index";
 
+
+
 export default function App() {
   return (
     <NavigationContainer>
