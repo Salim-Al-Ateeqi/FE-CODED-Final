@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import IntlPhoneInput from "react-native-intl-phone-input";
 import {
@@ -12,15 +11,14 @@ import {
 	Button,
 	HStack,
 	Center,
-	NativeBaseProvider,
 	useToast,
 } from "native-base";
 
-import styles from "../styles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // stores
 import authStore from "../../../stores/authStore";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Signup = () => {
 	const toast = useToast();
@@ -57,117 +55,127 @@ const Signup = () => {
 	};
 
 	return (
-		<Box safeArea p="2" py="8" w="90%" maxW="290">
-			<KeyboardAwareScrollView>
-				<Heading
-					size="lg"
-					fontWeight="600"
-					color="coolGray.800"
-					_dark={{
-						color: "warmGray.50",
-					}}
-				>
-					Welcome
-				</Heading>
-				<Heading
-					mt="1"
-					_dark={{
-						color: "warmGray.200",
-					}}
-					color="coolGray.600"
-					fontWeight="medium"
-					size="xs"
-				>
-					Register please to continue!
-				</Heading>
-
-				{equalPassword && (
-					<Heading mt="3" color="#dc2626" fontWeight="medium" size="xs">
-						Your password's are not the same.
-					</Heading>
-				)}
-
-				<VStack space={3} mt="5">
-					<FormControl>
-						<FormControl.Label>Phone Number</FormControl.Label>
-						<IntlPhoneInput
-							containerStyle={{
-								borderColor: "#d4d4d4",
-								borderWidth: 1,
-								height: 50,
-								borderBottomColor: "#D1D3D4",
-								borderRadius: 5,
+		<KeyboardAwareScrollView>
+			<ScrollView>
+				<Center mt="20">
+					<Box safeArea p="2" py="8" w="100%" maxW="290">
+						<Heading
+							size="lg"
+							fontWeight="600"
+							color="coolGray.800"
+							_dark={{
+								color: "warmGray.50",
 							}}
-							flagStyle={{ fontSize: 25 }}
-							phoneInputStyle={{
-								lineHeight: 18,
-								// if english or arabic
-								// textAlign: i18nStore.language === "en" ? "left" : "right",
-							}}
-							onChangeText={handleNumber}
-							defaultCountry="KW"
-							modalCountryItemCountryNameStyle={{
-								fontSize: 15,
-							}}
-						/>
-					</FormControl>
-
-					<FormControl>
-						<FormControl.Label>Name</FormControl.Label>
-						<Input
-							type="text"
-							placeholder="Enter your Name"
-							onChangeText={(name) =>
-								setUser({ ...user, profile: { name: name } })
-							}
-						/>
-					</FormControl>
-
-					<FormControl>
-						<FormControl.Label>Password</FormControl.Label>
-						<Input
-							type="password"
-							placeholder="Enter your password"
-							onChangeText={(password) => setUser({ ...user, password })}
-						/>
-					</FormControl>
-
-					<FormControl>
-						<FormControl.Label>Confirm Password</FormControl.Label>
-						<Input
-							type="password"
-							placeholder="Confirm your password"
-							onChangeText={(value) => setConfirmPassword(value)}
-						/>
-					</FormControl>
-
-					<Button mt="2" colorScheme="success" onPress={handleSubmit}>
-						Register
-					</Button>
-					<HStack mt="6" justifyContent="center">
-						<Text
-							fontSize="sm"
-							color="coolGray.600"
+						>
+							Welcome
+						</Heading>
+						<Heading
+							mt="1"
 							_dark={{
 								color: "warmGray.200",
 							}}
+							color="coolGray.600"
+							fontWeight="medium"
+							size="xs"
 						>
-							I already have an account.{" "}
-						</Text>
-						<Link
-							_text={{
-								color: "#404040",
-								fontWeight: "medium",
-								fontSize: "sm",
-							}}
-						>
-							Login
-						</Link>
-					</HStack>
-				</VStack>
-			</KeyboardAwareScrollView>
-		</Box>
+							Register please to continue!
+						</Heading>
+
+						{equalPassword && (
+							<Heading mt="3" color="#dc2626" fontWeight="medium" size="xs">
+								Your password's are not the same.
+							</Heading>
+						)}
+
+						<VStack space={3} mt="5">
+							<FormControl>
+								<FormControl.Label>Phone Number</FormControl.Label>
+								<IntlPhoneInput
+									containerStyle={{
+										borderColor: "#d4d4d4",
+										borderWidth: 1,
+										height: 50,
+										borderBottomColor: "#D1D3D4",
+										borderRadius: 5,
+									}}
+									flagStyle={{ fontSize: 25 }}
+									phoneInputStyle={{
+										lineHeight: 18,
+										// if english or arabic
+										// textAlign: i18nStore.language === "en" ? "left" : "right",
+									}}
+									onChangeText={handleNumber}
+									defaultCountry="KW"
+									modalCountryItemCountryNameStyle={{
+										fontSize: 15,
+									}}
+								/>
+							</FormControl>
+
+							<FormControl>
+								<FormControl.Label>Name</FormControl.Label>
+								<Input
+									bg="#fff"
+									h="50"
+									type="text"
+									placeholder="Enter your Name"
+									onChangeText={(name) =>
+										setUser({ ...user, profile: { name: name } })
+									}
+								/>
+							</FormControl>
+
+							<FormControl>
+								<FormControl.Label>Password</FormControl.Label>
+								<Input
+									bg="#fff"
+									h="50"
+									type="password"
+									placeholder="Enter your password"
+									onChangeText={(password) => setUser({ ...user, password })}
+								/>
+							</FormControl>
+
+							<FormControl>
+								<FormControl.Label>Confirm Password</FormControl.Label>
+								<Input
+									bg="#fff"
+									h="50"
+									type="password"
+									placeholder="Confirm your password"
+									onChangeText={(value) => setConfirmPassword(value)}
+								/>
+							</FormControl>
+
+							<Button mt="2" colorScheme="success" onPress={handleSubmit}>
+								Register
+							</Button>
+							<HStack mt="6" justifyContent="center">
+								<Text
+									fontSize="sm"
+									color="coolGray.600"
+									_dark={{
+										color: "warmGray.200",
+									}}
+								>
+									I already have an account.{" "}
+								</Text>
+								<Link
+									_text={{
+										color: "#404040",
+										fontWeight: "medium",
+										fontSize: "sm",
+									}}
+								>
+									Login
+								</Link>
+							</HStack>
+						</VStack>
+					</Box>
+				</Center>
+			</ScrollView>
+		</KeyboardAwareScrollView>
 	);
 };
 
- export default Signup;
+export default Signup;

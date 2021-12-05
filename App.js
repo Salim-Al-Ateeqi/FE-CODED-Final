@@ -1,29 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { NativeBaseProvider } from "native-base";
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import Signup from "./Components/Authentication/Signup";
+import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
+import { SSRProvider } from "@react-aria/ssr";
+
+// components
 import RootNavigator from "./Components/Navigation/index";
 
-
-
 export default function App() {
-
-  return (
-    <NavigationContainer>
-      <NativeBaseProvider>
-        <RootNavigator />
-      </NativeBaseProvider>
-    </NavigationContainer>
-  );
+	return (
+		<SSRProvider>
+			<NavigationContainer>
+				<NativeBaseProvider>
+					<RootNavigator />
+				</NativeBaseProvider>
+			</NavigationContainer>
+		</SSRProvider>
+	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});

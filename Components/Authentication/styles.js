@@ -11,15 +11,12 @@ const styles = StyleSheet.create({
 
 	//Sign-up
 
-
-  signupContainer: {
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-
-
-		// backgroundColor: "blue",
+	signupContainer: {
+		marginLeft: "auto",
+		marginRight: "auto",
 	},
+
+	// backgroundColor: "blue",
 
 	//Sign-in
 });
