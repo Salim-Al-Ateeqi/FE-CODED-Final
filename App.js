@@ -3,16 +3,18 @@ import { NativeBaseProvider } from "native-base";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Signup from "./Components/Authentication/Signup";
-import Signin from "./Components/Authentication/Signin";
+import { NavigationContainer } from "@react-navigation/native";
+import RootNavigator from "./Components/Navigation/index";
+
+
 
 export default function App() {
   return (
-    <NativeBaseProvider>
-      <View style={styles.container}>
-        <Signin />
-        <StatusBar style="auto" />
-      </View>
-    </NativeBaseProvider>
+    <NavigationContainer>
+      <NativeBaseProvider>
+        <RootNavigator />
+      </NativeBaseProvider>
+    </NavigationContainer>
   );
 }
 
