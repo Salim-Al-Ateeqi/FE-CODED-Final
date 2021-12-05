@@ -20,7 +20,7 @@ class AuthStore {
 		}
 	};
 
-	register = async (userData, navigation, toast) => {
+	register = async (userData, toast, navigation) => {
 		try {
 			const res = await instance.post("/register", userData);
 			this.setUser(res.data.token);
