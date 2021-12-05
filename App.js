@@ -3,12 +3,13 @@ import { NativeBaseProvider } from "native-base";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Signup from "./Components/Authentication/Signup";
+import Signin from "./Components/Authentication/Signin";
 
 export default function App() {
   return (
     <NativeBaseProvider>
       <View style={styles.container}>
-        <Signup />
+        <Signin />
         <StatusBar style="auto" />
       </View>
     </NativeBaseProvider>

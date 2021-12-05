@@ -5455,6 +5455,11 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
+react-native-intl-phone-input@^1.2.27:
+  version "1.2.27"
+  resolved "https://registry.yarnpkg.com/react-native-intl-phone-input/-/react-native-intl-phone-input-1.2.27.tgz#da9c5fda825519e5342899e87457798c4347526e"
+  integrity sha512-cq0yrokCriw2oTwWtJ7EjqxzxvGIUZkHmc4rqKB1RSigdBd1WnVByjij9ZnLodblNgU4mMnjaSk1tca3Wguz6w==
+
 react-native-safe-area-context@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"

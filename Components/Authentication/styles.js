@@ -12,10 +12,8 @@ const styles = StyleSheet.create({
   //Sign-up
 
   signupContainer: {
-    height: "50%",
-    width: "50%",
-    margin: "auto",
-    backgroundColor: "blue",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 
   //Sign-in
