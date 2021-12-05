@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import IntlPhoneInput from "react-native-intl-phone-input";
 import {
@@ -169,4 +170,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+ export default Signup;
