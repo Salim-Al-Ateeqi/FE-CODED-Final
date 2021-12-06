@@ -7,13 +7,13 @@ import { SSRProvider } from "@react-aria/ssr";
 import RootNavigator from "./Components/Navigation/index";
 
 export default function App() {
-	return (
-		<SSRProvider>
-			<NavigationContainer>
-				<NativeBaseProvider>
-					<RootNavigator />
-				</NativeBaseProvider>
-			</NavigationContainer>
-		</SSRProvider>
-	);
+  return (
+    <SSRProvider>
+      <NavigationContainer>
+        <NativeBaseProvider>
+          <RootNavigator />
+        </NativeBaseProvider>
+      </NavigationContainer>
+    </SSRProvider>
+  );
 }
