@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { instance } from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import imdbStore from "./imdbStore";
 
 class AuthStore {
   constructor() {
@@ -10,37 +11,37 @@ class AuthStore {
 
   user = null;
 
-  setUser = async (token) => {
-    try {
-      await AsyncStorage.setItem("myToken", token);
-      runInAction(() => {
-        this.user = decode(token);
-      });
+	setUser = async (token) => {
+		try {
+			await AsyncStorage.setItem("myToken", token);
+			runInAction(() => {
+				this.user = decode(token);
+			})
+			
+			instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-      instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  register = async (userData, toast, navigation) => {
-    try {
-      const res = await instance.post("/register", userData);
-      this.setUser(res.data.token);
-      this.checkUserValidated(toast, navigation, true);
-      toast.show({
-        status: "success",
-        title: `Account Created`,
-      });
-    } catch (error) {
-      console.log("register error", error);
-      toast.show({
-        status: "error",
-        title: "Invalid Login",
-        description: "The username or password you entered is incorrect",
-      });
-    }
-  };
+	register = async (userData, toast, navigation) => {
+		try {
+			const res = await instance.post("/register", userData);
+			await this.setUser(res.data.token);
+			this.checkUserValidated(toast, navigation, true)
+			toast.show({
+				status: "success",
+				title: `Account Created`,
+			});
+		} catch (error) {
+			console.log("register error", error);
+			toast.show({
+				status: "error",
+				title: "Invalid Login",
+				description: "The username or password you entered is incorrect",
+			});
+		}
+	};
 
   checkUserValidated = (toast, navigation, showToast = false) => {
     if (this.user.isValidated) {
@@ -50,7 +51,7 @@ class AuthStore {
           title: `Account Verified!`,
         });
       }
-      navigation.replace("Home");
+      navigation.replace("Tabs");
     } else {
       toast.show({
         status: "error",

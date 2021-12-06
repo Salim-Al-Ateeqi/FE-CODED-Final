@@ -7,6 +7,8 @@ import Signin from "../Authentication/Signin";
 import ValidateToken from "../Authentication/ValidateToken";
 import Tabs from "../DrawerNavigation/Tabs";
 import AddMembers from "../AddMembers";
+import CreateCustomPoll from "../CreateCustomPoll";
+import MoviePoll from "../../MoviePoll";
 
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
@@ -41,15 +43,23 @@ const RootNavigator = () => {
           headerShown: false,
         }}
       />
-<Screen
+			<Screen
+				name="CreateCustomPoll"
+				component={CreateCustomPoll}
+			/>
+			<Screen
+				name="MoviePoll"
+				component={MoviePoll}
+			/>
+      <Screen
 				name="Tabs"
 				component={Tabs}
 				options={{
 					headerShown: false,
 				}}
 			/>
-    </Navigator>
-  );
+		</Navigator>
+	);
 };
 
 export default RootNavigator;
