@@ -84,6 +84,16 @@ class GroupStore {
       console.log(error);
     }
   };
+
+  addMembersToGroup = async (groupId) => {
+    try {
+      const group = this.groups.find((group) => group._id === groupId);
+      const res = await instance.put(`/groups/${groupId}/members`);
+      for (const key in group) group[key] = res.data[key];
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 const groupStore = new GroupStore();
