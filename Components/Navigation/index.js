@@ -8,6 +8,7 @@ import ValidateToken from "../Authentication/ValidateToken";
 import Tabs from "../DrawerNavigation/Tabs";
 
 const RootNavigator = () => {
+
 	const { Navigator, Screen } = createStackNavigator();
 	return (
 		<Navigator initialRouteName="Tabs">
@@ -41,6 +42,5 @@ const RootNavigator = () => {
 			/>
 		</Navigator>
 	);
-};
 
 export default RootNavigator;
