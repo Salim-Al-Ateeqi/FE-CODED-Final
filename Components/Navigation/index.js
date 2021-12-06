@@ -11,33 +11,49 @@ import CreateCustomPoll from "../CreateCustomPoll";
 import MoviePoll from "../../MoviePoll";
 import Home from "../Home";
 
+
+// stores
+import authStore from "../../stores/authStore";
+import { observer } from "mobx-react";
+
 const RootNavigator = () => {
-  const { Navigator, Screen } = createStackNavigator();
-  return (
-    <Navigator initialRouteName="Home">
-      <Screen name="Home" component={Home} />
-      <Screen
-        name="Signup"
-        component={Signup}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="Signin"
-        component={Signin}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="ValidateToken"
-        component={ValidateToken}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
+	const { Navigator, Screen, Group } = createStackNavigator();
+	return (
+		<Navigator initialRouteName={!authStore.user ? "Signin" : "Tabs"}>
+			{authStore.user ? (
+				<Screen
+					name="Tabs"
+					component={Tabs}
+					options={{
+						headerShown: false,
+					}}
+				/>
+			) : (
+				<>
+					<Screen
+						name="Signup"
+						component={Signup}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen
+						name="Signin"
+						component={Signin}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen
+						name="ValidateToken"
+						component={ValidateToken}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</>
+			)}
+            <Screen
         name="AddMembers"
         component={AddMembers}
         options={{
@@ -46,15 +62,7 @@ const RootNavigator = () => {
       />
       <Screen name="CreateCustomPoll" component={CreateCustomPoll} />
       <Screen name="MoviePoll" component={MoviePoll} />
-      <Screen
-        name="Tabs"
-        component={Tabs}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Navigator>
-  );
+		</Navigator>
+	);
 };
-
-export default RootNavigator;
+export default observer(RootNavigator);

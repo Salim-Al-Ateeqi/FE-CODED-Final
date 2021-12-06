@@ -11,5 +11,6 @@ npm-debug.*
 web-build/
 baseURL.js
 apiKey.js
+
 # macOS
 .DS_Store
