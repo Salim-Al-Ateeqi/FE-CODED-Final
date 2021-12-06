@@ -9,11 +9,12 @@ import Tabs from "../DrawerNavigation/Tabs";
 import AddMembers from "../AddMembers";
 import CreateCustomPoll from "../CreateCustomPoll";
 import MoviePoll from "../../MoviePoll";
+import Home from "../Home";
 
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
   return (
-    <Navigator initialRouteName="AddMembers">
+    <Navigator initialRouteName="Home">
       <Screen name="Home" component={Home} />
       <Screen
         name="Signup"
@@ -43,23 +44,17 @@ const RootNavigator = () => {
           headerShown: false,
         }}
       />
-			<Screen
-				name="CreateCustomPoll"
-				component={CreateCustomPoll}
-			/>
-			<Screen
-				name="MoviePoll"
-				component={MoviePoll}
-			/>
+      <Screen name="CreateCustomPoll" component={CreateCustomPoll} />
+      <Screen name="MoviePoll" component={MoviePoll} />
       <Screen
-				name="Tabs"
-				component={Tabs}
-				options={{
-					headerShown: false,
-				}}
-			/>
-		</Navigator>
-	);
+        name="Tabs"
+        component={Tabs}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Navigator>
+  );
 };
 
 export default RootNavigator;

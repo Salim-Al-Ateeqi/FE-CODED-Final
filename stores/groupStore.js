@@ -14,7 +14,6 @@ class GroupStore {
     try {
       const res = await instance.get("/groups");
       this.groups = res.data;
-      console.log(this.groups);
       this.isLoading = false;
     } catch (error) {
       console.log("groupStore -> fetchGroups -> error", error);
