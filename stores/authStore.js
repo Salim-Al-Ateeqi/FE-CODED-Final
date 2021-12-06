@@ -13,7 +13,10 @@ class AuthStore {
 	setUser = async (token) => {
 		try {
 			await AsyncStorage.setItem("myToken", token);
-			this.user = decode(token);
+			runInAction(() => {
+				this.user = decode(token);
+			})
+			
 			instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 		} catch (error) {
 			console.log(error);
@@ -61,7 +64,7 @@ class AuthStore {
 	validateToken = async (userData, toast, navigation) => {
 		try {
 			const res = await instance.post("/verifyTwilio", userData);
-			this.setUser(res.data.token);
+			await this.setUser(res.data.token);
 			this.checkUserValidated(toast, navigation)
 		} catch (error) {
 			console.log("register error", error);
@@ -71,7 +74,7 @@ class AuthStore {
 	login = async (userData, toast, navigation) => {
 		try {
 			const res = await instance.post("/login", userData);
-			this.setUser(res.data.token);
+			await this.setUser(res.data.token);
 			this.checkUserValidated(toast, navigation, true)
 		} catch (error) {
 			console.log("login error", error);
