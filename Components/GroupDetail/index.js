@@ -10,10 +10,6 @@ const GroupDetail = ({ route, navigation }) => {
   if (groupStore.isLoading) {
     return <Spinner />;
   }
-  const handleDelete = () => {
-    groupStore.deleteGroup(group._id);
-    navigation.navigate("GroupList");
-  };
 
   return (
     <View>
