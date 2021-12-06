@@ -2,18 +2,24 @@ import React from "react";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import {
 	Box,
-	Center,
 	Pressable,
 	Text,
 	VStack,
 	Divider,
 	HStack,
 	Icon,
+	useToast,
+	Avatar,
+	Spinner,
 } from "native-base";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/core";
+import { observer } from "mobx-react-lite";
 
 // stores
 import authStore from "../../stores/authStore";
+import profileStore from "../../stores/ProfileStore";
+import { baseURL } from "../../stores/baseURL";
 
 const getIcon = (screenName) => {
 	switch (screenName) {
@@ -21,10 +27,6 @@ const getIcon = (screenName) => {
 			return "home";
 		case "Profile":
 			return "account";
-		case "Archive":
-			return "archive";
-		case "Trash":
-			return "trash-can";
 		case "Logout":
 			return "logout";
 		default:
@@ -33,16 +35,31 @@ const getIcon = (screenName) => {
 };
 
 const CustomDrawerContent = (props) => {
+	if (!profileStore.isLoading) return <Spinner />;
+	const navigation = useNavigation();
+	const toast = useToast();
+
+	const userProfile = profileStore.currentProfile;
+
+	console.log(userProfile);
 	return (
 		<DrawerContentScrollView {...props} safeArea>
 			<VStack space="6" my="2" mx="1">
-				<Box px="4">
-					<Text bold color="gray.700">
-						{authStore.user ? authStore.user.phoneNumber : "Name"}
-					</Text>
-					<Text fontSize="14" mt="1" color="gray.500" fontWeight="500">
-						john_doe@gmail.com
-					</Text>
+				<Box px="3">
+					<HStack alignItems="center">
+						{/* <Avatar
+							source={{
+								uri: baseURL + userProfile.profile.image,
+							}}
+							size={50}
+						/> */}
+						<Text bold color="gray.700" mx="3">
+							{userProfile.profile.name}
+						</Text>
+					</HStack>
+					{/* <Text fontSize="14" mt="5" color="gray.500" fontWeight="500">
+						{profileStore.profiles && profile.phoneNumber}
+					</Text> */}
 				</Box>
 
 				<VStack divider={<Divider />} space="4">
@@ -81,30 +98,30 @@ const CustomDrawerContent = (props) => {
 							</Pressable>
 						))}
 					</VStack>
-					{/* <VStack space="5">
-						<Text fontWeight="500" fontSize="14" px="5" color="gray.500">
-							Labels
-						</Text>
+					<VStack space="5">
 						<VStack space="3">
-							<Pressable px="5" py="2">
+							<Pressable
+								px="5"
+								py="2"
+								onPress={() => authStore.logout(navigation, toast)}
+							>
 								<HStack space="7" alignItems="center">
 									<Icon
 										color="gray.500"
 										size="5"
-										as={<MaterialCommunityIcons name="bookmark" />}
+										as={<MaterialCommunityIcons name="logout" />}
 									/>
 									<Text color="gray.700" fontWeight="500">
-										Friends
+										Logout
 									</Text>
 								</HStack>
 							</Pressable>
-
 						</VStack>
-					</VStack> */}
+					</VStack>
 				</VStack>
 			</VStack>
 		</DrawerContentScrollView>
 	);
 };
 
-export default CustomDrawerContent;
+export default observer(CustomDrawerContent);

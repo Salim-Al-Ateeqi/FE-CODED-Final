@@ -7,40 +7,48 @@ import Signin from "../Authentication/Signin";
 import ValidateToken from "../Authentication/ValidateToken";
 import Tabs from "../DrawerNavigation/Tabs";
 
-const RootNavigator = () => {
+// stores
+import authStore from "../../stores/authStore";
+import { observer } from "mobx-react";
 
-	const { Navigator, Screen } = createStackNavigator();
+const RootNavigator = () => {
+	const { Navigator, Screen, Group } = createStackNavigator();
 	return (
-		<Navigator initialRouteName="Tabs">
-			<Screen
-				name="Tabs"
-				component={Tabs}
-				options={{
-					headerShown: false,
-				}}
-			/>
-			<Screen
-				name="Signup"
-				component={Signup}
-				options={{
-					headerShown: false,
-				}}
-			/>
-			<Screen
-				name="Signin"
-				component={Signin}
-				options={{
-					headerShown: false,
-				}}
-			/>
-			<Screen
-				name="ValidateToken"
-				component={ValidateToken}
-				options={{
-					headerShown: false,
-				}}
-			/>
+		<Navigator initialRouteName={!authStore.user ? "Signin" : "Tabs"}>
+			{authStore.user ? (
+				<Screen
+					name="Tabs"
+					component={Tabs}
+					options={{
+						headerShown: false,
+					}}
+				/>
+			) : (
+				<>
+					<Screen
+						name="Signup"
+						component={Signup}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen
+						name="Signin"
+						component={Signin}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen
+						name="ValidateToken"
+						component={ValidateToken}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</>
+			)}
 		</Navigator>
 	);
-
-export default RootNavigator;
+};
+export default observer(RootNavigator);
