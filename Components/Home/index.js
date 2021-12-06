@@ -10,6 +10,7 @@ import {
 } from "native-base";
 import styles from "./styles";
 import groupStore from "../../stores/groupStore";
+import { baseURL } from "../../stores/baseURL";
 
 const Home = ({ navigation }) => {
   const groupList = groupStore.map((group) => (
@@ -18,8 +19,8 @@ const Home = ({ navigation }) => {
     >
       <Image
         style={styles.image}
-        source={{ uri: baseUrl + trip.image }}
-        alt={trip.title}
+        source={{ uri: baseURL + group.image }}
+        alt={group.title}
       />
     </Pressable>
   ));
