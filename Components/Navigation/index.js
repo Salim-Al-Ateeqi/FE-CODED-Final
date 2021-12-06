@@ -6,6 +6,11 @@ import Signup from "../Authentication/Signup";
 import Signin from "../Authentication/Signin";
 import ValidateToken from "../Authentication/ValidateToken";
 import Tabs from "../DrawerNavigation/Tabs";
+import AddMembers from "../AddMembers";
+import CreateCustomPoll from "../CreateCustomPoll";
+import MoviePoll from "../../MoviePoll";
+import Home from "../Home";
+
 
 // stores
 import authStore from "../../stores/authStore";
@@ -48,6 +53,15 @@ const RootNavigator = () => {
 					/>
 				</>
 			)}
+            <Screen
+        name="AddMembers"
+        component={AddMembers}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Screen name="CreateCustomPoll" component={CreateCustomPoll} />
+      <Screen name="MoviePoll" component={MoviePoll} />
 		</Navigator>
 	);
 };

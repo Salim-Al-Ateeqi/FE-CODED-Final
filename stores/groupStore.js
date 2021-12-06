@@ -10,15 +10,17 @@ class GroupStore {
 
 	isLoading = true;
 
-	fetchGroups = async () => {
-		try {
-			const res = await instance.get("/groups");
-			this.groups = res.data;
-			this.isLoading = false;
-		} catch (error) {
-			console.log("groupStore -> fetchGroups -> error", error);
-		}
-	};
+
+  fetchGroups = async () => {
+    try {
+      const res = await instance.get("/groups");
+      this.groups = res.data;
+      this.isLoading = false;
+    } catch (error) {
+      console.log("groupStore -> fetchGroups -> error", error);
+    }
+  };
+
 
 	createGroup = async (group, navigation, toast) => {
 		try {
@@ -75,14 +77,25 @@ class GroupStore {
 		}
 	};
 
-	deleteGroup = async (groupId) => {
-		try {
-			await instance.delete(`/groups/${groupId}`);
-			this.groups = this.groups.filter((group) => group._id !== groupId);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+
+  deleteGroup = async (groupId) => {
+    try {
+      await instance.delete(`/groups/${groupId}`);
+      this.groups = this.groups.filter((group) => group._id !== groupId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  addMembersToGroup = async (groupId) => {
+    try {
+      const group = this.groups.find((group) => group._id === groupId);
+      const res = await instance.put(`/groups/${groupId}/members`);
+      for (const key in group) group[key] = res.data[key];
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 const groupStore = new GroupStore();

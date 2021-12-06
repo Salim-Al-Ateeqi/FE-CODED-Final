@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { instance } from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import imdbStore from "./imdbStore";
 
 class AuthStore {
 	constructor() {
@@ -26,7 +27,8 @@ class AuthStore {
 	register = async (userData, toast, navigation) => {
 		try {
 			const res = await instance.post("/register", userData);
-			this.setUser(res.data.token);
+
+				await this.setUser(res.data.token);
 			this.checkUserValidated(toast, navigation, true);
 			toast.show({
 				status: "success",
@@ -43,6 +45,7 @@ class AuthStore {
 			});
 		}
 	};
+
 
 	checkUserValidated = (toast, navigation, showToast = false) => {
 		if (this.user.isValidated) {
@@ -64,6 +67,7 @@ class AuthStore {
 			navigation.replace("ValidateToken");
 		}
 	};
+
 
 	validateToken = async (userData, toast, navigation) => {
 		try {
