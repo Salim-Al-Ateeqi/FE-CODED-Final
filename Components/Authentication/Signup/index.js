@@ -40,7 +40,10 @@ const Signup = ({ navigation }) => {
 		phoneNumber,
 		isVerified,
 	}) => {
-		setUser({ ...user, phoneNumber: dialCode + "-" + phoneNumber });
+		const userNumber = phoneNumber.replace(' ', '')
+		const newNumber = `${dialCode}${userNumber}`
+		console.log(newNumber)
+		setUser({ ...user, phoneNumber: newNumber.replace('-', '') });
 	};
 
 	// To show the incorrect password for Confirm password field
