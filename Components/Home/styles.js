@@ -8,11 +8,6 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "pink",
   },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-  },
 });
 
 export default styles;

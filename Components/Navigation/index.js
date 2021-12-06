@@ -2,10 +2,10 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // components
-import Home from "../Home";
 import Signup from "../Authentication/Signup";
 import Signin from "../Authentication/Signin";
 import ValidateToken from "../Authentication/ValidateToken";
+import Tabs from "../DrawerNavigation/Tabs";
 import AddMembers from "../AddMembers";
 
 const RootNavigator = () => {
@@ -41,6 +41,13 @@ const RootNavigator = () => {
           headerShown: false,
         }}
       />
+<Screen
+				name="Tabs"
+				component={Tabs}
+				options={{
+					headerShown: false,
+				}}
+			/>
     </Navigator>
   );
 };
