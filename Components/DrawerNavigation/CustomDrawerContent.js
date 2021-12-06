@@ -20,6 +20,7 @@ import { observer } from "mobx-react-lite";
 import authStore from "../../stores/authStore";
 import profileStore from "../../stores/ProfileStore";
 import { baseURL } from "../../stores/baseURL";
+import Profile from "../Profile/Profile";
 
 const getIcon = (screenName) => {
 	switch (screenName) {
@@ -35,31 +36,32 @@ const getIcon = (screenName) => {
 };
 
 const CustomDrawerContent = (props) => {
-	if (!profileStore.isLoading) return <Spinner />;
+	// if (!profileStore.isLoading) return <Spinner />;
 	const navigation = useNavigation();
 	const toast = useToast();
 
-	const userProfile = profileStore.currentProfile;
+	const userProfile = profileStore.profiles.find(
+		(_profile) => _profile._id === authStore.user._id
+	);
 
-	console.log(userProfile);
 	return (
 		<DrawerContentScrollView {...props} safeArea>
 			<VStack space="6" my="2" mx="1">
 				<Box px="3">
 					<HStack alignItems="center">
-						{/* <Avatar
+						<Avatar
 							source={{
 								uri: baseURL + userProfile.profile.image,
 							}}
 							size={50}
-						/> */}
+						/>
 						<Text bold color="gray.700" mx="3">
 							{userProfile.profile.name}
 						</Text>
 					</HStack>
-					{/* <Text fontSize="14" mt="5" color="gray.500" fontWeight="500">
-						{profileStore.profiles && profile.phoneNumber}
-					</Text> */}
+					<Text fontSize="14" mt="5" color="gray.500" fontWeight="500">
+						{userProfile.phoneNumber}
+					</Text>
 				</Box>
 
 				<VStack divider={<Divider />} space="4">

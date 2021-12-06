@@ -7,11 +7,13 @@ import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
 
 const Profile = () => {
-	const userProfile = profileStore.findProfile(authStore.user._id);
-
+	const userProfile = profileStore.profiles.find(
+		(_profile) => _profile._id === authStore.user._id
+	);
+	console.log(userProfile);
 	return (
 		<View>
-			<Text>{userProfile.phoneNumber}</Text>
+			<Text>{userProfile.profile.name}</Text>
 		</View>
 	);
 };

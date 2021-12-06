@@ -9,30 +9,20 @@ class ProfileStore {
 	}
 
 	profiles = [];
-	currentProfile = null;
 	isLoading = true;
 
 	fetchProfile = async () => {
 		try {
 			const res = await instance.get("/getprofiles");
-			const foundUser = res.data.find(
-				(profile) => profile._id === authStore.user._id
-			);
+
 			runInAction(() => {
-				this.currentProfile = foundUser;
+				this.profiles = res.data;
 				this.isLoading = false;
 			});
 		} catch (error) {
 			console.log("fetchProfile", error);
 		}
 	};
-
-	// findProfile = (userId) => {
-	// 	const foundUser = this.profiles.find((profile) => profile._id === userId);
-	// 	runInAction(() => {
-	// 		this.currentProfile = foundUser;
-	// 	});
-	// };
 }
 
 const profileStore = new ProfileStore();
