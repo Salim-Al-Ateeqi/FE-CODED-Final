@@ -1,14 +1,23 @@
-import styles from "./styles";
-
 import React from "react";
-import { View, Text } from "react-native";
+import { ScrollView, View, Spinner } from "native-base";
+import groupStore from "../../stores/groupStore";
+import GroupItem from "./GroupItem";
+import { observer } from "mobx-react";
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  if (groupStore.isLoading) {
+    return <Spinner />;
+  }
+
+  const groupList = groupStore.groups.map((group) => (
+    <GroupItem navigation={navigation} group={group} key={group._id} />
+  ));
+
   return (
     <View>
-      <Text>Hello World</Text>
+      <ScrollView>{groupList}</ScrollView>
     </View>
   );
 };
 
-export default Home;
+export default observer(Home);
