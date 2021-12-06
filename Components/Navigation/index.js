@@ -53,33 +53,17 @@ const RootNavigator = () => {
 					/>
 				</>
 			)}
-      <Screen
-        name="AddMembers"
-        component={AddMembers}
-        options={{
-        headerShown: false,
-      }}
-      />
 			<Screen
-				name="CreateCustomPoll"
-				component={CreateCustomPoll}
-			/>
-			<Screen
-				name="MoviePoll"
-				component={MoviePoll}
-			/>
-      <Screen
-				name="Tabs"
-				component={Tabs}
+				name="AddMembers"
+				component={AddMembers}
 				options={{
 					headerShown: false,
 				}}
-      />
-      <Screen
-        name="FinalizeMoviePoll"
-        component={FinalizeMoviePoll}
-      />
+			/>
+			<Screen name="CreateCustomPoll" component={CreateCustomPoll} />
+			<Screen name="MoviePoll" component={MoviePoll} />
 
+			<Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
 		</Navigator>
 	);
 };
