@@ -14,7 +14,6 @@ class ImdbStore {
     runInAction(() => {
       this.isLoading = true;
     });
-
     const options = {
       method: "GET",
       url: "https://imdb8.p.rapidapi.com/auto-complete",
@@ -24,10 +23,8 @@ class ImdbStore {
         "x-rapidapi-key": apiKey,
       },
     };
-
     try {
       const res = await axios.request(options);
-      // console.log(res.data.d);
       runInAction(() => {
         this.data = res.data.d;
         this.isLoading = false;

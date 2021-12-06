@@ -10,7 +10,7 @@ import AddMembers from "../AddMembers";
 import CreateCustomPoll from "../CreateCustomPoll";
 import MoviePoll from "../../MoviePoll";
 import Home from "../Home";
-
+import FinalizeMoviePoll from "../../MoviePoll/FinalizeMoviePoll";
 
 // stores
 import authStore from "../../stores/authStore";
@@ -53,15 +53,33 @@ const RootNavigator = () => {
 					/>
 				</>
 			)}
-            <Screen
+      <Screen
         name="AddMembers"
         component={AddMembers}
         options={{
-          headerShown: false,
-        }}
+        headerShown: false,
+      }}
       />
-      <Screen name="CreateCustomPoll" component={CreateCustomPoll} />
-      <Screen name="MoviePoll" component={MoviePoll} />
+			<Screen
+				name="CreateCustomPoll"
+				component={CreateCustomPoll}
+			/>
+			<Screen
+				name="MoviePoll"
+				component={MoviePoll}
+			/>
+      <Screen
+				name="Tabs"
+				component={Tabs}
+				options={{
+					headerShown: false,
+				}}
+      />
+      <Screen
+        name="FinalizeMoviePoll"
+        component={FinalizeMoviePoll}
+      />
+
 		</Navigator>
 	);
 };
