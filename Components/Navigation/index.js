@@ -9,12 +9,14 @@ import Tabs from "../DrawerNavigation/Tabs";
 import AddMembers from "../AddMembers";
 import CreateCustomPoll from "../CreateCustomPoll";
 import MoviePoll from "../../MoviePoll";
+import Home from "../Home";
+import FinalizeMoviePoll from "../../MoviePoll/FinalizeMoviePoll";
 
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
   return (
-    <Navigator initialRouteName="AddMembers">
-      <Screen name="Home" component={Home} />
+    <Navigator initialRouteName="">
+      <Screen name="Home" component={MoviePoll} />
       <Screen
         name="Signup"
         component={Signup}
@@ -57,7 +59,11 @@ const RootNavigator = () => {
 				options={{
 					headerShown: false,
 				}}
-			/>
+      />
+      <Screen
+        name="FinalizeMoviePoll"
+        component={FinalizeMoviePoll}
+      />
 		</Navigator>
 	);
 };

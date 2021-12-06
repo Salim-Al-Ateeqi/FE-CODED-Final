@@ -5,18 +5,22 @@ import { View, Text } from 'react-native'
 import imdbStore from '../stores/imdbStore'
 import MovieItem from './MovieItem';
 
-const MovieList = ({ setSelectedMovie }) => {
+const MovieList = ({ navigation, group }) => {
 
-    if(imdbStore.isLoading) return <Spinner />
+    if (imdbStore.isLoading) return <Spinner />
 
     const movieList = imdbStore.data.map(
         movie => {
             if (movie.q) {
-                return <MovieItem key={movie.id} movie={movie} setSelectedMovie={setSelectedMovie} />
+                return <MovieItem
+                    key={movie.id}
+                    movie={movie}
+                    navigation={navigation}
+                    group={group}
+                />
             }
         }
-    )
-
+    );
 
     return (
         <View>

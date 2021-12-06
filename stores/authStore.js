@@ -56,7 +56,7 @@ class AuthStore {
       toast.show({
         status: "error",
         title: "Invalid Token",
-        description: "The token is incorrect",
+        description: "Please",
       });
       navigation.replace("ValidateToken");
     }

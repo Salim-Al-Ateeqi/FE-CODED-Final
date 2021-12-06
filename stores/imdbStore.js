@@ -28,7 +28,6 @@ class ImdbStore {
         
         try {
             const res = await axios.request(options)
-            // console.log(res.data.d);
             runInAction(() => {
                 this.data = res.data.d;
                 this.isLoading = false;
