@@ -12,38 +12,53 @@ import MoviePoll from "../../MoviePoll";
 import Home from "../Home";
 import FinalizeMoviePoll from "../../MoviePoll/FinalizeMoviePoll";
 
+// stores
+import authStore from "../../stores/authStore";
+import { observer } from "mobx-react";
+
 const RootNavigator = () => {
-  const { Navigator, Screen } = createStackNavigator();
-  return (
-    <Navigator initialRouteName="">
-      <Screen name="Home" component={MoviePoll} />
-      <Screen
-        name="Signup"
-        component={Signup}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="Signin"
-        component={Signin}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Screen
-        name="ValidateToken"
-        component={ValidateToken}
-        options={{
-          headerShown: false,
-        }}
-      />
+	const { Navigator, Screen, Group } = createStackNavigator();
+	return (
+		<Navigator initialRouteName={!authStore.user ? "Signin" : "Tabs"}>
+			{authStore.user ? (
+				<Screen
+					name="Tabs"
+					component={Tabs}
+					options={{
+						headerShown: false,
+					}}
+				/>
+			) : (
+				<>
+					<Screen
+						name="Signup"
+						component={Signup}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen
+						name="Signin"
+						component={Signin}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen
+						name="ValidateToken"
+						component={ValidateToken}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</>
+			)}
       <Screen
         name="AddMembers"
         component={AddMembers}
         options={{
-          headerShown: false,
-        }}
+        headerShown: false,
+      }}
       />
 			<Screen
 				name="CreateCustomPoll"
@@ -64,8 +79,8 @@ const RootNavigator = () => {
         name="FinalizeMoviePoll"
         component={FinalizeMoviePoll}
       />
+
 		</Navigator>
 	);
 };
-
-export default RootNavigator;
+export default observer(RootNavigator);
