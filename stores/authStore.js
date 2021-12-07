@@ -2,7 +2,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { instance } from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import imdbStore from "./imdbStore";
+import profileStore from "./ProfileStore";
+import { observer } from "mobx-react";
 
 class AuthStore {
 	constructor() {
@@ -28,7 +29,7 @@ class AuthStore {
 		try {
 			const res = await instance.post("/register", userData);
 
-				await this.setUser(res.data.token);
+			await this.setUser(res.data.token);
 			this.checkUserValidated(toast, navigation, true);
 			toast.show({
 				status: "success",
@@ -133,6 +134,7 @@ class AuthStore {
 		}
 	};
 }
+
 
 const authStore = new AuthStore();
 authStore.checkForToken();

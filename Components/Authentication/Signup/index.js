@@ -19,6 +19,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 // stores
 import authStore from "../../../stores/authStore";
+import profileStore from "../../../stores/ProfileStore";
 import { ScrollView } from "react-native-gesture-handler";
 
 const Signup = ({ navigation }) => {

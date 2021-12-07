@@ -41,6 +41,19 @@ class ProfileStore {
 			console.log(error);
 		}
 	};
+
+	pushNewUser = (userData) => {
+		this.profiles.push({
+			_id: this.user._id,
+			phoneNumber: userData.phoneNumber,
+			isValidated: false,
+			profile: {
+				name: "New User",
+				image: "/media/defaultUserImage.jpg",
+				groups: []
+			},
+		})
+	}
 }
 
 const profileStore = new ProfileStore();
