@@ -23,7 +23,6 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
   const currentTime = Date.now();
   const toast = useToast();
 
-  // const [date, setDate] = useState();
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [pollData, setPollData] = useState({
@@ -52,7 +51,7 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
   };
 
   const handleSubmit = () => {
-    groupStore.createPoll(pollData);
+    groupStore.createPoll(group._id, pollData, navigation, toast );
   }
 
   return (
