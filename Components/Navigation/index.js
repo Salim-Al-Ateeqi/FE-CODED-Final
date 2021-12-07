@@ -7,13 +7,14 @@ import Signin from "../Authentication/Signin";
 import Tabs from "../DrawerNavigation/Tabs";
 import ValidateToken from "../Authentication/ValidateToken";
 import CreateCustomPoll from "../CreateCustomPoll";
-import MoviePoll from "../../MoviePoll";
-import FinalizeMoviePoll from "../../MoviePoll/FinalizeMoviePoll";
+import MoviePoll from "../MoviePoll";
+import FinalizeMoviePoll from "../MoviePoll/FinalizeMoviePoll";
 import AddMembers from "../AddMembers";
+import GroupDetail from "../GroupDetail";
+import MenuIcon from "../GroupDetail/MenuIcon";
 // stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
-import GroupDetail from "../GroupDetail";
 
 const RootNavigator = () => {
 
@@ -58,10 +59,11 @@ const RootNavigator = () => {
           <Screen
             name="GroupDetail"
             component={GroupDetail}
-            options={({ route }) => {
+            options={({ route, navigation }) => {
               const { group } = route.params;
               return {
-                title: group.name,
+                headerTitle: group.name,
+                headerRight: () => <MenuIcon navigation={navigation} />,
               };
             }}
           />

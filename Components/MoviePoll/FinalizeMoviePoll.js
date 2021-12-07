@@ -15,7 +15,7 @@ import {
     useToast,
 } from "native-base";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import groupStore from "../stores/groupStore";
+import groupStore from "../../stores/groupStore";
 
 const FinalizeMoviePoll = ({ route, navigation }) => {
   const { movie, group } = route.params;

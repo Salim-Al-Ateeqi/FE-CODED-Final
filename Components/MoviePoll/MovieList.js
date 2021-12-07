@@ -2,8 +2,8 @@ import { observer } from 'mobx-react'
 import { Spinner } from 'native-base'
 import React from 'react'
 import { View, Text } from 'react-native'
-import imdbStore from '../stores/imdbStore'
-import MovieItem from './MovieItem';
+import imdbStore from '../../stores/imdbStore'
+import MovieItem from './MovieItem'
 
 const MovieList = ({ navigation, group }) => {
 

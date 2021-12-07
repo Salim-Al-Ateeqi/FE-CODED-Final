@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
-import imdbStore from "../stores/imdbStore";
+import imdbStore from "../../stores/imdbStore";
 import MovieList from "./MovieList";
 
 const index = ({ navigation, group }) => {
