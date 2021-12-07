@@ -25,14 +25,33 @@ import authStore from "../../stores/authStore";
 import { baseURL } from "../../stores/baseURL";
 
 const Profile = () => {
-	const userProfile = profileStore.profiles.find(
-		(_profile) => _profile._id === authStore.user._id
-	);
+	const userProfile = authStore.user
+		? profileStore.profiles.find(
+				(_profile) => _profile._id === authStore.user._id
+		  )
+		: null;
+
 	const [updateProfile, setUpdateProfile] = useState({
-		name: userProfile.profile.name,
-		image: userProfile.profile.image,
-		status: userProfile.profile.status,
+		name: authStore.user ? userProfile.profile.name : "",
+		image: authStore.user ? userProfile.profile.image : "",
+		status: authStore.user ? userProfile.profile.status : "",
 	});
+
+	if (!authStore.user) {
+		return <Text>Sign in please</Text>;
+	}
+
+	// useEffect(() => {
+	// 	(async () => {
+	// 		if (Platform.OS !== "web") {
+	// 			const { status } =
+	// 				await ImagePicker.requestMediaLibraryPermissionsAsync();
+	// 			if (status !== "granted") {
+	// 				alert("Sorry, we need camera roll permissions to make this work!");
+	// 			}
+	// 		}
+	// 	})();
+	// }, []);
 
 	const _pickImage = async () => {
 		try {
@@ -52,7 +71,7 @@ const Profile = () => {
 					name: filename,
 					type: match ? `image/${match[1]}` : `image`,
 				};
-				setUpdateProfile({ ...updateProfile, image });
+				setUpdateProfile({ ...updateProfile, image: image });
 			}
 		} catch (error) {
 			console.log(error);
@@ -150,7 +169,7 @@ const Profile = () => {
 						w="25%"
 						colorScheme="success"
 					>
-						Submit
+						Update
 					</Button>
 				</ScrollView>
 			</KeyboardAwareScrollView>
