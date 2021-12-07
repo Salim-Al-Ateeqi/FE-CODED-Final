@@ -18,11 +18,11 @@ const MovieItem = ({ movie, navigation, group }) => {
             
                 <Center >
                     <Image
-                        source={{ uri: movie.i.imageUrl }}
-                        alt={movie.l}
+                        source={{ uri: `https://image.tmdb.org/t/p/w500`+movie.poster_path }}
+                        alt={movie.title}
                         style={{ width: 150, height: 200, padding: 5 }}
                     />
-                    <Text>{movie.l}</Text>
+                    <Text>{movie.original_title}</Text>
                 </Center >
         </Pressable>
     )

@@ -16,17 +16,20 @@ class ImdbStore {
     });
     const options = {
       method: "GET",
-      url: "https://imdb8.p.rapidapi.com/auto-complete",
-      params: { q: query },
-      headers: {
-        "x-rapidapi-host": "imdb8.p.rapidapi.com",
-        "x-rapidapi-key": apiKey,
+      url: "https://api.themoviedb.org/3/search/movie",
+      params: {
+        query: query,
+        api_key: apiKey,
+        include_adult: true,
+        page: 1,
+        language: "en-US"
       },
     };
     try {
       const res = await axios.request(options);
+      // console.log('\n\n\n\n\n\nNEWLINE')
       runInAction(() => {
-        this.data = res.data.d;
+        this.data = res.data.results;
         this.isLoading = false;
       });
     } catch (error) {
