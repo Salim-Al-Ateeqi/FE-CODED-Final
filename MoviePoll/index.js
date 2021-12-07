@@ -27,7 +27,7 @@ const index = ({ navigation, group }) => {
       <KeyboardAwareScrollView>
         <ScrollView>
           <Center>
-            <Box safeArea p="1" py="8" w="100%" maxW="290">
+            <Box safeArea p="1" w="100%" maxW="290">
               <Heading
                 size="lg"
                 fontWeight="600"
@@ -50,7 +50,7 @@ const index = ({ navigation, group }) => {
               <Button mt="2" colorScheme="success" onPress={handleSubmit}>
                 Find
               </Button>
-              <VStack w='100%' m='2' >
+              <VStack w='100%' mt='1' >
                 {
                   imdbStore.data && <MovieList
                     navigation={navigation}
