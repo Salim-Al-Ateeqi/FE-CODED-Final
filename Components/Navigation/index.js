@@ -18,7 +18,7 @@ import { observer } from "mobx-react";
 const RootNavigator = () => {
 	const { Navigator, Screen, Group } = createStackNavigator();
 	return (
-		<Navigator initialRouteName={"MoviePoll"}>
+		<Navigator>
 			{authStore.user ? (
 				<Screen
 					name="Tabs"

@@ -20,7 +20,7 @@ class ImdbStore {
       params: {
         query: query,
         api_key: apiKey,
-        include_adult: true,
+        include_adult: false,
         page: 1,
         language: "en-US"
       },
