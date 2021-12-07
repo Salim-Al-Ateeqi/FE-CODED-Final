@@ -28,6 +28,14 @@ const MenuIcon = ({ navigation }) => {
                     <Menu.Item  onPress={() => navigation.navigate("AddMembers")}>
                         AddMembers
                     </Menu.Item>
+                    {/* Add page to return group member list */}
+                    <Menu.Item >
+                        View Members
+                    </Menu.Item>
+                    {/* Add Update Page for Group */}
+                    <Menu.Item >
+                        Update Group Details
+                    </Menu.Item>
                     {/* Add Delete Handler and navigate */}
                     <Menu.Item >
                         Delete Group
