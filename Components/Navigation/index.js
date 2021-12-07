@@ -13,58 +13,69 @@ import AddMembers from "../AddMembers";
 // stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
+import GroupDetail from "../GroupDetail";
 
 const RootNavigator = () => {
-	const { Navigator, Screen, Group } = createStackNavigator();
-	return (
-		<Navigator>
-			{!authStore.user ? (
-				<>
-					<Screen
-						name="Signup"
-						component={Signup}
-						options={{
-						headerShown: false,
-						}}
-					/>
-						<Screen
-						name="Signin"
-						component={Signin}
-						options={{
-						headerShown: false,
-						}}
-					/>
-				</>
-			) : authStore.user.isValidated ? (
-				<>
-				<Screen
-					name="Tabs"
-					component={Tabs}
-					options={{
-						headerShown: false,
-					}}
-				/>
-				<Screen name="CreateCustomPoll" component={CreateCustomPoll} />
-				<Screen name="MoviePoll" component={MoviePoll} />
-				<Screen
-				name="AddMembers"
-					component={AddMembers}
-					options={{
-						headerShown: false,
-					}}
-				/>
-				<Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
-				</>
-			) : (
-				<Screen
-					name="ValidateToken"
-					component={ValidateToken}
-					options={{
-						headerShown: false,
-					}}
-				/>
-			)}
-		</Navigator>
-	);
+  const { Navigator, Screen, Group } = createStackNavigator();
+  return (
+    <Navigator>
+      {!authStore.user ? (
+        <>
+          <Screen
+            name="Signup"
+            component={Signup}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Screen
+            name="Signin"
+            component={Signin}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </>
+      ) : authStore.user.isValidated ? (
+        <>
+          <Screen
+            name="Tabs"
+            component={Tabs}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Screen name="CreateCustomPoll" component={CreateCustomPoll} />
+          <Screen name="MoviePoll" component={MoviePoll} />
+          <Screen
+            name="AddMembers"
+            component={AddMembers}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Screen
+            name="GroupDetail"
+            component={GroupDetail}
+            options={({ route }) => {
+              const { group } = route.params;
+              return {
+                title: group.name,
+              };
+            }}
+          />
+          <Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
+        </>
+      ) : (
+        <Screen
+          name="ValidateToken"
+          component={ValidateToken}
+          options={{
+            headerShown: false,
+          }}
+        />
+      )}
+    </Navigator>
+  );
 };
 export default observer(RootNavigator);
