@@ -19,16 +19,8 @@ const Tabs = ({ navigation }) => {
 				initialRouteName={Home}
 				drawerContent={(props) => <CustomDrawerContent {...props} />}
 			>
-				<Drawer.Screen
-					name="Groups"
-					component={Home}
-					options={{ headerTitle: "" }}
-				/>
-				<Drawer.Screen
-					name="Edit Profile"
-					component={Profile}
-					options={{ headerTitle: "" }}
-				/>
+				<Drawer.Screen name="Groups" component={Home} />
+				<Drawer.Screen name="Edit Profile" component={Profile} />
 			</Drawer.Navigator>
 		</Box>
 	);

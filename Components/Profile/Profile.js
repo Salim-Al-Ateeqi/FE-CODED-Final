@@ -87,7 +87,7 @@ const Profile = () => {
 		<VStack flex="1" w="100%" bg="#f5f5f5">
 			<KeyboardAwareScrollView>
 				<ScrollView>
-					<VStack my="5" mx="1">
+					<VStack mt="10" mb="5" mx="1">
 						<Center space="3">
 							<Pressable onPress={_pickImage}>
 								<VStack position="relative">
@@ -119,11 +119,11 @@ const Profile = () => {
 					</VStack>
 
 					<VStack>
-						<Heading size="md" mx="5">
+						{/* <Heading size="md" mx="5">
 							Edit Profile
-						</Heading>
+						</Heading> */}
 						<Center>
-							<FormControl w="90%" my="2">
+							<FormControl w="90%">
 								<FormControl.Label>Name</FormControl.Label>
 								<Input
 									defaultValue={userProfile.profile.name}

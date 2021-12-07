@@ -63,7 +63,7 @@ const CustomDrawerContent = (props) => {
 							<Text bold color="gray.700">
 								{userProfile.profile.name}
 							</Text>
-							<Text fontSize="12" mt="1" color="gray.500" fontWeight="500">
+							<Text fontSize="13" mt="1" color="gray.500" fontWeight="500">
 								{userProfile.profile.status}
 							</Text>
 							<Text fontSize="12" mt="1" color="gray.500" fontWeight="500">
