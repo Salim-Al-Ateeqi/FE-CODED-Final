@@ -11,7 +11,7 @@ const MovieList = ({ navigation, group }) => {
 
     const movieList = imdbStore.data.map(
         movie => {
-            if (movie.q) {
+            if (movie.title && movie.poster_path) {
                 return <MovieItem
                     key={movie.id}
                     movie={movie}
