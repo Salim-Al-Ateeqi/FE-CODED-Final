@@ -11,16 +11,17 @@ import {
 	useToast,
 	Avatar,
 	Spinner,
+	Button,
 } from "native-base";
-import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
-import { observer } from "mobx-react-lite";
+
+import { observer } from "mobx-react";
 
 // stores
 import authStore from "../../stores/authStore";
 import profileStore from "../../stores/ProfileStore";
 import { baseURL } from "../../stores/baseURL";
-import Profile from "../Profile/Profile";
 
 const getIcon = (screenName) => {
 	switch (screenName) {
@@ -46,26 +47,28 @@ const CustomDrawerContent = (props) => {
 
 	return (
 		<DrawerContentScrollView {...props} safeArea>
-			<VStack space="6" my="2" mx="1">
+			<VStack space="3" my="2" mx="1">
 				<Box px="3">
-					<HStack alignItems="center">
+					<HStack>
 						<Avatar
 							source={{
 								uri: baseURL + userProfile.profile.image,
 							}}
 							size={50}
 						/>
-						<Text bold color="gray.700" mx="3">
-							{userProfile.profile.name}
-						</Text>
+						<VStack mx="3">
+							<Text bold color="gray.700">
+								{userProfile.profile.name}
+							</Text>
+							<Text fontSize="14" mt="1" color="gray.500" fontWeight="500">
+								{userProfile.phoneNumber}
+							</Text>
+						</VStack>
 					</HStack>
-					<Text fontSize="14" mt="5" color="gray.500" fontWeight="500">
-						{userProfile.phoneNumber}
-					</Text>
 				</Box>
-
-				<VStack divider={<Divider />} space="4">
-					<VStack space="3">
+				<Divider />
+				<VStack divider={<Divider />} space="2">
+					<VStack space="2">
 						{props.state.routeNames.map((name, index) => (
 							<Pressable
 								px="5"

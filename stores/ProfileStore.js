@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { instance } from "./instance";
 
-import authStore from "./authStore";
+// stores
+import { instance } from "./instance";
 
 class ProfileStore {
 	constructor() {
@@ -21,6 +21,25 @@ class ProfileStore {
 			});
 		} catch (error) {
 			console.log("fetchProfile", error);
+		}
+	};
+
+	updateProfile = async (profileId, updateInfo, toast) => {
+		try {
+			const formData = new FormData();
+			for (const key in updateInfo) {
+				formData.append(key, updateInfo[key]);
+			}
+			const res = await instance.put("/updateprofile", formData);
+
+			const findProfile = this.profiles.find(
+				(profile) => profile._id === profileId
+			);
+			runInAction(() => {
+				findProfile = res.data;
+			});
+		} catch (error) {
+			console.log(error);
 		}
 	};
 }
