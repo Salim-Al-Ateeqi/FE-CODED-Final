@@ -7,9 +7,12 @@ import {
 } from "native-base";
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-const MenuIcon = ({ navigation }) => {
-
-
+const MenuIcon = ({ navigation, group }) => {
+    
+    //Having issue sending group object to moviepoll component
+    //Returns 
+    // console.log(group)
+    
     return (
         <Center>
             <Menu w="190"
@@ -22,7 +25,7 @@ const MenuIcon = ({ navigation }) => {
                 }}
             >
                 <Box w="100%" px={4} justifyContent="center">
-                    <Menu.Item onPress={() => navigation.navigate("MoviePoll")}>
+                    <Menu.Item onPress={() => navigation.navigate("MoviePoll", {group: group})}>
                         Create Movie Poll
                     </Menu.Item>
                     <Menu.Item  onPress={() => navigation.navigate("AddMembers")}>

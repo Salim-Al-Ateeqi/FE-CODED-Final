@@ -8,6 +8,7 @@ import MovieItem from './MovieItem'
 const MovieList = ({ navigation, group }) => {
 
     if (imdbStore.isLoading) return <Spinner />
+    console.log('list', group)
 
     const movieList = imdbStore.data.map(
         movie => {

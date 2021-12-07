@@ -15,7 +15,7 @@ const MovieItem = ({ movie, navigation, group }) => {
     const handleSelect = () => {
         navigation.navigate('FinalizeMoviePoll', { movie: movie, group: group })
     }
-
+    
     return (
         <Pressable onPress={handleSelect} mb='5'>
             <VStack direction="row" mb="2.5" mt="1.5" space={3}>
