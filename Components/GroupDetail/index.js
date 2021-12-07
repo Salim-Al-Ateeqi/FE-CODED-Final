@@ -1,66 +1,78 @@
 import { observer } from "mobx-react";
-import { Spinner } from "native-base";
+import { HStack, Spinner } from "native-base";
 import React from "react";
 import {
-  VStack,
-  Input,
-  Button,
-  IconButton,
-  Icon,
-  Text,
-  NativeBaseProvider,
-  Center,
-  Box,
-  Divider,
-  Heading,
+	VStack,
+	Input,
+	Button,
+	IconButton,
+	Icon,
+	Text,
+	NativeBaseProvider,
+	Center,
+	Box,
+	Divider,
+	Heading,
 } from "native-base";
 import groupStore from "../../stores/groupStore";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 const GroupDetail = ({ route, navigation }) => {
-  const { group } = route.params;
+	const { group } = route.params;
 
-  if (groupStore.isLoading) {
-    return <Spinner />;
-  }
+	if (groupStore.isLoading) {
+		return <Spinner />;
+	}
 
-  return (
-    <KeyboardAwareScrollView>
-      <ScrollView>
-        <VStack flex={1} bg="white" w="100%">
-          <VStack
-            space={0}
-            w="100%"
-            h="50%"
-            // divider={
-            //   <Box px="2">
-            //     <Divider />
-            //   </Box>
-            // }
-          ></VStack>
-          <VStack width="100%" space={0} alignItems="center">
-            <Input
-              placeholder="type message"
-              variant="filled"
-              width="100%"
-              bg="muted.200"
-              borderRadius="10"
-              py="1"
-              px="2"
-              placeholderTextColor="muted.400"
-              _hover={{ bg: "gray.200", borderWidth: 0 }}
-              borderWidth="0"
-              _web={{
-                _focus: { style: { boxShadow: "none" } },
-              }}
-              // InputLeftElement={<Icon ml="2" size="5" color="gray.500" />}
-            />
-          </VStack>
-        </VStack>
-      </ScrollView>
-    </KeyboardAwareScrollView>
-  );
+	return (
+		<VStack flex={1} bg="white" w="100%">
+			<Divider />
+			<VStack mx="2" mt="5" w="100%" h="85%">
+				<ScrollView>
+					<Text>Data</Text>
+				</ScrollView>
+			</VStack>
+			<Divider mb="2" />
+
+			<KeyboardAwareScrollView extraScrollHeight={50}>
+				<VStack width="100%" alignItems="center">
+					<HStack>
+						<Input
+							placeholder="Type message"
+							variant="filled"
+							bg="muted.200"
+							borderRadius="50"
+							w="85%"
+							py="1"
+							px="3"
+							mx="1"
+							placeholderTextColor="muted.400"
+							_hover={{ bg: "gray.200", borderWidth: 0 }}
+							borderWidth="0"
+							_web={{
+								_focus: { style: { boxShadow: "none" } },
+							}}
+							InputLeftElement={
+								<Icon
+									size="sm"
+									ml="3"
+									color="#0077e6"
+									as={<AntDesign name="pluscircle" />}
+								/>
+							}
+						/>
+						<MaterialCommunityIcons
+							name="send-circle-outline"
+							size={32}
+							color="#0077e6"
+						/>
+					</HStack>
+				</VStack>
+			</KeyboardAwareScrollView>
+		</VStack>
+	);
 };
 export default observer(GroupDetail);

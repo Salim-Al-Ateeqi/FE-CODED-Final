@@ -80,28 +80,20 @@ const CustomDrawerContent = (props) => {
 								px="5"
 								py="3"
 								rounded="md"
-								bg={
-									index === props.state.index
-										? "rgba(6, 182, 212, 0.1)"
-										: "transparent"
-								}
+								bg={index === props.state.index ? "#dbf4ff" : "transparent"}
 								onPress={(event) => {
 									props.navigation.navigate(name);
 								}}
 							>
 								<HStack space="7" alignItems="center">
 									<Icon
-										color={
-											index === props.state.index ? "primary.500" : "gray.500"
-										}
+										color={index === props.state.index ? "#0077e6" : "gray.500"}
 										size="5"
 										as={<MaterialCommunityIcons name={getIcon(name)} />}
 									/>
 									<Text
 										fontWeight="500"
-										color={
-											index === props.state.index ? "primary.500" : "gray.700"
-										}
+										color={index === props.state.index ? "#0077e6" : "gray.700"}
 									>
 										{name}
 									</Text>

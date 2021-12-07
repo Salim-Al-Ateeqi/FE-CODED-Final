@@ -167,7 +167,10 @@ const Profile = () => {
 						m="5"
 						alignSelf="center"
 						w="25%"
-						colorScheme="success"
+						colorScheme="darkBlue"
+						_text={{
+							color: "#fff",
+						}}
 					>
 						Update
 					</Button>
