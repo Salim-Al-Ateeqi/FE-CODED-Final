@@ -16,6 +16,7 @@ import { observer } from "mobx-react";
 import GroupDetail from "../GroupDetail";
 
 const RootNavigator = () => {
+
   const { Navigator, Screen, Group } = createStackNavigator();
   return (
     <Navigator>
@@ -77,5 +78,6 @@ const RootNavigator = () => {
       )}
     </Navigator>
   );
+
 };
 export default observer(RootNavigator);

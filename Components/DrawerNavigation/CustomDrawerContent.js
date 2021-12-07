@@ -25,10 +25,10 @@ import { baseURL } from "../../stores/baseURL";
 
 const getIcon = (screenName) => {
 	switch (screenName) {
-		case "Home":
-			return "home";
-		case "Profile":
-			return "account";
+		case "Groups":
+			return "account-group";
+		case "Edit Profile":
+			return "account-edit";
 		case "Logout":
 			return "logout";
 		default:
@@ -37,7 +37,9 @@ const getIcon = (screenName) => {
 };
 
 const CustomDrawerContent = (props) => {
-	// if (!profileStore.isLoading) return <Spinner />;
+	if (!authStore.user) {
+		return <Text>You need to sign in.</Text>;
+	}
 	const navigation = useNavigation();
 	const toast = useToast();
 
@@ -56,11 +58,15 @@ const CustomDrawerContent = (props) => {
 							}}
 							size={50}
 						/>
+
 						<VStack mx="3">
 							<Text bold color="gray.700">
 								{userProfile.profile.name}
 							</Text>
-							<Text fontSize="14" mt="1" color="gray.500" fontWeight="500">
+							<Text fontSize="13" mt="1" color="gray.500" fontWeight="500">
+								{userProfile.profile.status}
+							</Text>
+							<Text fontSize="12" mt="1" color="gray.500" fontWeight="500">
 								{userProfile.phoneNumber}
 							</Text>
 						</VStack>

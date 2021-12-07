@@ -95,7 +95,29 @@ class GroupStore {
     } catch (error) {
       console.log(error);
     }
-  };
+	};
+	
+	createPoll = async (groupId, pollData, navigation, toast) => {
+		try {
+			const group = this.groups.find((group) => group._id === groupId);
+			const res = await instance.post(`/groups/${groupId}/createmoviepoll`, pollData);
+			group.polls.push(res.data);
+			toast.show({
+				title: "Poll Created!",
+				status: "success",
+				placement: "top",
+			});
+			navigation.navigate("GroupDetail", { group: group });
+		} catch (error) {
+			console.log(error);
+			toast.show({
+				title: "Something Went Wrong!",
+				description: "Something happened somewhere!",
+				status: "error",
+				placement: "top",
+			});
+		}
+	};
 }
 
 const groupStore = new GroupStore();

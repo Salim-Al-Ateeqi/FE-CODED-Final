@@ -1,29 +1,20 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { Box, Icon, Input } from "native-base";
-
 import { MaterialIcons } from "@expo/vector-icons";
 
-// Components
-// import SearchTripsList from "../SearchTrips/SearchTripsList";
-
-export default function Search({ navigation }) {
-	const [query, setQuery] = useState("");
+export default function Search({ setQuery }) {
 	return (
 		<Box
 			style={{
-				backgroundColor: "#0f1010",
-				height: "100%",
-				width: "100%",
-				paddingTop: 10,
 				alignItems: "center",
+				margin: 5,
 			}}
 		>
 			<Input
 				onChangeText={(value) => setQuery(value)}
-				placeholder="Search for groups"
+				placeholder="Search for a group"
 				bg="#fff"
-				width="80%"
+				width="100%"
 				borderRadius="50"
 				py="2"
 				px="1"
@@ -38,8 +29,6 @@ export default function Search({ navigation }) {
 					/>
 				}
 			/>
-
-			{/* <SearchTripsList query={query} navigation={navigation} /> */}
 		</Box>
 	);
 }
