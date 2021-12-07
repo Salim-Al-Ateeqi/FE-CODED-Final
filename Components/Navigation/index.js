@@ -53,7 +53,7 @@ const RootNavigator = () => {
             name="AddMembers"
             component={AddMembers}
             options={{
-              headerShown: false,
+              headerShown: true,
             }}
           />
           <Screen
