@@ -9,7 +9,6 @@ import Tabs from "../DrawerNavigation/Tabs";
 import AddMembers from "../AddMembers";
 import CreateCustomPoll from "../CreateCustomPoll";
 import MoviePoll from "../../MoviePoll";
-import Home from "../Home";
 import FinalizeMoviePoll from "../../MoviePoll/FinalizeMoviePoll";
 
 // stores

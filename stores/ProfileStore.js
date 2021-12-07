@@ -32,11 +32,10 @@ class ProfileStore {
 			}
 			const res = await instance.put("/updateprofile", formData);
 
-			const findProfile = this.profiles.find(
-				(profile) => profile._id === profileId
-			);
 			runInAction(() => {
-				findProfile = res.data;
+				this.profiles = this.profiles.map((_profile) =>
+					_profile._id === profileId ? res.data : _profile
+				);
 			});
 		} catch (error) {
 			console.log(error);
