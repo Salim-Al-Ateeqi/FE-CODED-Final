@@ -26,6 +26,7 @@ const GroupItem = ({ group, navigation }) => {
 							</Text>
 						</VStack>
 						<Spacer />
+
 						<Text>{updateTime}</Text>
 					</HStack>
 				</Box>
