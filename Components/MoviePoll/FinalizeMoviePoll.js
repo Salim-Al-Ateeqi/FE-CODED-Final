@@ -18,7 +18,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import groupStore from "../../stores/groupStore";
 
 const FinalizeMoviePoll = ({ route, navigation }) => {
-  const { movie, group } = route.params;
+  const { movie } = route.params;
+  const { group } = route.params;
+
 
   const currentTime = Date.now();
   const toast = useToast();

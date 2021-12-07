@@ -14,7 +14,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import imdbStore from "../../stores/imdbStore";
 import MovieList from "./MovieList";
 
-const index = ({ navigation, group }) => {
+const index = ({ navigation, route }) => {
+
+  const { group } = route.params;
 
   const [query, setQuery] = useState('');
 

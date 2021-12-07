@@ -63,7 +63,8 @@ const RootNavigator = () => {
               const { group } = route.params;
               return {
                 headerTitle: group.name,
-                headerRight: () => <MenuIcon navigation={navigation} />,
+                //Having issue sending group object to moviepoll component
+                headerRight: () => <MenuIcon navigation={navigation} group={group} />,
               };
             }}
           />
