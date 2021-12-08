@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../utils/Colors";
 
 const styles = StyleSheet.create({
   movieTitle: { fontWeight: "bold", fontSize: 20, marginTop: 5 },
