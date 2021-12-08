@@ -17,7 +17,6 @@ import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
 
 const RootNavigator = () => {
-
   const { Navigator, Screen, Group } = createStackNavigator();
   return (
     <Navigator>
@@ -64,7 +63,9 @@ const RootNavigator = () => {
               return {
                 headerTitle: group.name,
                 //Having issue sending group object to moviepoll component
-                headerRight: () => <MenuIcon navigation={navigation} group={group} />,
+                headerRight: () => (
+                  <MenuIcon navigation={navigation} group={group} />
+                ),
               };
             }}
           />
@@ -81,6 +82,5 @@ const RootNavigator = () => {
       )}
     </Navigator>
   );
-
 };
 export default observer(RootNavigator);
