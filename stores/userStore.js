@@ -1,27 +1,29 @@
-import { makeAutoObservable } from "mobx";
-import { instance } from "./instance";
+//This is a scratched idea... store was going to be used for something else like user to user chat
 
-class UserStore {
-  users = [];
+// import { makeAutoObservable } from "mobx";
+// import { instance } from "./instance";
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+// class UserStore {
+//   users = [];
 
-  isLoading = true;
+//   constructor() {
+//     makeAutoObservable(this);
+//   }
 
-  fetchUsers = async () => {
-    try {
-      const res = await instance.get("/getprofiles");
-      this.users = res.data;
-      this.isLoading = false;
-    } catch (error) {
-      console.log("userStore -> fetchUsers -> error", error);
-    }
-  };
-}
+//   isLoading = true;
 
-const userStore = new UserStore();
-userStore.fetchUsers();
+//   fetchUsers = async () => {
+//     try {
+//       const res = await instance.get("/getprofiles");
+//       this.users = res.data;
+//       this.isLoading = false;
+//     } catch (error) {
+//       console.log("userStore -> fetchUsers -> error", error);
+//     }
+//   };
+// }
 
-export default userStore;
+// const userStore = new UserStore();
+// userStore.fetchUsers();
+
+// export default userStore;

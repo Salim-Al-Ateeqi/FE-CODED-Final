@@ -31,6 +31,7 @@ const Home = ({ navigation }) => {
       <GroupItem navigation={navigation} group={group} key={group._id} />
     ));
 
+
   const handlePress = () => {
     if (authStore) {
       navigation.navigate("CreateGroup");
@@ -47,6 +48,7 @@ const Home = ({ navigation }) => {
             <Button colorScheme="darkBlue" variant="link">
               Broadcast List
             </Button>
+
             <Button colorScheme="darkBlue" variant="link" onPress={handlePress}>
               Create Group
             </Button>
