@@ -14,7 +14,7 @@ const ChatItem = ({ chatData }) => {
     const userProfile = profileStore.profiles.find(profile => profile._id === chatData.sentFrom)
     console.log(userProfile._id);
 
-    const color = authStore.user._id === chatData.sentFrom ? '' : Colors.Primary
+    const color = authStore.user._id === chatData.sentFrom ? '#99CCFF' : Colors.Primary
 
     return (
         <HStack space={2} flex={1} m='4' >
