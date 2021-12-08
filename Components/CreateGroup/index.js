@@ -20,7 +20,7 @@ import {
   Divider,
 } from "native-base";
 import IntlPhoneInput from "react-native-intl-phone-input";
-import { KeyboardAvoidingView } from "react-native";
+import { Image, KeyboardAvoidingView } from "react-native";
 import {
   MaterialIcons,
   AntDesign,
@@ -36,12 +36,10 @@ import groupStore from "../../stores/groupStore";
 
 const CreateGroup = ({ navigation }) => {
   const toast = useToast();
-  const [image, setImage] = useState({
-    uri: baseURL + `/media/defaultUserImage.jpg`,
-  });
+  //   const [image, setImage] = useState({});
   const [group, setGroup] = useState({
     name: "",
-    image: "",
+    image: { uri: baseURL + `/media/defaultUserImage.jpg` },
   });
 
   //   useEffect(() => {
@@ -78,6 +76,7 @@ const CreateGroup = ({ navigation }) => {
           name: filename,
           type: match ? `image/${match[1]}` : `image`,
         };
+
         setGroup({ ...group, image: image });
       }
     } catch (error) {
@@ -97,22 +96,26 @@ const CreateGroup = ({ navigation }) => {
           <Center space="3">
             <Pressable onPress={_pickImage}>
               <VStack position="relative">
-                <Text
-                  position="absolute"
-                  top={70}
-                  left="23"
-                  zIndex={1}
-                  color="#737373"
-                  fontSize="15"
-                >
-                  Edit Image
-                </Text>
-                <Avatar
-                  size={120}
-                  source={{
-                    uri: baseURL + `/media/defaultUserImage.jpg`,
-                  }}
-                />
+                <Box>
+                  <Text
+                    position="absolute"
+                    top={70}
+                    left="23"
+                    zIndex={1}
+                    color="#737373"
+                    fontSize="15"
+                  >
+                    Edit Image
+                  </Text>
+
+                  <Image
+                    //   size={120}
+                    style={{ width: 100, height: 100, borderRadius: 100 }}
+                    source={{
+                      uri: group.image.uri,
+                    }}
+                  />
+                </Box>
               </VStack>
             </Pressable>
             <Text fontSize="18" bold my="1">

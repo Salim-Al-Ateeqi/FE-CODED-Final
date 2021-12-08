@@ -83,11 +83,16 @@ class GroupStore {
     }
   };
 
-  addMembersToGroup = async (groupId) => {
+  addMembersToGroup = async (member, groupId, navigation, toast) => {
     try {
       const group = this.groups.find((group) => group._id === groupId);
-      const res = await instance.put(`/groups/${groupId}/members`);
+      const res = await instance.put(`/groups/${groupId}/members`, member);
       for (const key in group) group[key] = res.data[key];
+      toast.show({
+        title: "Poll Created!",
+        status: "success",
+        placement: "top",
+      });
     } catch (error) {
       console.log(error);
     }
