@@ -10,6 +10,7 @@ import CreateCustomPoll from "../CreateCustomPoll";
 import MoviePoll from "../MoviePoll";
 import FinalizeMoviePoll from "../MoviePoll/FinalizeMoviePoll";
 import AddMembers from "../AddMembers";
+import EditGroup from "../EditGroup";
 import GroupDetail from "../GroupDetail";
 import MenuIcon from "../GroupDetail/MenuIcon";
 // stores
@@ -52,6 +53,13 @@ const RootNavigator = () => {
           <Screen
             name="AddMembers"
             component={AddMembers}
+            options={{
+              headerShown: true,
+            }}
+          />
+          <Screen
+            name="EditGroup"
+            component={EditGroup}
             options={{
               headerShown: true,
             }}

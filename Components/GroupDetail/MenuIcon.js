@@ -1,8 +1,23 @@
-import React from "react";
-import { Menu, Box, Center, Pressable } from "native-base";
+import React, { useState } from "react";
+import {
+  Menu,
+  Box,
+  Center,
+  Pressable,
+  Modal,
+  FormControl,
+  Input,
+  Button,
+} from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import groupStore from "../../stores/groupStore";
 
-const MenuIcon = ({ navigation, group }) => {
+
+const MenuIcon = ({ navigation, group, route }) => {
+const handleDelete = () => {
+    groupStore.deleteGroup(group._id);
+    navigation.navigate("Tabs");
+  };
 	return (
 		<Center>
 			<Menu
@@ -35,9 +50,9 @@ const MenuIcon = ({ navigation, group }) => {
 					{/* Add page to return group member list */}
 					<Menu.Item>View Members</Menu.Item>
 					{/* Add Update Page for Group */}
-					<Menu.Item>Edit Group</Menu.Item>
+					<Menu.Item onPress={() => navigation.navigate("EditGroup")}>Edit Group</Menu.Item>
 					{/* Add Delete Handler and navigate */}
-					<Menu.Item>Delete Group</Menu.Item>
+					<Menu.Item onPress={handleDelete}>Delete Group</Menu.Item>
 				</Box>
 			</Menu>
 		</Center>
