@@ -2,126 +2,126 @@ import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
 
 class GroupStore {
-  groups = [];
-  isLoading = true;
+	groups = [];
+	isLoading = true;
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+	constructor() {
+		makeAutoObservable(this);
+	}
 
-  fetchGroups = async () => {
-    try {
-      const res = await instance.get("/groups");
-      this.groups = res.data;
-      this.isLoading = false;
-    } catch (error) {
-      console.log("groupStore -> fetchGroups -> error", error);
-    }
-  };
+	fetchGroups = async () => {
+		try {
+			const res = await instance.get("/groups");
+			this.groups = res.data;
+			this.isLoading = false;
+		} catch (error) {
+			console.log("groupStore -> fetchGroups -> error", error);
+		}
+	};
 
-  createGroup = async (group, toast, navigation) => {
-    try {
-      const formData = new FormData();
-      for (const key in group) {
-        formData.append(key, group[key]);
-      }
-      console.log("Hello");
-      const res = await instance.post("/groups", formData);
-      this.groups.push(res.data);
-      toast.show({
-        title: "Group Created",
-        status: "success",
-        placement: "top",
-      });
-      navigation.goBack();
-    } catch (error) {
-      console.log(error);
-      toast.show({
-        title: "Something Went Wrong!",
-        description: "You Broke Something",
-        status: "error",
-        placement: "top",
-      });
-    }
-  };
+	createGroup = async (group, toast, navigation) => {
+		try {
+			const formData = new FormData();
+			for (const key in group) {
+				formData.append(key, group[key]);
+			}
+			console.log("Hello");
+			const res = await instance.post("/groups", formData);
+			this.groups.push(res.data);
+			toast.show({
+				title: "Group Created",
+				status: "success",
+				placement: "top",
+			});
+			navigation.goBack();
+		} catch (error) {
+			console.log(error);
+			toast.show({
+				title: "Something Went Wrong!",
+				description: "You Broke Something",
+				status: "error",
+				placement: "top",
+			});
+		}
+	};
 
-  updateGroup = async (groupId, updatedGroup, navigation, toast) => {
-    try {
-      const group = this.groups.find((group) => group._id === groupId);
+	updateGroup = async (groupId, updatedGroup, navigation, toast) => {
+		try {
+			const group = this.groups.find((group) => group._id === groupId);
 
-      const formData = new FormData();
-      for (const key in updatedGroup) {
-        formData.append(key, updatedGroup[key]);
-      }
-      const res = await instance.put(`/groups/${groupId}`, formData);
+			const formData = new FormData();
+			for (const key in updatedGroup) {
+				formData.append(key, updatedGroup[key]);
+			}
+			const res = await instance.put(`/groups/${groupId}`, formData);
 
-      for (const key in group) group[key] = res.data[key];
+			for (const key in group) group[key] = res.data[key];
 
-      toast.show({
-        title: "Group UpDate!",
-        status: "success",
-        placement: "top",
-      });
-      navigation.navigate("GroupDetail", { group: group });
-    } catch (error) {
-      console.log(error);
-      toast.show({
-        title: "Something Went Wrong!",
-        description: "You Broke Something",
-        status: "error",
-        placement: "top",
-      });
-    }
-  };
+			toast.show({
+				title: "Group UpDate!",
+				status: "success",
+				placement: "top",
+			});
+			navigation.navigate("GroupDetail", { group: group });
+		} catch (error) {
+			console.log(error);
+			toast.show({
+				title: "Something Went Wrong!",
+				description: "You Broke Something",
+				status: "error",
+				placement: "top",
+			});
+		}
+	};
 
-  deleteGroup = async (groupId) => {
-    try {
-      await instance.delete(`/groups/${groupId}`);
-      this.groups = this.groups.filter((group) => group._id !== groupId);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+	deleteGroup = async (groupId) => {
+		try {
+			await instance.delete(`/groups/${groupId}`);
+			this.groups = this.groups.filter((group) => group._id !== groupId);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-  addMembersToGroup = async (member, groupId, navigation, toast) => {
-    try {
-      const group = this.groups.find((group) => group._id === groupId);
-      const res = await instance.put(`/groups/${groupId}/members`, member);
-      for (const key in group) group[key] = res.data[key];
-      toast.show({
-        title: "Poll Created!",
-        status: "success",
-        placement: "top",
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+	addMembersToGroup = async (member, groupId, navigation, toast) => {
+		try {
+			const group = this.groups.find((group) => group._id === groupId);
+			const res = await instance.put(`/groups/${groupId}/members`, member);
+			for (const key in group) group[key] = res.data[key];
+			toast.show({
+				title: "Poll Created!",
+				status: "success",
+				placement: "top",
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-  createPoll = async (groupId, pollData, navigation, toast) => {
-    try {
-      const group = this.groups.find((group) => group._id === groupId);
-      const res = await instance.post(
-        `/groups/${groupId}/createmoviepoll`,
-        pollData
-      );
-      group.polls.push(res.data);
-      toast.show({
-        title: "Poll Created!",
-        status: "success",
-        placement: "top",
-      });
-      navigation.navigate("GroupDetail", { group: group });
-    } catch (error) {
-      console.log(error);
-      toast.show({
-        title: "Something Went Wrong!",
-        description: "Something happened somewhere!",
-        status: "error",
-        placement: "top",
-      });
-    }
-  };
+	createPoll = async (groupId, pollData, navigation, toast) => {
+		try {
+			const group = this.groups.find((group) => group._id === groupId);
+			const res = await instance.post(
+				`/groups/${groupId}/createmoviepoll`,
+				pollData
+			);
+			group.polls.push(res.data);
+			toast.show({
+				title: "Poll Created!",
+				status: "success",
+				placement: "top",
+			});
+			navigation.navigate("GroupDetail", { group: group });
+		} catch (error) {
+			console.log(error);
+			toast.show({
+				title: "Something Went Wrong!",
+				description: "Something happened somewhere!",
+				status: "error",
+				placement: "top",
+			});
+		}
+	};
 }
 
 const groupStore = new GroupStore();

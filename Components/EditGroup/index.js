@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-	Avatar,
 	Center,
 	Icon,
 	Input,
@@ -13,25 +12,31 @@ import {
 	Box,
 	Divider,
 	useToast,
-	KeyboardAvoidingView,
+	HStack,
+	Image,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
 // components
 import { Colors } from "../../utils/Colors";
+import ViewMembers from "./ViewMembers";
 
 // stores
+import profileStore from "../../stores/ProfileStore";
 import groupStore from "../../stores/groupStore";
 import { baseURL } from "../../stores/baseURL";
 
 const EditGroup = ({ route, navigation }) => {
 	const { group } = route.params;
-
 	const [updatedGroup, setUpdatedGroup] = useState({
 		name: group.name,
 		image: group.image,
 	});
+
+	const groupMembers = profileStore.profiles
+		.filter((profile) => group.members.includes(profile._id))
+		.map((member) => <ViewMembers key={member._id} member={member} />);
 
 	const toast = useToast();
 
@@ -64,7 +69,7 @@ const EditGroup = ({ route, navigation }) => {
 		groupStore.updateGroup(group._id, updatedGroup, navigation, toast);
 	};
 	return (
-		<Box flex="1" w="100%" bg="#f5f5f5">
+		<Box flex="1" w="100%" bg="#fff">
 			<ScrollView>
 				<VStack mt="10" mb="2" mx="1">
 					<Center space="3">
@@ -73,14 +78,16 @@ const EditGroup = ({ route, navigation }) => {
 								<Text
 									position="absolute"
 									top={70}
-									left="23"
+									left="23.5"
 									zIndex={1}
-									color="#737373"
+									color="#d4d4d8"
 									fontSize="15"
 								>
 									Edit Image
 								</Text>
-								<Avatar
+
+								<Image
+									borderRadius="100"
 									size={120}
 									source={{
 										uri: baseURL + group.image,
@@ -89,88 +96,58 @@ const EditGroup = ({ route, navigation }) => {
 							</VStack>
 						</Pressable>
 
-						<Text fontSize="18" bold my="1">
+						<Text fontSize="18" bold my="3">
 							{group.name}
 						</Text>
 					</Center>
 				</VStack>
 
 				<Divider mb="5" />
-				<KeyboardAvoidingView keyboardVerticalOffset={5}>
+
+				<VStack flex={1} space="5">
+					<FormControl>
+						<FormControl.Label ml="3">Group Name</FormControl.Label>
+						<HStack justifyContent="space-evenly">
+							<Input
+								w="75%"
+								_focus={{ borderColor: Colors.Primary }}
+								defaultValue={group.name}
+								placeholder="Edit your name"
+								InputLeftElement={
+									<Icon
+										as={<MaterialIcons name="group" />}
+										size={5}
+										ml="2"
+										color="muted.400"
+									/>
+								}
+								onChangeText={(name) =>
+									setUpdatedGroup({ ...updatedGroup, name })
+								}
+							/>
+							<Button
+								onPress={handleUpdate}
+								style={{ backgroundColor: Colors.Primary }}
+								_text={{
+									color: "#fff",
+								}}
+							>
+								Update
+							</Button>
+						</HStack>
+					</FormControl>
 					<VStack>
-						{/* <Heading size="md" mx="5">
-            Edit Profile
-          </Heading> */}
-						<Center>
-							<FormControl w="90%">
-								<FormControl.Label>Name</FormControl.Label>
-								<Input
-									_focus={{ borderColor: Colors.Primary }}
-									defaultValue={group.name}
-									placeholder="Edit your name"
-									InputLeftElement={
-										<Icon
-											as={<MaterialIcons name="group" />}
-											size={5}
-											ml="2"
-											color="muted.400"
-										/>
-									}
-									onChangeText={(name) =>
-										setUpdatedGroup({ ...updatedGroup, name })
-									}
-								/>
-							</FormControl>
-						</Center>
+						<HStack w="100%">
+							<Text ml="5" mb="2">
+								{group.members.length} PARTICIPANTS
+							</Text>
+						</HStack>
+						<Divider />
+						{groupMembers}
 					</VStack>
-				</KeyboardAvoidingView>
-				<Button
-					onPress={handleUpdate}
-					m="5"
-					alignSelf="center"
-					w="25%"
-					style={{ backgroundColor: Colors.Primary }}
-					_text={{
-						color: "#fff",
-					}}
-				>
-					Update
-				</Button>
+				</VStack>
 			</ScrollView>
 		</Box>
-		// <Box>
-		// 	<FormControl>
-		// 		<FormControl.Label>Updated Group Name:</FormControl.Label>
-		// 		<Input
-		// 			onChangeText={(name) => setUpdatedGroup({ ...updatedGroup, name })}
-		// 			placeholder="Please enter a new group name!"
-		// 		/>
-		// 	</FormControl>
-		// 	<FormControl>
-		// 		<FormControl.Label>Choose An Image to Upload</FormControl.Label>
-		// 		<Button onPress={_pickImage} variant="outline" colorScheme="success">
-		// 			Upload Image
-		// 		</Button>
-		// 	</FormControl>
-
-		// 	<FormControl>
-		// 		<FormControl.Label>Updated Description:</FormControl.Label>
-		// 		<Input
-		// 			onChangeText={(description) =>
-		// 				setUpdatedGroup({ ...updatedGroup, description })
-		// 			}
-		// 			placeholder="Please enter a new group description!"
-		// 		/>
-		// 	</FormControl>
-		// 	<Button
-		// 		mt="2"
-		// 		colorScheme="indigo"
-		// 		onPress={handleUpdate}
-		// 		variant="outline"
-		// 	>
-		// 		Update Group
-		// 	</Button>
-		// </Box>
 	);
 };
 
