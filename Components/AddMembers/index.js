@@ -20,18 +20,22 @@ import { Colors } from "../../utils/Colors";
 
 // stores
 import groupStore from "../../stores/groupStore";
+import profileStore from "../../stores/ProfileStore";
 
 const AddMembers = ({ navigation, route }) => {
   const { group } = route.params;
-
   const [member, setMember] = useState({
     phoneNumber: "",
   });
 
+  const newMember = profileStore.profiles.find(
+    (profile) => profile.phoneNumber === member.phoneNumber
+  );
   const toast = useToast();
 
   const handleSubmit = () => {
-    groupStore.addMembersToGroup(member, group._id, navigation, toast);
+    console.log("newMember in componenet:", newMember);
+    groupStore.addMembersToGroup(newMember, group, navigation, toast);
   };
   return (
     <KeyboardAwareScrollView>
