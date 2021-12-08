@@ -14,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { ScrollView } from "react-native-gesture-handler";
 import authStore from "../../../stores/authStore";
 import { observer } from 'mobx-react';
+import { Colors } from "../../../utils/Colors";
 
 const index = ({ navigation }) => {
 
@@ -79,13 +80,18 @@ const index = ({ navigation }) => {
 									h="50"
 									keyboardType={"number-pad"}
 									placeholder="Enter Your 4-Digit Token"
+									_focus={{ borderColor: Colors.Primary }}
 									onChangeText={(SMSToken) =>
 										setUserInput({ ...userInput, SMSToken })
 									}
 								/>
 							</FormControl>
 
-							<Button mt="2" colorScheme="success" onPress={handleSubmit}>
+							<Button 
+								mt="2" 
+								style={{ backgroundColor: Colors.Primary }}
+								onPress={handleSubmit}
+							>
 								Register
 							</Button>
 							

@@ -47,14 +47,13 @@ class AuthStore {
 		}
 	};
 
-
 	checkUserValidated = (toast, navigation, showToast = false) => {
 		if (this.user.isValidated) {
 			if (showToast) {
 				toast.show({
 					status: "success",
 					placement: "top",
-					title: `Account Verified!`,
+					title: `Welcome`,
 				});
 			}
 			navigation.replace("Tabs");
@@ -68,7 +67,6 @@ class AuthStore {
 			navigation.replace("ValidateToken");
 		}
 	};
-
 
 	validateToken = async (userData, toast, navigation) => {
 		try {
@@ -135,7 +133,6 @@ class AuthStore {
 		}
 	};
 }
-
 
 const authStore = new AuthStore();
 authStore.checkForToken();

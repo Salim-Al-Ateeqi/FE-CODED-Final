@@ -2,6 +2,9 @@ import React from "react";
 import { Box, Icon, Input } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
+// components
+import { Colors } from "../../utils/Colors";
+
 export default function Search({ setQuery }) {
 	return (
 		<Box
@@ -11,6 +14,10 @@ export default function Search({ setQuery }) {
 			}}
 		>
 			<Input
+				_focus={{
+					borderColor: Colors.Primary,
+				}}
+				color={Colors.Primary}
 				onChangeText={(value) => setQuery(value)}
 				placeholder="Search for a group"
 				bg="#fff"

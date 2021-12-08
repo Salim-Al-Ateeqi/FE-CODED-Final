@@ -13,14 +13,17 @@ import {
 	HStack,
 	Center,
 	useToast,
+	ScrollView,
 } from "native-base";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+// components
+import { Colors } from "../../../utils/Colors";
+
 // stores
 import authStore from "../../../stores/authStore";
 import profileStore from "../../../stores/ProfileStore";
-import { ScrollView } from "react-native-gesture-handler";
 
 const Signup = ({ navigation }) => {
 	const toast = useToast();
@@ -82,7 +85,7 @@ const Signup = ({ navigation }) => {
 							fontWeight="medium"
 							size="xs"
 						>
-							Register please to continue!
+							Register to continue!
 						</Heading>
 
 						{equalPassword && (
@@ -123,6 +126,7 @@ const Signup = ({ navigation }) => {
 									h="50"
 									type="text"
 									placeholder="Enter your Name"
+									_focus={{ borderColor: Colors.Primary }}
 									onChangeText={(name) =>
 										setUser({ ...user, profile: { name: name } })
 									}
@@ -136,6 +140,7 @@ const Signup = ({ navigation }) => {
 									h="50"
 									type="password"
 									placeholder="Enter your password"
+									_focus={{ borderColor: Colors.Primary }}
 									onChangeText={(password) => setUser({ ...user, password })}
 								/>
 							</FormControl>
@@ -147,11 +152,16 @@ const Signup = ({ navigation }) => {
 									h="50"
 									type="password"
 									placeholder="Confirm your password"
+									_focus={{ borderColor: Colors.Primary }}
 									onChangeText={(value) => setConfirmPassword(value)}
 								/>
 							</FormControl>
 
-							<Button mt="2" colorScheme="success" onPress={handleSubmit}>
+							<Button
+								mt="2"
+								style={{ backgroundColor: Colors.Primary }}
+								onPress={handleSubmit}
+							>
 								Register
 							</Button>
 							<HStack mt="6" justifyContent="center">
@@ -166,13 +176,13 @@ const Signup = ({ navigation }) => {
 								</Text>
 								<Link
 									_text={{
-										color: "#404040",
-										fontWeight: "medium",
+										color: "#52525b",
+										fontWeight: "bold",
 										fontSize: "sm",
 									}}
 									onPress={() => navigation.navigate("Signin")}
 								>
-									Sign-in
+									Login
 								</Link>
 							</HStack>
 						</VStack>
