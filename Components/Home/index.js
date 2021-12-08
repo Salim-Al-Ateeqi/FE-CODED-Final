@@ -17,6 +17,7 @@ import { Colors } from "../../utils/Colors";
 
 // stores
 import groupStore from "../../stores/groupStore";
+import authStore from "../../stores/authStore";
 
 const Home = ({ navigation }) => {
   const [query, setQuery] = useState("");
@@ -30,6 +31,13 @@ const Home = ({ navigation }) => {
       <GroupItem navigation={navigation} group={group} key={group._id} />
     ));
 
+
+  const handlePress = () => {
+    if (authStore) {
+      navigation.navigate("CreateGroup");
+    }
+  };
+
   return (
     <Box bg="white" flex="1">
       <ScrollView>
@@ -40,7 +48,8 @@ const Home = ({ navigation }) => {
             <Button colorScheme="darkBlue" variant="link">
               Broadcast List
             </Button>
-            <Button colorScheme="darkBlue" variant="link">
+
+            <Button colorScheme="darkBlue" variant="link" onPress={handlePress}>
               Create Group
             </Button>
           </HStack>

@@ -16,6 +16,7 @@ import MenuIcon from "../GroupDetail/MenuIcon";
 // stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
+import CreateGroup from "../CreateGroup";
 
 const RootNavigator = () => {
   const { Navigator, Screen, Group } = createStackNavigator();
@@ -75,6 +76,13 @@ const RootNavigator = () => {
                   <MenuIcon navigation={navigation} group={group} />
                 ),
               };
+            }}
+          />
+          <Screen
+            name="CreateGroup"
+            component={CreateGroup}
+            options={{
+              headerShown: true,
             }}
           />
           <Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
