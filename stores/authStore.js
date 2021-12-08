@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { instance } from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import profileStore from "./ProfileStore";
+import socketStore from "./SocketStore";
 import { observer } from "mobx-react";
 
 class AuthStore {
@@ -18,7 +18,7 @@ class AuthStore {
 			runInAction(() => {
 				this.user = decode(token);
 			});
-
+			socketStore.setConnection();
 			instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 		} catch (error) {
 			console.log(error);
@@ -101,6 +101,7 @@ class AuthStore {
 			runInAction(() => {
 				this.user = null;
 			});
+			socketStore.disconnect();
 			navigation.navigate("Signup");
 			toast.show({
 				status: "success",

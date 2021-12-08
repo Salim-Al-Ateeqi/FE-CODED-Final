@@ -83,6 +83,7 @@ const Profile = () => {
 	const handleSubmit = () => {
 		profileStore.updateProfile(userProfile._id, updateProfile);
 		console.log(updateProfile);
+		//needs completing
 	};
 
 	return (
