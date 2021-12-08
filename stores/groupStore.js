@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
+import profileStore from "./ProfileStore";
 
 class GroupStore {
 	groups = [];
@@ -83,20 +84,25 @@ class GroupStore {
 		}
 	};
 
-	addMembersToGroup = async (member, groupId, navigation, toast) => {
-		try {
-			const group = this.groups.find((group) => group._id === groupId);
-			const res = await instance.put(`/groups/${groupId}/members`, member);
-			for (const key in group) group[key] = res.data[key];
-			toast.show({
-				title: "Poll Created!",
-				status: "success",
-				placement: "top",
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	};
+
+  addMembersToGroup = async (member, group, navigation, toast) => {
+    try {
+      console.log("group in store:", member._id);
+      // const group = this.groups.find((group) => group._id === groupId);
+      const res = await instance.put(`/groups/${group._id}/members`);
+      group.members.push(member._id);
+      profileStore.addGroupToProfile(member, group);
+      // for (const key in group) group[key] = res.data[key];
+      toast.show({
+        title: "Poll Created!",
+        status: "success",
+        placement: "top",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
 	createPoll = async (groupId, pollData, navigation, toast) => {
 		try {
