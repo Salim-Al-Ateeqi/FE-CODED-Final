@@ -18,6 +18,8 @@ import { Colors } from "../../../utils/Colors";
 
 const index = ({ navigation }) => {
 
+	
+
     const toast = useToast();
 
     const [userInput, setUserInput] = useState({SMSToken: ''});
@@ -64,7 +66,7 @@ const index = ({ navigation }) => {
 							fontWeight="medium"
 							size="xs"
 						>
-							You will receive an SMS message shortly!
+							{ authStore.message }
                         </Heading>
                         
                         {matchingToken && (
@@ -79,7 +81,7 @@ const index = ({ navigation }) => {
 									bg="#fff"
 									h="50"
 									keyboardType={"number-pad"}
-									placeholder="Enter Your 4-Digit Token"
+									placeholder="Enter Your Token"
 									_focus={{ borderColor: Colors.Primary }}
 									onChangeText={(SMSToken) =>
 										setUserInput({ ...userInput, SMSToken })

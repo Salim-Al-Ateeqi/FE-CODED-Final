@@ -60,7 +60,6 @@ const CustomDrawerContent = (props) => {
 							}}
 							size={50}
 						/>
-
 						<VStack mx="3">
 							<Text bold color="gray.700">
 								{userProfile.profile.name}
@@ -82,6 +81,7 @@ const CustomDrawerContent = (props) => {
 								px="5"
 								py="3"
 								rounded="md"
+                key={name}
 								bg={index === props.state.index ? "#dbf4ff" : "transparent"}
 								onPress={(event) => {
 									props.navigation.navigate(name);
