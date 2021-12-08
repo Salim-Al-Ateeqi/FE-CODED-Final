@@ -117,6 +117,20 @@ class GroupStore {
       });
     }
   };
+
+  sendChatToGroup = async (groupId, newMessage) => {
+    try {
+      console.log(groupId, newMessage)
+      const group = this.groups.find((group) => group._id === groupId);
+      const res = await instance.post(`/groups/${groupId}/addChat`);
+      console.log(res.data)
+      group.chat.push(res.data);
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+
 }
 
 const groupStore = new GroupStore();

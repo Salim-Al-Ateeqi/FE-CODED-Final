@@ -1,15 +1,17 @@
 import { observer } from "mobx-react";
 import { HStack, KeyboardAvoidingView, Spinner } from "native-base";
-import React from "react";
+import React, { useState } from "react";
 import { VStack, Input, Icon, Text, Box, Divider, Heading } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 // components
 import { Colors } from "../../utils/Colors";
-
+import ChatItem from "./ChatItem";
+import PollItem from "./PollItem";
 // stores
 import groupStore from "../../stores/groupStore";
+
 
 const GroupDetail = ({ route, navigation }) => {
 	const { group } = route.params;
@@ -18,13 +20,33 @@ const GroupDetail = ({ route, navigation }) => {
 		return <Spinner />;
 	}
 
+	const groupDetailContent = [...group.chat, ...group.polls];
+
+	//create a sort method using moment
+
+
+	const content = groupDetailContent.map(element => {
+		if (element.contentType === 'chat') {
+			return <ChatItem key={ element._id } chatData={ element }/>
+		} else if (element.contentType === 'poll') {
+			return <PollItem key={ element._id } pollData={ element } />
+		}
+	})
+
+	const [newMessage, setNewMessage] = useState('');
+
+	const handleSubmit = () => {
+		groupStore.sendChatToGroup(group._id, newMessage);
+		setNewMessage('');
+	}
+
 	return (
-		<Box flex={1} bg="#fafafa">
+		<Box flex={1} bg="#fafafa" >
 			<Divider />
 
-			<VStack mx="2" mt="5" flex={1}>
+			<VStack mt="5" flex={1} >
 				<ScrollView>
-					<Text>messages will be here</Text>
+					{ content }
 				</ScrollView>
 			</VStack>
 
@@ -34,17 +56,19 @@ const GroupDetail = ({ route, navigation }) => {
 				<VStack alignItems="center" mb="5">
 					<HStack alignItems="center">
 						<Input
-							color="#27272a"
+							color="#fafafa"
 							placeholder="Type message"
-							placeholderTextColor="#52525b"
+							placeholderTextColor="#a1a1aa"
 							variant="filled"
-							bg="#d4d4d8"
+							bg="#71717a"
 							borderRadius="50"
 							w="85%"
 							py="2"
 							px="3"
 							mx="1"
 							_focus={{ borderColor: Colors.Primary }}
+							value={newMessage}
+							onChangeText={(newMessage)=> setNewMessage(newMessage)}
 							borderWidth="0"
 							InputLeftElement={
 								<Icon
@@ -59,6 +83,7 @@ const GroupDetail = ({ route, navigation }) => {
 							name="send-circle-outline"
 							size={32}
 							color={Colors.Primary}
+							onPress={handleSubmit}
 						/>
 					</HStack>
 				</VStack>

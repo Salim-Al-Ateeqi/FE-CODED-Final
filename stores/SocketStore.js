@@ -8,7 +8,7 @@ class SocketStore {
     constructor() { 
         makeAutoObservable(this);
     }
-    
+    //checkout custom hooks for sockets useSockets
 
     socket = null;
 
