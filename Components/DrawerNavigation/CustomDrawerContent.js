@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import {
 	Box,
@@ -16,7 +17,8 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
 
-import { observer } from "mobx-react";
+// components
+import { Colors } from "../../utils/Colors";
 
 // stores
 import authStore from "../../stores/authStore";
@@ -87,13 +89,17 @@ const CustomDrawerContent = (props) => {
 							>
 								<HStack space="7" alignItems="center">
 									<Icon
-										color={index === props.state.index ? "#0077e6" : "gray.500"}
+										color={
+											index === props.state.index ? Colors.Primary : "gray.500"
+										}
 										size="5"
 										as={<MaterialCommunityIcons name={getIcon(name)} />}
 									/>
 									<Text
 										fontWeight="500"
-										color={index === props.state.index ? "#0077e6" : "gray.700"}
+										color={
+											index === props.state.index ? Colors.Primary : "gray.700"
+										}
 									>
 										{name}
 									</Text>

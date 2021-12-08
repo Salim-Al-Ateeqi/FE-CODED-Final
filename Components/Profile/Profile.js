@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 import {
 	Avatar,
-	Box,
 	Center,
-	HStack,
 	Icon,
 	Input,
 	Text,
 	VStack,
 	FormControl,
 	ScrollView,
-	Heading,
 	Pressable,
 	Button,
+	Box,
+	Divider,
 } from "native-base";
 import * as ImagePicker from "expo-image-picker";
 import { observer } from "mobx-react";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { KeyboardAvoidingView } from "react-native";
+
+// components
+import { Colors } from "../../utils/Colors";
 
 // stores
 import profileStore from "../../stores/ProfileStore";
@@ -84,40 +86,41 @@ const Profile = () => {
 	};
 
 	return (
-		<VStack flex="1" w="100%" bg="#f5f5f5">
-			<KeyboardAwareScrollView>
-				<ScrollView>
-					<VStack mt="10" mb="5" mx="1">
-						<Center space="3">
-							<Pressable onPress={_pickImage}>
-								<VStack position="relative">
-									<Text
-										position="absolute"
-										top={70}
-										left="23"
-										zIndex={1}
-										color="#737373"
-										fontSize="15"
-									>
-										Edit Image
-									</Text>
-									<Avatar
-										size={120}
-										source={{
-											uri: baseURL + userProfile.profile.image,
-										}}
-									/>
-								</VStack>
-							</Pressable>
-							<Text fontSize="18" bold my="1">
-								{userProfile.profile.name}
-							</Text>
-							<Text fontSize="14" my="1">
-								{userProfile.profile.status}
-							</Text>
-						</Center>
-					</VStack>
+		<Box flex="1" w="100%" bg="#f5f5f5">
+			<ScrollView>
+				<VStack mt="10" mb="2" mx="1">
+					<Center space="3">
+						<Pressable onPress={_pickImage}>
+							<VStack position="relative">
+								<Text
+									position="absolute"
+									top={70}
+									left="23"
+									zIndex={1}
+									color="#737373"
+									fontSize="15"
+								>
+									Edit Image
+								</Text>
+								<Avatar
+									size={120}
+									source={{
+										uri: baseURL + userProfile.profile.image,
+									}}
+								/>
+							</VStack>
+						</Pressable>
+						<Text fontSize="18" bold my="1">
+							{userProfile.profile.name}
+						</Text>
+						<Text fontSize="14" my="1">
+							{userProfile.profile.status}
+						</Text>
+					</Center>
+				</VStack>
 
+				<Divider mb="5" />
+				<KeyboardAvoidingView keyboardVerticalOffset={5}>
 					<VStack>
 						{/* <Heading size="md" mx="5">
 							Edit Profile
@@ -126,6 +129,7 @@ const Profile = () => {
 							<FormControl w="90%">
 								<FormControl.Label>Name</FormControl.Label>
 								<Input
+									_focus={{ borderColor: Colors.Primary }}
 									defaultValue={userProfile.profile.name}
 									placeholder="Edit your name"
 									InputLeftElement={
@@ -145,6 +149,7 @@ const Profile = () => {
 							<FormControl w="90%" my="2">
 								<FormControl.Label>Status</FormControl.Label>
 								<Input
+									_focus={{ borderColor: Colors.Primary }}
 									defaultValue={userProfile.profile.status}
 									placeholder="Edit your status"
 									InputLeftElement={
@@ -162,21 +167,21 @@ const Profile = () => {
 							</FormControl>
 						</Center>
 					</VStack>
-					<Button
-						onPress={handleSubmit}
-						m="5"
-						alignSelf="center"
-						w="25%"
-						colorScheme="darkBlue"
-						_text={{
-							color: "#fff",
-						}}
-					>
-						Update
-					</Button>
-				</ScrollView>
-			</KeyboardAwareScrollView>
-		</VStack>
+				</KeyboardAvoidingView>
+				<Button
+					onPress={handleSubmit}
+					m="5"
+					alignSelf="center"
+					w="25%"
+					style={{ backgroundColor: Colors.Primary }}
+					_text={{
+						color: "#fff",
+					}}
+				>
+					Update
+				</Button>
+			</ScrollView>
+		</Box>
 	);
 };
 

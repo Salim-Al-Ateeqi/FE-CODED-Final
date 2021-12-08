@@ -13,6 +13,7 @@ import {
 // components
 import GroupItem from "./GroupItem";
 import Search from "../Search/Search";
+import { Colors } from "../../utils/Colors";
 
 // stores
 import groupStore from "../../stores/groupStore";

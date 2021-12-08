@@ -1,24 +1,15 @@
 import { observer } from "mobx-react";
-import { HStack, Spinner } from "native-base";
+import { HStack, KeyboardAvoidingView, Spinner } from "native-base";
 import React from "react";
-import {
-	VStack,
-	Input,
-	Button,
-	IconButton,
-	Icon,
-	Text,
-	NativeBaseProvider,
-	Center,
-	Box,
-	Divider,
-	Heading,
-} from "native-base";
-import groupStore from "../../stores/groupStore";
-
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { VStack, Input, Icon, Text, Box, Divider, Heading } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+
+// components
+import { Colors } from "../../utils/Colors";
+
+// stores
+import groupStore from "../../stores/groupStore";
 
 const GroupDetail = ({ route, navigation }) => {
 	const { group } = route.params;
@@ -28,38 +19,38 @@ const GroupDetail = ({ route, navigation }) => {
 	}
 
 	return (
-		<VStack flex={1} bg="white" w="100%">
+		<Box flex={1} bg="#fafafa">
 			<Divider />
-			<VStack mx="2" mt="5" w="100%" h="85%">
+
+			<VStack mx="2" mt="5" flex={1}>
 				<ScrollView>
-					<Text>Data</Text>
+					<Text>messages will be here</Text>
 				</ScrollView>
 			</VStack>
+
 			<Divider mb="2" />
 
-			<KeyboardAwareScrollView extraScrollHeight={50}>
-				<VStack width="100%" alignItems="center">
-					<HStack>
+			<KeyboardAvoidingView>
+				<VStack alignItems="center" mb="5">
+					<HStack alignItems="center">
 						<Input
+							color="#27272a"
 							placeholder="Type message"
+							placeholderTextColor="#52525b"
 							variant="filled"
-							bg="muted.200"
+							bg="#d4d4d8"
 							borderRadius="50"
 							w="85%"
-							py="1"
+							py="2"
 							px="3"
 							mx="1"
-							placeholderTextColor="muted.400"
-							_hover={{ bg: "gray.200", borderWidth: 0 }}
+							_focus={{ borderColor: Colors.Primary }}
 							borderWidth="0"
-							_web={{
-								_focus: { style: { boxShadow: "none" } },
-							}}
 							InputLeftElement={
 								<Icon
 									size="sm"
 									ml="3"
-									color="#0077e6"
+									color="#3f3f46"
 									as={<AntDesign name="pluscircle" />}
 								/>
 							}
@@ -67,12 +58,12 @@ const GroupDetail = ({ route, navigation }) => {
 						<MaterialCommunityIcons
 							name="send-circle-outline"
 							size={32}
-							color="#0077e6"
+							color={Colors.Primary}
 						/>
 					</HStack>
 				</VStack>
-			</KeyboardAwareScrollView>
-		</VStack>
+			</KeyboardAvoidingView>
+		</Box>
 	);
 };
 export default observer(GroupDetail);
