@@ -15,9 +15,9 @@ import MenuIcon from "../GroupDetail/MenuIcon";
 // stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
+import CreateGroup from "../CreateGroup";
 
 const RootNavigator = () => {
-
   const { Navigator, Screen, Group } = createStackNavigator();
   return (
     <Navigator>
@@ -64,8 +64,17 @@ const RootNavigator = () => {
               return {
                 headerTitle: group.name,
                 //Having issue sending group object to moviepoll component
-                headerRight: () => <MenuIcon navigation={navigation} group={group} />,
+                headerRight: () => (
+                  <MenuIcon navigation={navigation} group={group} />
+                ),
               };
+            }}
+          />
+          <Screen
+            name="CreateGroup"
+            component={CreateGroup}
+            options={{
+              headerShown: true,
             }}
           />
           <Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
@@ -81,6 +90,5 @@ const RootNavigator = () => {
       )}
     </Navigator>
   );
-
 };
 export default observer(RootNavigator);
