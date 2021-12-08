@@ -34,7 +34,7 @@ const MenuIcon = ({ navigation, group }) => {
 					>
 						Add Movie Poll
 					</Menu.Item>
-					<Menu.Item onPress={() => navigation.navigate("AddMembers")}>
+					<Menu.Item onPress={() => navigation.navigate("AddMembers", { group: group })}>
 						Add Members
 					</Menu.Item>
 					{/* Add page to return group member list */}
