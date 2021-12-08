@@ -9,10 +9,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const MenuIcon = ({ navigation, group }) => {
     
-    //Having issue sending group object to moviepoll component
-    //Returns 
-    // console.log(group)
-    
     return (
         <Center>
             <Menu w="190"

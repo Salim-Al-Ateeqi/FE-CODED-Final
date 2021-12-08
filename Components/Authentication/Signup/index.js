@@ -43,7 +43,6 @@ const Signup = ({ navigation }) => {
 	}) => {
 		const userNumber = phoneNumber.replace(" ", "");
 		const newNumber = `${dialCode}${userNumber}`;
-		console.log(newNumber);
 		setUser({ ...user, phoneNumber: newNumber.replace("-", "") });
 	};
 
