@@ -98,6 +98,8 @@ class GroupStore {
       });
     } catch (error) {
       console.log(error);
+    }
+  }
 
   sendChatToGroup = async (groupId, newMessage) => {
 	  try {
