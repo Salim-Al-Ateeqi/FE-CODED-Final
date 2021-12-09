@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import {
 	ScrollView,
@@ -18,6 +18,8 @@ import { Colors } from "../../utils/Colors";
 // stores
 import groupStore from "../../stores/groupStore";
 import authStore from "../../stores/authStore";
+import { socket } from "../../stores/instance";
+
 
 const Home = ({ navigation }) => {
 	const [query, setQuery] = useState("");
@@ -26,6 +28,9 @@ const Home = ({ navigation }) => {
 	}
 
 	const userId = authStore.user ? authStore.user._id : "";
+
+	const data = authStore.user
+	socket.emit('authUser', data)
 
 	const groupList = groupStore.groups
 		.filter((_group) => _group.name.toLowerCase().includes(query.toLowerCase()))

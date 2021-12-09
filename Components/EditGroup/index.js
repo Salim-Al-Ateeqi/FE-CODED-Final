@@ -72,25 +72,19 @@ const EditGroup = ({ route, navigation }) => {
 	return (
 		<Box flex="1" w="100%" bg="#fff">
 			<ScrollView>
-				<VStack mt="10" mb="2" mx="1">
+				<VStack mt="10" mb="7" mx="1">
 					<Center space="3">
 						<Pressable onPress={_pickImage}>
 							<Image
-								style={{ width: 120, height: 120, borderRadius: 100 }}
+								style={{ width: 130, height: 130, borderRadius: 100 }}
 								alt="Group Image"
 								source={{
 									uri: baseURL + group.image,
 								}}
 							/>
 						</Pressable>
-
-						<Text fontSize="18" bold my="3">
-							{group.name}
-						</Text>
 					</Center>
 				</VStack>
-
-				<Divider mb="5" />
 
 				<VStack flex={1} space="5">
 					<FormControl>
@@ -124,6 +118,7 @@ const EditGroup = ({ route, navigation }) => {
 							</Button>
 						</HStack>
 					</FormControl>
+
 					<VStack>
 						<HStack w="100%">
 							<Text ml="5" mb="2">

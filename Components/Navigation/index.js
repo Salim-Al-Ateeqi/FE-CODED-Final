@@ -13,6 +13,8 @@ import AddMembers from "../AddMembers";
 import EditGroup from "../EditGroup";
 import GroupDetail from "../GroupDetail";
 import MenuIcon from "../GroupDetail/MenuIcon";
+import GroupLeftImage from "../GroupDetail/GroupLeftImage";
+
 // stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
@@ -55,6 +57,46 @@ const RootNavigator = () => {
 						component={AddMembers}
 						options={{
 							headerShown: true,
+						}}
+					/>
+					<Screen
+						name="EditGroup"
+						component={EditGroup}
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							return {
+								headerTitle: `${group.name} info`,
+							};
+						}}
+					/>
+					<Screen
+						name="GroupDetail"
+						component={GroupDetail}
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							return {
+								headerTitle: () => (
+									<GroupLeftImage navigation={navigation} group={group} />
+								),
+							};
+						}}
+					/>
+
+					<Screen
+						name="MoviePoll"
+						component={MoviePoll}
+						options={{
+							headerShown: true,
+							headerTitle: "Movie Poll",
+						}}
+					/>
+
+					<Screen
+						name="AddMembers"
+						component={AddMembers}
+						options={{
+							headerShown: true,
+							headerTitle: "Add Members",
 						}}
 					/>
 					<Screen

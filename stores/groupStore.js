@@ -87,14 +87,10 @@ class GroupStore {
 
   addMembersToGroup = async (phoneNumber, group, navigation, toast) => {
     try {
-      // const group = this.groups.find((group) => group._id === groupId);
       const res = await instance.put(`/groups/${group._id}/members`, {
         phoneNumber: phoneNumber.phoneNumber,
       });
       group.members.push(member._id);
-
-      profileStore.addGroupToProfile(member, group);
-      // for (const key in group) group[key] = res.data[key];
       toast.show({
         title: "Poll Created!",
         status: "success",
@@ -102,20 +98,17 @@ class GroupStore {
       });
     } catch (error) {
       console.log(error);
+
+  sendChatToGroup = async (groupId, newMessage) => {
+	  try {
+      const group = this.groups.find((group) => group._id === groupId);
+      const res = await instance.post(`/groups/${groupId}/addChat`, newMessage);
+      group.chat.push(res.data);
+    } catch (error) {
+      console.log(error)
     }
   };
 
-  sendChatToGroup = async (groupId, newMessage) => {
-    try {
-      console.log(groupId, newMessage);
-      const group = this.groups.find((group) => group._id === groupId);
-      const res = await instance.post(`/groups/${groupId}/addChat`);
-      console.log(res.data);
-      group.chat.push(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   createPoll = async (groupId, pollData, navigation, toast) => {
     try {
