@@ -1,5 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
+import { useNavigation } from "@react-navigation/core";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import {
 	Box,
@@ -10,12 +11,9 @@ import {
 	HStack,
 	Icon,
 	useToast,
-	Avatar,
-	Spinner,
-	Button,
 } from "native-base";
+import { Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/core";
 
 // components
 import { Colors } from "../../utils/Colors";
@@ -54,11 +52,11 @@ const CustomDrawerContent = (props) => {
 			<VStack space="3" my="2" mx="1">
 				<Box px="3">
 					<HStack>
-						<Avatar
+						<Image
 							source={{
 								uri: baseURL + userProfile.profile.image,
 							}}
-							size={50}
+							style={{ width: 60, height: 60, borderRadius: 100 }}
 						/>
 						<VStack mx="3">
 							<Text bold color="gray.700">
@@ -81,7 +79,7 @@ const CustomDrawerContent = (props) => {
 								px="5"
 								py="3"
 								rounded="md"
-                key={name}
+								key={name}
 								bg={index === props.state.index ? "#dbf4ff" : "transparent"}
 								onPress={(event) => {
 									props.navigation.navigate(name);
@@ -90,7 +88,7 @@ const CustomDrawerContent = (props) => {
 								<HStack space="7" alignItems="center">
 									<Icon
 										color={
-											index === props.state.index ? Colors.Primary : "gray.500"
+											index === props.state.index ? Colors.primary : "gray.500"
 										}
 										size="5"
 										as={<MaterialCommunityIcons name={getIcon(name)} />}
@@ -98,7 +96,7 @@ const CustomDrawerContent = (props) => {
 									<Text
 										fontWeight="500"
 										color={
-											index === props.state.index ? Colors.Primary : "gray.700"
+											index === props.state.index ? Colors.primary : "gray.700"
 										}
 									>
 										{name}

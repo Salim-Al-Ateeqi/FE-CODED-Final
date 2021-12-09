@@ -26,13 +26,13 @@ import groupStore from "../../stores/groupStore";
 import { baseURL } from "../../stores/baseURL";
 
 const CreateGroup = ({ navigation }) => {
-	const toast = useToast();
-	//   const [image, setImage] = useState({});
 	const [group, setGroup] = useState({
 		name: "",
 		image: `/media/defaultUserImage.jpg`,
 	});
-	const [imageSent, setImageSent] = useState(false);
+
+	// Check if the user change the image.
+	const [imageChanged, setImageChanged] = useState(false);
 
 	useEffect(() => {
 		(async () => {
@@ -48,6 +48,8 @@ const CreateGroup = ({ navigation }) => {
 			}
 		})();
 	}, []);
+
+	const toast = useToast();
 
 	const _pickImage = async () => {
 		try {
@@ -69,7 +71,7 @@ const CreateGroup = ({ navigation }) => {
 				};
 
 				setGroup({ ...group, image: image });
-				setImageSent(true);
+				setImageChanged(true);
 			}
 		} catch (error) {
 			console.log(error);
@@ -86,7 +88,7 @@ const CreateGroup = ({ navigation }) => {
 				<VStack mt="10" mb="2" mx="1">
 					<Pressable onPress={_pickImage}>
 						<VStack alignItems="center">
-							{!imageSent ? (
+							{!imageChanged ? (
 								<Image
 									style={{ width: 120, height: 120, borderRadius: 100 }}
 									source={{
@@ -113,7 +115,7 @@ const CreateGroup = ({ navigation }) => {
 							<FormControl w="90%">
 								<FormControl.Label>Group Name</FormControl.Label>
 								<Input
-									_focus={{ borderColor: Colors.Primary }}
+									_focus={{ borderColor: Colors.primary }}
 									defaultValue={groupStore.groups.name}
 									placeholder="Enter group name"
 									InputLeftElement={
@@ -137,7 +139,7 @@ const CreateGroup = ({ navigation }) => {
 					m="5"
 					alignSelf="center"
 					w="30%"
-					style={{ backgroundColor: Colors.Primary }}
+					style={{ backgroundColor: Colors.primary }}
 					_text={{
 						color: "#fff",
 					}}

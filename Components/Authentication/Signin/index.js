@@ -103,7 +103,7 @@ const Signin = ({ navigation }) => {
 									bg="#fff"
 									placeholder="Enter your password"
 									type="password"
-									_focus={{ borderColor: Colors.Primary }}
+									_focus={{ borderColor: Colors.primary }}
 									onChangeText={(password) =>
 										setCredentials({ ...credentials, password })
 									}
@@ -112,7 +112,7 @@ const Signin = ({ navigation }) => {
 
 							<Button
 								mt="2"
-								style={{ backgroundColor: Colors.Primary }}
+								style={{ backgroundColor: Colors.primary }}
 								onPress={handleSubmit}
 							>
 								Login

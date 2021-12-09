@@ -51,7 +51,7 @@ const index = ({ navigation, route }) => {
 									placeholder="Enter title"
 									value={query}
 									_focus={{
-										borderColor: Colors.Primary,
+										borderColor: Colors.primary,
 									}}
 									onChangeText={(query) => setQuery(query)}
 								/>
@@ -59,7 +59,7 @@ const index = ({ navigation, route }) => {
 						</VStack>
 						<Button
 							mt="2"
-							style={{ backgroundColor: Colors.Primary }}
+							style={{ backgroundColor: Colors.primary }}
 							onPress={handleSubmit}
 						>
 							Find

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
 	Box,
 	Heading,
@@ -7,43 +7,40 @@ import {
 	Input,
 	Button,
 	Center,
-    useToast,
-    Spinner,
+	useToast,
+	Spinner,
 } from "native-base";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
 import authStore from "../../../stores/authStore";
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react";
 import { Colors } from "../../../utils/Colors";
 
 const index = ({ navigation }) => {
+	const toast = useToast();
 
-	
+	const [userInput, setUserInput] = useState({ SMSToken: "" });
+	const [matchingToken, setMatchingToken] = useState(false);
 
-    const toast = useToast();
+	if (!authStore.user) {
+		return <Spinner />;
+	}
 
-    const [userInput, setUserInput] = useState({SMSToken: ''});
-    const [matchingToken, setMatchingToken] = useState(false);
-    
-    if (!authStore.user) {
-        return <Spinner />;
-    }
+	const userSMSAuthToken = authStore.user.SMSToken;
 
-    const userSMSAuthToken = authStore.user.SMSToken;
+	const checkMatchingToken = () => {
+		userSMSAuthToken !== userInput
+			? setMatchingToken(false)
+			: setMatchingToken(true);
+	};
 
-    const checkMatchingToken = () => {
-        userSMSAuthToken !== userInput
-            ? setMatchingToken(false)
-            : setMatchingToken(true)
-    };
-
-    const handleSubmit = () => {
-        checkMatchingToken();
+	const handleSubmit = () => {
+		checkMatchingToken();
 		authStore.validateToken(userInput, toast, navigation);
-    };
-    
-    return (
-        <KeyboardAwareScrollView>
+	};
+
+	return (
+		<KeyboardAwareScrollView>
 			<ScrollView>
 				<Center mt="20">
 					<Box safeArea p="2" py="8" w="100%" maxW="290">
@@ -66,10 +63,10 @@ const index = ({ navigation }) => {
 							fontWeight="medium"
 							size="xs"
 						>
-							{ authStore.message }
-                        </Heading>
-                        
-                        {matchingToken && (
+							{authStore.message}
+						</Heading>
+
+						{matchingToken && (
 							<Heading mt="3" color="#dc2626" fontWeight="medium" size="xs">
 								Please ensure you've entered the token correctly!
 							</Heading>
@@ -82,27 +79,26 @@ const index = ({ navigation }) => {
 									h="50"
 									keyboardType={"number-pad"}
 									placeholder="Enter Your Token"
-									_focus={{ borderColor: Colors.Primary }}
+									_focus={{ borderColor: Colors.primary }}
 									onChangeText={(SMSToken) =>
 										setUserInput({ ...userInput, SMSToken })
 									}
 								/>
 							</FormControl>
 
-							<Button 
-								mt="2" 
-								style={{ backgroundColor: Colors.Primary }}
+							<Button
+								mt="2"
+								style={{ backgroundColor: Colors.primary }}
 								onPress={handleSubmit}
 							>
 								Register
 							</Button>
-							
 						</VStack>
 					</Box>
 				</Center>
 			</ScrollView>
 		</KeyboardAwareScrollView>
-    )
-}
+	);
+};
 
-export default observer(index)
+export default observer(index);

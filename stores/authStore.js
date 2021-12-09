@@ -28,8 +28,8 @@ class AuthStore {
 			const res = await instance.post("/register", userData);
 
 			await this.setUser(res.data.token);
-			this.message = 'You will receive an SMS message shortly!'
-			this.checkUserValidated(toast, navigation , true);
+			this.message = "You will receive an SMS message shortly!";
+			this.checkUserValidated(toast, navigation, true);
 			toast.show({
 				status: "success",
 				title: `Account Created`,
@@ -54,7 +54,7 @@ class AuthStore {
 					placement: "top",
 					title: `Welcome`,
 				});
-			};
+			}
 			// this.message = null;
 			navigation.replace("Tabs");
 		} else {
@@ -64,7 +64,7 @@ class AuthStore {
 				placement: "top",
 				description: "The token is incorrect",
 			});
-			navigation.replace("ValidateToken");
+			navigation.push("ValidateToken");
 		}
 	};
 
@@ -80,7 +80,6 @@ class AuthStore {
 
 	login = async (userData, toast, navigation) => {
 		try {
-			
 			const res = await instance.post("/login", userData);
 			await this.setUser(res.data.token);
 			this.checkUserValidated(toast, navigation, true);
@@ -121,7 +120,8 @@ class AuthStore {
 
 			if (token) {
 				const user = decode(token);
-				this.message = 'An SMS message was sent containing your token! Please check for an SMS from Twilio!'
+				this.message =
+					"An SMS message was sent containing your token! Please check for an SMS from Twilio!";
 				const userExp = user.exp * 1000;
 				if (userExp > Date.now()) {
 					this.setUser(token);
