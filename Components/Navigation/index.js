@@ -13,42 +13,72 @@ import AddMembers from "../AddMembers";
 import EditGroup from "../EditGroup";
 import GroupDetail from "../GroupDetail";
 import MenuIcon from "../GroupDetail/MenuIcon";
+import GroupLeftImage from "../GroupDetail/GroupLeftImage";
+
 // stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
 import CreateGroup from "../CreateGroup";
 
 const RootNavigator = () => {
-  const { Navigator, Screen, Group } = createStackNavigator();
-  return (
-    <Navigator>
-      {!authStore.user ? (
-        <>
-          <Screen
-            name="Signup"
-            component={Signup}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Screen
-            name="Signin"
-            component={Signin}
-            options={{
-              headerShown: false,
-            }}
-          />
-        </>
-      ) : authStore.user.isValidated ? (
-        <>
-          <Screen
-            name="Tabs"
-            component={Tabs}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Screen name="CreateCustomPoll" component={CreateCustomPoll} />
+
+	const { Navigator, Screen, Group } = createStackNavigator();
+	return (
+		<Navigator>
+			{!authStore.user ? (
+				<>
+					<Screen
+						name="Signup"
+						component={Signup}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen
+						name="Signin"
+						component={Signin}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</>
+			) : authStore.user.isValidated ? (
+				<>
+					<Screen
+						name="Tabs"
+						component={Tabs}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Screen name="CreateCustomPoll" component={CreateCustomPoll} />
+					<Screen name="MoviePoll" component={MoviePoll} />
+					<Screen
+						name="AddMembers"
+						component={AddMembers}
+						options={{
+							headerShown: true,
+						}}
+					/>
+					<Screen
+						name="EditGroup"
+						component={EditGroup}
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							return {
+								headerTitle: `${group.name} info`,
+							};
+						}}
+					/>
+					<Screen
+						name="GroupDetail"
+						component={GroupDetail}
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							return {
+								headerTitle: () => (
+									<GroupLeftImage navigation={navigation} group={group} />
+								),
 
           <Screen
             name="MoviePoll"
