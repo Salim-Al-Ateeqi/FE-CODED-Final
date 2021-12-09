@@ -13,6 +13,8 @@ import AddMembers from "../AddMembers";
 import EditGroup from "../EditGroup";
 import GroupDetail from "../GroupDetail";
 import MenuIcon from "../GroupDetail/MenuIcon";
+import GroupLeftImage from "../GroupDetail/GroupLeftImage";
+
 // stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
@@ -72,6 +74,9 @@ const RootNavigator = () => {
 							const { group } = route.params;
 							return {
 								headerTitle: group.name,
+								headerLeft: () => (
+									<GroupLeftImage navigation={navigation} group={group} />
+								),
 
 								//Having issue sending group object to moviepoll component
 								headerRight: () => (

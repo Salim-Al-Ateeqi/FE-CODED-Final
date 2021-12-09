@@ -15,6 +15,7 @@ import {
 	useToast,
 	HStack,
 	Image,
+	AspectRatio,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
@@ -75,13 +76,14 @@ const EditGroup = ({ route, navigation }) => {
 				<VStack mt="10" mb="2" mx="1">
 					<Center space="3">
 						<Pressable onPress={_pickImage}>
-							<Image
-								style={{ width: 120, height: 120, borderRadius: 100 }}
-								alt="Group Image"
-								source={{
-									uri: baseURL + group.image,
-								}}
-							/>
+							<AspectRatio w="100%" ratio={16 / 9}>
+								<Image
+									alt="Group Image"
+									source={{
+										uri: baseURL + group.image,
+									}}
+								/>
+							</AspectRatio>
 						</Pressable>
 
 						<Text fontSize="18" bold my="3">
@@ -89,8 +91,6 @@ const EditGroup = ({ route, navigation }) => {
 						</Text>
 					</Center>
 				</VStack>
-
-				<Divider mb="5" />
 
 				<VStack flex={1} space="5">
 					<FormControl>
@@ -124,6 +124,7 @@ const EditGroup = ({ route, navigation }) => {
 							</Button>
 						</HStack>
 					</FormControl>
+
 					<VStack>
 						<HStack w="100%">
 							<Text ml="5" mb="2">
