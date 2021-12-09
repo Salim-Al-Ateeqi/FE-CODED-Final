@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { instance } from "./instance";
 import profileStore from "./ProfileStore";
 
@@ -56,14 +56,15 @@ class GroupStore {
 			}
 			const res = await instance.put(`/groups/${groupId}`, formData);
 
-			for (const key in group) group[key] = res.data[key];
+			runInAction(() => {
+				for (const key in group) group[key] = res.data[key];
+			});
 
 			toast.show({
-				title: "Group UpDate!",
+				title: "Group UpDated!",
 				status: "success",
 				placement: "top",
 			});
-			navigation.navigate("GroupDetail", { group: group });
 		} catch (error) {
 			console.log(error);
 			toast.show({
@@ -84,37 +85,35 @@ class GroupStore {
 		}
 	};
 
+	addMembersToGroup = async (member, group, navigation, toast) => {
+		try {
+			console.log("group in store:", member._id);
+			// const group = this.groups.find((group) => group._id === groupId);
+			const res = await instance.put(`/groups/${group._id}/members`);
+			group.members.push(member._id);
+			profileStore.addGroupToProfile(member, group);
+			// for (const key in group) group[key] = res.data[key];
+			toast.show({
+				title: "Poll Created!",
+				status: "success",
+				placement: "top",
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-  addMembersToGroup = async (member, group, navigation, toast) => {
-    try {
-      console.log("group in store:", member._id);
-      // const group = this.groups.find((group) => group._id === groupId);
-      const res = await instance.put(`/groups/${group._id}/members`);
-      group.members.push(member._id);
-      profileStore.addGroupToProfile(member, group);
-      // for (const key in group) group[key] = res.data[key];
-      toast.show({
-        title: "Poll Created!",
-        status: "success",
-        placement: "top",
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
-  sendChatToGroup = async (groupId, newMessage) => {
-    try {
-      console.log(groupId, newMessage)
-      const group = this.groups.find((group) => group._id === groupId);
-      const res = await instance.post(`/groups/${groupId}/addChat`);
-      console.log(res.data)
-      group.chat.push(res.data);
-    } catch (error) {
-      console.log(error)
-    }
-  };
+	sendChatToGroup = async (groupId, newMessage) => {
+		try {
+			console.log(groupId, newMessage);
+			const group = this.groups.find((group) => group._id === groupId);
+			const res = await instance.post(`/groups/${groupId}/addChat`);
+			console.log(res.data);
+			group.chat.push(res.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	createPoll = async (groupId, pollData, navigation, toast) => {
 		try {

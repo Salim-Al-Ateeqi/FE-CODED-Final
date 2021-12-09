@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
 import {
 	Center,
 	Icon,
@@ -74,26 +75,13 @@ const EditGroup = ({ route, navigation }) => {
 				<VStack mt="10" mb="2" mx="1">
 					<Center space="3">
 						<Pressable onPress={_pickImage}>
-							<VStack position="relative">
-								<Text
-									position="absolute"
-									top={70}
-									left="23.5"
-									zIndex={1}
-									color="#d4d4d8"
-									fontSize="15"
-								>
-									Edit Image
-								</Text>
-
-								<Image
-									borderRadius="100"
-									size={120}
-									source={{
-										uri: baseURL + group.image,
-									}}
-								/>
-							</VStack>
+							<Image
+								style={{ width: 120, height: 120, borderRadius: 100 }}
+								alt="Group Image"
+								source={{
+									uri: baseURL + group.image,
+								}}
+							/>
 						</Pressable>
 
 						<Text fontSize="18" bold my="3">
@@ -106,7 +94,7 @@ const EditGroup = ({ route, navigation }) => {
 
 				<VStack flex={1} space="5">
 					<FormControl>
-						<FormControl.Label ml="3">Group Name</FormControl.Label>
+						<FormControl.Label ml="3">Change Group Name</FormControl.Label>
 						<HStack justifyContent="space-evenly">
 							<Input
 								w="75%"
@@ -132,7 +120,7 @@ const EditGroup = ({ route, navigation }) => {
 									color: "#fff",
 								}}
 							>
-								Update
+								Change
 							</Button>
 						</HStack>
 					</FormControl>
@@ -151,4 +139,4 @@ const EditGroup = ({ route, navigation }) => {
 	);
 };
 
-export default EditGroup;
+export default observer(EditGroup);

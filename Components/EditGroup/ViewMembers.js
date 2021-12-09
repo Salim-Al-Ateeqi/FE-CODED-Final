@@ -22,6 +22,7 @@ const ViewMembers = ({ member }) => {
 				<HStack alignItems="center" space={3}>
 					<Image
 						borderRadius="50"
+						alt="Members Image"
 						size="48px"
 						source={{ uri: baseURL + member.profile.image }}
 					/>

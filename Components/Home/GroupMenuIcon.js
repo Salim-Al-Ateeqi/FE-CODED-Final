@@ -1,19 +1,6 @@
 import React from "react";
-import {
-	Menu,
-	Actionsheet,
-	useDisclose,
-	Icon,
-	Box,
-	Text,
-	Center,
-	Button,
-} from "native-base";
-import {
-	MaterialCommunityIcons,
-	MaterialIcons,
-	Ionicons,
-} from "@expo/vector-icons";
+import { Actionsheet, useDisclose, Icon, Box, Text } from "native-base";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Path } from "react-native-svg";
 
 // stores
@@ -23,7 +10,6 @@ const GroupMenuIcon = ({ group, navigation }) => {
 	const { isOpen, onOpen, onClose } = useDisclose();
 	const handleDelete = () => {
 		groupStore.deleteGroup(group._id);
-		navigation.navigate("Tabs");
 	};
 
 	return (
