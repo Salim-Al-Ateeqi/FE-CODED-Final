@@ -62,9 +62,11 @@ const RootNavigator = () => {
 					<Screen
 						name="EditGroup"
 						component={EditGroup}
-						options={{
-							headerTitle: "Group Info",
-							headerShown: true,
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							return {
+								headerTitle: `${group.name} info`,
+							};
 						}}
 					/>
 					<Screen
@@ -73,8 +75,7 @@ const RootNavigator = () => {
 						options={({ route, navigation }) => {
 							const { group } = route.params;
 							return {
-								headerTitle: group.name,
-								headerLeft: () => (
+								headerTitle: () => (
 									<GroupLeftImage navigation={navigation} group={group} />
 								),
 
