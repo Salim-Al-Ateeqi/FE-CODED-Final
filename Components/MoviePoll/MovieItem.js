@@ -2,7 +2,6 @@ import React from "react";
 import { Text } from "react-native";
 import { Image, Pressable, Center, Container, HStack, Box } from "native-base";
 import styles from "./styles";
-import { style } from "dom-helpers";
 
 const MovieItem = ({ movie, navigation, group }) => {
   const handleSelect = () => {

@@ -63,29 +63,14 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
             <VStack space={2} mt="2">
               <FormControl>
                 <Center>
-                  <Heading
-                    size="lg"
-                    fontWeight="600"
-                    color="coolGray.800"
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                  >
-                    Selected Movie
-                  </Heading>
-                  <Text>{movie.title}</Text>
+                  <Heading>{movie.title}</Heading>
                   <Image
                     source={{
                       uri:
                         `https://image.tmdb.org/t/p/w500` + movie.poster_path,
                     }}
                     alt={movie.title}
-                    style={{
-                      width: 250,
-                      height: 400,
-                      padding: 5,
-                      marginTop: 5,
-                    }}
+                    style={styles.detailPoster}
                   />
                 </Center>
               </FormControl>
@@ -99,7 +84,7 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
                     <Button
                       onPress={showDatepicker}
                       title="Show date picker!"
-                      mt="2"
+                      style={styles.secondaryButton}
                     >
                       Set Date
                     </Button>
@@ -108,14 +93,12 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
                     <Button
                       onPress={showTimepicker}
                       title="Show time picker!"
-                      mt="2"
+                      style={styles.secondaryButton}
                     >
                       Set Time
                     </Button>
                   </View>
-                  <Center>
-                    <Heading>Add Expiration</Heading>
-                  </Center>
+                  <Text style={styles.descCategory}> Set Expiration Date</Text>
                   {show && (
                     <DateTimePicker
                       testID="dateTimePicker"
@@ -129,7 +112,7 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
                 </View>
               </FormControl>
             </VStack>
-            <Button mt="2" colorScheme="success" onPress={handleSubmit}>
+            <Button style={styles.primaryButton} onPress={handleSubmit}>
               Submit
             </Button>
           </Box>
