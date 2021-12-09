@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import { HStack, KeyboardAvoidingView, Spinner } from "native-base";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { VStack, Input, Icon, Text, Box, Divider, Heading } from "native-base";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
@@ -12,6 +12,7 @@ import PollItem from "./PollItem";
 // stores
 import groupStore from "../../stores/groupStore";
 import authStore from "../../stores/authStore";
+import { socket } from '../../stores/instance';
 
 const GroupDetail = ({ route, navigation }) => {
 	const { group } = route.params;
@@ -22,7 +23,12 @@ const GroupDetail = ({ route, navigation }) => {
 
 	const groupDetailContent = [...group.chat, ...group.polls];
 
-	//create a sort method using moment
+  socket.on('new-message', (payload) => {
+    console.log(payload)
+    groupStore.receiveMessage(payload)
+  })
+
+  //create a sort method using moment
 
 	const content = groupDetailContent.map((element) => {
 		if (element.contentType === "chat") {
@@ -37,11 +43,14 @@ const GroupDetail = ({ route, navigation }) => {
 	const handleSubmit = () => {
 		const message = {
 			sentFrom: authStore.user._id,
-			message: newMessage,
-		};
+      message: newMessage,
+      members: group.members,
+      group: group._id
+		}
 		groupStore.sendChatToGroup(group._id, message);
 		setNewMessage("");
 	};
+
 
 	return (
 		<Box flex={1} bg="#fafafa">
