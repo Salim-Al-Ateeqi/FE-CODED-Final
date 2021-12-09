@@ -126,7 +126,7 @@ const Signup = ({ navigation }) => {
 									h="50"
 									type="text"
 									placeholder="Enter your Name"
-									_focus={{ borderColor: Colors.Primary }}
+									_focus={{ borderColor: Colors.primary }}
 									onChangeText={(name) =>
 										setUser({ ...user, profile: { name: name } })
 									}
@@ -140,7 +140,7 @@ const Signup = ({ navigation }) => {
 									h="50"
 									type="password"
 									placeholder="Enter your password"
-									_focus={{ borderColor: Colors.Primary }}
+									_focus={{ borderColor: Colors.primary }}
 									onChangeText={(password) => setUser({ ...user, password })}
 								/>
 							</FormControl>
@@ -152,14 +152,14 @@ const Signup = ({ navigation }) => {
 									h="50"
 									type="password"
 									placeholder="Confirm your password"
-									_focus={{ borderColor: Colors.Primary }}
+									_focus={{ borderColor: Colors.primary }}
 									onChangeText={(value) => setConfirmPassword(value)}
 								/>
 							</FormControl>
 
 							<Button
 								mt="2"
-								style={{ backgroundColor: Colors.Primary }}
+								style={{ backgroundColor: Colors.primary }}
 								onPress={handleSubmit}
 							>
 								Register

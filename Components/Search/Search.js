@@ -15,9 +15,8 @@ export default function Search({ setQuery }) {
 		>
 			<Input
 				_focus={{
-					borderColor: Colors.Primary,
+					borderColor: Colors.primary,
 				}}
-				color={Colors.Primary}
 				onChangeText={(value) => setQuery(value)}
 				placeholder="Search for a group"
 				bg="#fff"

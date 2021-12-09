@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react";
 import {
 	Box,
 	Text,
@@ -9,7 +10,7 @@ import {
 	Spacer,
 	Divider,
 } from "native-base";
-import { observer } from "mobx-react";
+import { Image } from "react-native";
 import moment from "moment";
 
 // components
@@ -29,7 +30,13 @@ const GroupItem = ({ group, navigation }) => {
 			>
 				<Box pl="4" pr="5" py="2">
 					<HStack alignItems="center" space={3}>
-						<Avatar size="48px" source={{ uri: baseURL + group.image }} />
+						<Image
+							borderRadius="50"
+							alt="Members Image"
+							style={{ width: 48, height: 48, borderRadius: 50 }}
+							source={{ uri: baseURL + group.image }}
+						/>
+
 						<VStack>
 							<Text color="coolGray.800" _dark={{ color: "warmGray.50" }} bold>
 								{group.name}
@@ -38,6 +45,7 @@ const GroupItem = ({ group, navigation }) => {
 						<Spacer />
 
 						<Text>{updateTime}</Text>
+
 						<GroupMenuIcon group={group} navigation={navigation} />
 					</HStack>
 				</Box>

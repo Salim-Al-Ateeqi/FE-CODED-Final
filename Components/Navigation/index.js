@@ -21,11 +21,10 @@ import { observer } from "mobx-react";
 import CreateGroup from "../CreateGroup";
 
 const RootNavigator = () => {
-
 	const { Navigator, Screen, Group } = createStackNavigator();
 	return (
 		<Navigator>
-			{!authStore.user ? (
+			{!authStore.user || !authStore.user.isValidated ? (
 				<>
 					<Screen
 						name="Signup"
@@ -41,8 +40,16 @@ const RootNavigator = () => {
 							headerShown: false,
 						}}
 					/>
+
+					<Screen
+						name="ValidateToken"
+						component={ValidateToken}
+						options={{
+							headerShown: true,
+						}}
+					/>
 				</>
-			) : authStore.user.isValidated ? (
+			) : (
 				<>
 					<Screen
 						name="Tabs"
@@ -52,14 +59,14 @@ const RootNavigator = () => {
 						}}
 					/>
 					<Screen name="CreateCustomPoll" component={CreateCustomPoll} />
-          <Screen
-            name="AddMembers"
-            component={AddMembers}
-            options={{
-              headerShown: true,
-              headerTitle: "Add Members",
-            }}
-          />
+					<Screen
+						name="AddMembers"
+						component={AddMembers}
+						options={{
+							headerShown: true,
+							headerTitle: "Add Members",
+						}}
+					/>
 					<Screen
 						name="EditGroup"
 						component={EditGroup}
@@ -70,48 +77,40 @@ const RootNavigator = () => {
 							};
 						}}
 					/>
-          <Screen
-            name="MoviePoll"
-            component={MoviePoll}
-            options={{
-              headerShown: true,
-              headerTitle: "Movie Poll",
-            }}
-          />
-          <Screen
-            name="GroupDetail"
-            component={GroupDetail}
-            options={({ route, navigation }) => {
-              const { group } = route.params;
-              return {
-                headerTitle: () => (
-                  <GroupLeftImage navigation={navigation} group={group} />
-                ),
-                headerRight: () => (
-                  <MenuIcon navigation={navigation} group={group} />
-                ),
-              };
-            }}
-          />
-          <Screen
-            name="CreateGroup"
-            component={CreateGroup}
-            options={{
-              headerShown: true,
-            }}
-          />
-          <Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
-        </>
-      ) : (
-        <Screen
-          name="ValidateToken"
-          component={ValidateToken}
-          options={{
-            headerShown: false,
-          }}
-        />
-      )}
-    </Navigator>
-  );
+					<Screen
+						name="MoviePoll"
+						component={MoviePoll}
+						options={{
+							headerShown: true,
+							headerTitle: "Movie Poll",
+						}}
+					/>
+					<Screen
+						name="GroupDetail"
+						component={GroupDetail}
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							return {
+								headerTitle: () => (
+									<GroupLeftImage navigation={navigation} group={group} />
+								),
+								headerRight: () => (
+									<MenuIcon navigation={navigation} group={group} />
+								),
+							};
+						}}
+					/>
+					<Screen
+						name="CreateGroup"
+						component={CreateGroup}
+						options={{
+							headerShown: true,
+						}}
+					/>
+					<Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
+				</>
+			)}
+		</Navigator>
+	);
 };
 export default observer(RootNavigator);
