@@ -11,6 +11,7 @@ import ChatItem from "./ChatItem";
 import PollItem from "./PollItem";
 // stores
 import groupStore from "../../stores/groupStore";
+import authStore from "../../stores/authStore";
 
 const GroupDetail = ({ route, navigation }) => {
   const { group } = route.params;
@@ -33,10 +34,14 @@ const GroupDetail = ({ route, navigation }) => {
 
   const [newMessage, setNewMessage] = useState("");
 
-  const handleSubmit = () => {
-    groupStore.sendChatToGroup(group._id, newMessage);
-    setNewMessage("");
-  };
+	const handleSubmit = () => {
+		const message = {
+			sentFrom: authStore.user._id,
+			message: newMessage
+		}
+		groupStore.sendChatToGroup(group._id, message);
+		setNewMessage('');
+	}
 
   return (
     <Box flex={1} bg="#fafafa">

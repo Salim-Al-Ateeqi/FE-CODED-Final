@@ -103,17 +103,15 @@ class GroupStore {
 		}
 	};
 
-	sendChatToGroup = async (groupId, newMessage) => {
-		try {
-			console.log(groupId, newMessage);
-			const group = this.groups.find((group) => group._id === groupId);
-			const res = await instance.post(`/groups/${groupId}/addChat`);
-			console.log(res.data);
-			group.chat.push(res.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+  sendChatToGroup = async (groupId, newMessage) => {
+	  try {
+      const group = this.groups.find((group) => group._id === groupId);
+      const res = await instance.post(`/groups/${groupId}/addChat`, newMessage);
+      group.chat.push(res.data);
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
 	createPoll = async (groupId, pollData, navigation, toast) => {
 		try {
