@@ -30,10 +30,13 @@ const CreateGroup = ({ navigation }) => {
 	//   const [image, setImage] = useState({});
 	const [group, setGroup] = useState({
 		name: "",
-		image: { uri: baseURL + `/media/defaultUserImage.jpg` },
+		image: `/media/defaultUserImage.jpg`,
 	});
+	const [imageSent, setImageSent] = useState(false);
 
-	useEffect(() => {
+	console.log(`/media/${group.image.name}`);
+
+	http: useEffect(() => {
 		(async () => {
 			const { status } = await Contacts.requestPermissionsAsync();
 			if (status === "granted") {
@@ -69,6 +72,7 @@ const CreateGroup = ({ navigation }) => {
 				};
 
 				setGroup({ ...group, image: image });
+				setImageSent(true);
 			}
 		} catch (error) {
 			console.log(error);
@@ -86,12 +90,19 @@ const CreateGroup = ({ navigation }) => {
 				<VStack mt="10" mb="2" mx="1">
 					<Pressable onPress={_pickImage}>
 						<VStack alignItems="center">
-							<Image
-								style={{ width: 120, height: 120, borderRadius: 100 }}
-								source={{
-									uri: group.image.uri,
-								}}
-							/>
+							{!imageSent ? (
+								<Image
+									style={{ width: 120, height: 120, borderRadius: 100 }}
+									source={{
+										uri: baseURL + group.image,
+									}}
+								/>
+							) : (
+								<Image
+									style={{ width: 120, height: 120, borderRadius: 100 }}
+									source={{ uri: group.image.uri }}
+								/>
+							)}
 						</VStack>
 					</Pressable>
 
