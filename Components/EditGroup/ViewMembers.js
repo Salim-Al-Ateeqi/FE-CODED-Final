@@ -8,8 +8,8 @@ import {
 	VStack,
 	Spacer,
 	Divider,
-	Image,
 } from "native-base";
+import { Image } from "react-native";
 
 // stores
 import { baseURL } from "../../stores/baseURL";
@@ -22,7 +22,7 @@ const ViewMembers = ({ member }) => {
 					<Image
 						borderRadius="50"
 						alt="Members Image"
-						size="48px"
+						style={{ width: 40, height: 40, borderRadius: 50 }}
 						source={{ uri: baseURL + member.profile.image }}
 					/>
 					<VStack>

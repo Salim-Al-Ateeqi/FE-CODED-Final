@@ -94,17 +94,17 @@ class GroupStore {
         group.members.push(res.data.members[res.data.members.length - 1]);
       });
       toast.show({
-        title: "Poll Created!",
+        title: "Member Added!",
         status: "success",
         placement: "top",
       });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   sendChatToGroup = async (groupId, newMessage) => {
-	  try {
+    try {
       const group = this.groups.find((group) => group._id === groupId);
       const res = await instance.post(`/groups/${groupId}/addChat`, newMessage);
       group.chat.push(res.data);
@@ -114,10 +114,9 @@ class GroupStore {
       }
       socket.emit('group-message', (payload))
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
-
 
   createPoll = async (groupId, pollData, navigation, toast) => {
     try {

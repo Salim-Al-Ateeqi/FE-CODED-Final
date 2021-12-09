@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
 import {
 	Center,
@@ -14,8 +14,8 @@ import {
 	Divider,
 	useToast,
 	HStack,
-	Image,
 } from "native-base";
+import { Image } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
@@ -29,11 +29,26 @@ import groupStore from "../../stores/groupStore";
 import { baseURL } from "../../stores/baseURL";
 
 const EditGroup = ({ route, navigation }) => {
-	const { group } = route.params;
+	const [imageChanged, setImageChanged] = useState(false);
 	const [updatedGroup, setUpdatedGroup] = useState({
-		name: group.name,
-		image: group.image,
+		name: "",
+		image: "",
 	});
+
+	useEffect(() => {
+		(async () => {
+			if (Platform.OS !== "web") {
+				const { status } =
+					await ImagePicker.requestMediaLibraryPermissionsAsync();
+				if (status !== "granted") {
+					alert("Sorry, we need camera roll permissions to make this work!");
+				}
+			}
+		})();
+	}, []);
+
+	const { group } = route.params;
+	const defaultImage = `/media/defaultUserImage.jpg`;
 
 	const groupMembers = profileStore.profiles
 		.filter((profile) => group.members.includes(profile._id))
@@ -59,7 +74,8 @@ const EditGroup = ({ route, navigation }) => {
 					name: filename,
 					type: match ? `image/${match[1]}` : image,
 				};
-				setUpdatedGroup({ ...updatedGroup, image: image });
+				setUpdatedGroup({ ...group.image, image: image });
+				setImageChanged(true);
 			}
 		} catch (error) {
 			console.log(error);
@@ -68,6 +84,7 @@ const EditGroup = ({ route, navigation }) => {
 
 	const handleUpdate = async () => {
 		groupStore.updateGroup(group._id, updatedGroup, navigation, toast);
+		setImageChanged(false);
 	};
 	return (
 		<Box flex="1" w="100%" bg="#fff">
@@ -75,49 +92,72 @@ const EditGroup = ({ route, navigation }) => {
 				<VStack mt="10" mb="7" mx="1">
 					<Center space="3">
 						<Pressable onPress={_pickImage}>
-							<Image
-								style={{ width: 130, height: 130, borderRadius: 100 }}
-								alt="Group Image"
-								source={{
-									uri: baseURL + group.image,
-								}}
-							/>
+							{group.image ? (
+								!imageChanged ? (
+									<Image
+										style={{ width: 120, height: 120, borderRadius: 100 }}
+										alt="Group Image"
+										source={{
+											uri: baseURL + group.image,
+										}}
+									/>
+								) : (
+									<Image
+										style={{ width: 120, height: 120, borderRadius: 100 }}
+										alt="Group Image"
+										source={{
+											uri: updatedGroup.image.uri,
+										}}
+									/>
+								)
+							) : (
+								<Image
+									style={{ width: 120, height: 120, borderRadius: 100 }}
+									alt="Group Image"
+									source={{
+										uri: baseURL + defaultImage,
+									}}
+								/>
+							)}
 						</Pressable>
 					</Center>
 				</VStack>
 
 				<VStack flex={1} space="5">
 					<FormControl>
-						<FormControl.Label ml="3">Change Group Name</FormControl.Label>
+						<FormControl.Label ml="3">Group Name</FormControl.Label>
 						<HStack justifyContent="space-evenly">
 							<Input
-								w="75%"
-								_focus={{ borderColor: Colors.Primary }}
+								w="100%"
+								_focus={{ borderColor: Colors.primary }}
+								variant={"underlined"}
 								defaultValue={group.name}
 								placeholder="Edit your name"
 								InputLeftElement={
 									<Icon
 										as={<MaterialIcons name="group" />}
 										size={5}
-										ml="2"
+										ml="3"
 										color="muted.400"
 									/>
 								}
 								onChangeText={(name) =>
-									setUpdatedGroup({ ...updatedGroup, name })
+									setUpdatedGroup({ ...group.name, name })
 								}
 							/>
-							<Button
-								onPress={handleUpdate}
-								style={{ backgroundColor: Colors.Primary }}
-								_text={{
-									color: "#fff",
-								}}
-							>
-								Change
-							</Button>
 						</HStack>
 					</FormControl>
+					<Button
+						alignSelf={"center"}
+						w="40%"
+						onPress={handleUpdate}
+						style={{ backgroundColor: Colors.primary }}
+						_text={{
+							color: "#fff",
+						}}
+					>
+						Update Profile
+					</Button>
 
 					<VStack>
 						<HStack w="100%">

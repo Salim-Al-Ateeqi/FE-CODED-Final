@@ -3,15 +3,18 @@ import {
   Button,
   FormControl,
   Heading,
-  Input,
+  HStack,
   VStack,
   useToast,
   Center,
+  Text,
+  Divider,
 } from "native-base";
 
 import React, { useState } from "react";
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import IntlPhoneInput from "react-native-intl-phone-input";
 
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -20,7 +23,8 @@ import { Colors } from "../../utils/Colors";
 
 // stores
 import groupStore from "../../stores/groupStore";
-import profileStore from "../../stores/ProfileStore";
+import userStore from "../../stores/userStore";
+import ViewMembers from "../EditGroup/ViewMembers";
 
 const AddMembers = ({ navigation, route }) => {
   const { group } = route.params;
@@ -28,10 +32,18 @@ const AddMembers = ({ navigation, route }) => {
     phoneNumber: "",
   });
 
-  // const newMember = profileStore.profiles.find(
-  //   (profile) => profile.phoneNumber === member.phoneNumber
-  // );
   const toast = useToast();
+
+  const handleNumber = ({
+    dialCode,
+    unmaskedPhoneNumber,
+    phoneNumber,
+    isVerified,
+  }) => {
+    const userNumber = phoneNumber.replace(" ", "");
+    const newNumber = `${dialCode}${userNumber}`;
+    setPhoneNumber({ ...phoneNumber, phoneNumber: newNumber.replace("-", "") });
+  };
 
   const handleSubmit = () => {
     groupStore.addMembersToGroup(phoneNumber, group, navigation, toast);
@@ -55,19 +67,31 @@ const AddMembers = ({ navigation, route }) => {
             <VStack space={3} mt="5">
               <FormControl>
                 <FormControl.Label>Phone Number</FormControl.Label>
-                <Input
-                  placeholder="Enter Member"
-                  keyboardType="number-pad"
-                  _focus={{ borderColor: Colors.Primary }}
-                  onChangeText={(phoneNumber) =>
-                    setPhoneNumber({ ...phoneNumber, phoneNumber })
-                  }
+                <IntlPhoneInput
+                  containerStyle={{
+                    borderColor: "#d4d4d4",
+                    borderWidth: 1,
+                    height: 50,
+                    borderBottomColor: "#D1D3D4",
+                    borderRadius: 5,
+                  }}
+                  flagStyle={{ fontSize: 25 }}
+                  phoneInputStyle={{
+                    lineHeight: 18,
+                    // if english or arabic
+                    // textAlign: i18nStore.language === "en" ? "left" : "right",
+                  }}
+                  onChangeText={handleNumber}
+                  defaultCountry="KW"
+                  modalCountryItemCountryNameStyle={{
+                    fontSize: 15,
+                  }}
                 />
               </FormControl>
 
               <Button
                 mt="2"
-                style={{ backgroundColor: Colors.Primary }}
+                style={{ backgroundColor: Colors.primary }}
                 onPress={handleSubmit}
               >
                 Add Member

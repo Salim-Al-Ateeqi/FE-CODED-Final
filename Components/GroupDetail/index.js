@@ -15,13 +15,13 @@ import authStore from "../../stores/authStore";
 import { socket } from '../../stores/instance';
 
 const GroupDetail = ({ route, navigation }) => {
-  const { group } = route.params;
+	const { group } = route.params;
 
-  if (groupStore.isLoading) {
-    return <Spinner />;
-  }
+	if (groupStore.isLoading) {
+		return <Spinner />;
+	}
 
-  const groupDetailContent = [...group.chat, ...group.polls];
+	const groupDetailContent = [...group.chat, ...group.polls];
 
   socket.on('new-message', (payload) => {
     console.log(payload)
@@ -30,15 +30,15 @@ const GroupDetail = ({ route, navigation }) => {
 
   //create a sort method using moment
 
-  const content = groupDetailContent.map((element) => {
-    if (element.contentType === "chat") {
-      return <ChatItem key={element._id} chatData={element} />;
-    } else if (element.contentType === "poll") {
-      return <PollItem key={element._id} pollData={element} />;
-    }
-  });
+	const content = groupDetailContent.map((element) => {
+		if (element.contentType === "chat") {
+			return <ChatItem key={element._id} chatData={element} />;
+		} else if (element.contentType === "poll") {
+			return <PollItem key={element._id} pollData={element} />;
+		}
+	});
 
-  const [newMessage, setNewMessage] = useState("");
+	const [newMessage, setNewMessage] = useState("");
 
 	const handleSubmit = () => {
 		const message = {
@@ -48,56 +48,57 @@ const GroupDetail = ({ route, navigation }) => {
       group: group._id
 		}
 		groupStore.sendChatToGroup(group._id, message);
-    setNewMessage('');
-	}
+		setNewMessage("");
+	};
 
-  return (
-    <Box flex={1} bg="#fafafa">
-      <Divider />
 
-      <VStack mt="5" flex={1}>
-        <ScrollView>{content}</ScrollView>
-      </VStack>
+	return (
+		<Box flex={1} bg="#fafafa">
+			<Divider />
 
-      <Divider mb="2" />
+			<VStack mt="5" flex={1}>
+				<ScrollView>{content}</ScrollView>
+			</VStack>
 
-      <KeyboardAvoidingView>
-        <VStack alignItems="center" mb="5">
-          <HStack alignItems="center">
-            <Input
-              color="#fafafa"
-              placeholder="Type message"
-              placeholderTextColor="#F4F7F5"
-              variant="filled"
-              bg="#A7A2A9"
-              borderRadius="50"
-              w="85%"
-              py="2"
-              px="3"
-              mx="1"
-              _focus={{ borderColor: Colors.primary }}
-              value={newMessage}
-              onChangeText={(newMessage) => setNewMessage(newMessage)}
-              borderWidth="0"
-              InputLeftElement={
-                <Icon
-                  size="sm"
-                  ml="3"
-                  color="#3f3f46"
-                  as={<AntDesign name="pluscircle" />}
-                />
-              }
-            />
-            <MaterialCommunityIcons
-              name="send-circle-outline"
-              size={32}
-              color={Colors.primary}
-              onPress={handleSubmit}
-            />
-          </HStack>
-        </VStack>
-      </KeyboardAvoidingView>
-    </Box>
-  );
+			<Divider mb="2" />
+
+			<KeyboardAvoidingView>
+				<VStack alignItems="center" mb="5">
+					<HStack alignItems="center">
+						<Input
+							color="#fafafa"
+							placeholder="Type message"
+							placeholderTextColor="#F4F7F5"
+							variant="filled"
+							bg="#A7A2A9"
+							borderRadius="50"
+							w="85%"
+							py="2"
+							px="3"
+							mx="1"
+							_focus={{ borderColor: Colors.primary }}
+							value={newMessage}
+							onChangeText={(newMessage) => setNewMessage(newMessage)}
+							borderWidth="0"
+							InputLeftElement={
+								<Icon
+									size="sm"
+									ml="3"
+									color="#3f3f46"
+									as={<AntDesign name="pluscircle" />}
+								/>
+							}
+						/>
+						<MaterialCommunityIcons
+							name="send-circle-outline"
+							size={32}
+							color={Colors.primary}
+							onPress={handleSubmit}
+						/>
+					</HStack>
+				</VStack>
+			</KeyboardAvoidingView>
+		</Box>
+	);
 };
 export default observer(GroupDetail);

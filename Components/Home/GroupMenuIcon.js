@@ -10,6 +10,7 @@ const GroupMenuIcon = ({ group, navigation }) => {
 	const { isOpen, onOpen, onClose } = useDisclose();
 	const handleDelete = () => {
 		groupStore.deleteGroup(group._id);
+		onClose();
 	};
 
 	return (
@@ -36,7 +37,10 @@ const GroupMenuIcon = ({ group, navigation }) => {
 					</Box>
 
 					<Actionsheet.Item
-						onPress={() => navigation.navigate("EditGroup", { group: group })}
+						onPress={() => {
+							navigation.navigate("EditGroup", { group: group });
+							onClose();
+						}}
 						startIcon={
 							<Icon
 								as={MaterialIcons}
@@ -87,46 +91,6 @@ const GroupMenuIcon = ({ group, navigation }) => {
 			</Actionsheet>
 		</>
 	);
-	// <Center>
-	// 	<Menu
-	// 		w="190"
-	// 		trigger={(triggerProps) => {
-	// 			return (
-	// 				<Pressable
-	// 					style={{ marginRight: -5 }}
-	// 					accessibilityLabel="More options menu"
-	// 					{...triggerProps}
-	// 				>
-	// 					<MaterialCommunityIcons
-	// 						name="dots-vertical"
-	// 						size={24}
-	// 						color="black"
-	// 					/>
-	// 				</Pressable>
-	// 			);
-	// 		}}
-	// 	>
-	// 		<Box w="100%" px={4} justifyContent="center">
-	// 			{/* <Menu.Item
-	// 				onPress={() => navigation.navigate("MoviePoll", { group: group })}
-	// 			>
-	// 				Add Movie Poll
-	// 			</Menu.Item> */}
-	// 			{/* <Menu.Item onPress={() => navigation.navigate("AddMembers")}>
-	// 				Add Members
-	// 			</Menu.Item> */}
-	// 			{/* Add page to return group member list */}
-	// 			{/* Add Update Page for Group */}
-	// 			<Menu.Item
-	// 				onPress={() => navigation.navigate("EditGroup", { group: group })}
-	// 			>
-	// 				Group Info
-	// 			</Menu.Item>
-	// 			{/* Add Delete Handler and navigate */}
-	// 			<Menu.Item onPress={handleDelete}>Leave Group</Menu.Item>
-	// 		</Box>
-	// 	</Menu>
-	// </Center>
 };
 
 export default GroupMenuIcon;

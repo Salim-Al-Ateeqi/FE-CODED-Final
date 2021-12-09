@@ -25,21 +25,12 @@ import authStore from "../../stores/authStore";
 import { baseURL } from "../../stores/baseURL";
 
 const Profile = () => {
-	const userProfile = authStore.user
-		? profileStore.profiles.find(
-				(_profile) => _profile._id === authStore.user._id
-		  )
-		: null;
-
+	const [imageChanged, setImageChanged] = useState(false);
 	const [updateProfile, setUpdateProfile] = useState({
-		name: authStore.user ? userProfile.profile.name : "",
-		image: authStore.user ? userProfile.profile.image : "",
-		status: authStore.user ? userProfile.profile.status : "",
+		name: "",
+		image: "",
+		status: "",
 	});
-
-	if (!authStore.user) {
-		return <Text>Sign in please</Text>;
-	}
 
 	useEffect(() => {
 		(async () => {
@@ -52,6 +43,14 @@ const Profile = () => {
 			}
 		})();
 	}, []);
+
+	if (!authStore.user) {
+		return <Text>Obs! Error occur, please refresh the App!</Text>;
+	}
+
+	const userProfile = profileStore.profiles.find(
+		(_profile) => _profile._id === authStore.user._id
+	);
 
 	const _pickImage = async () => {
 		try {
@@ -71,7 +70,8 @@ const Profile = () => {
 					name: filename,
 					type: match ? `image/${match[1]}` : `image`,
 				};
-				setUpdateProfile({ ...updateProfile, image: image });
+				setUpdateProfile({ ...userProfile.profile, image: image });
+				setImageChanged(true);
 			}
 		} catch (error) {
 			console.log(error);
@@ -80,6 +80,7 @@ const Profile = () => {
 
 	const handleSubmit = () => {
 		profileStore.updateProfile(userProfile._id, updateProfile);
+		setImageChanged(false);
 	};
 
 	return (
@@ -87,10 +88,17 @@ const Profile = () => {
 			<ScrollView>
 				<VStack mt="10" mb="2" mx="1" alignItems="center">
 					<Pressable onPress={_pickImage}>
-						<Image
-							style={{ width: 120, height: 120, borderRadius: 100 }}
-							source={{ uri: baseURL + userProfile.profile.image }}
-						/>
+						{!imageChanged ? (
+							<Image
+								style={{ width: 120, height: 120, borderRadius: 100 }}
+								source={{ uri: baseURL + userProfile.profile.image }}
+							/>
+						) : (
+							<Image
+								style={{ width: 120, height: 120, borderRadius: 100 }}
+								source={{ uri: updateProfile.image.uri }}
+							/>
+						)}
 					</Pressable>
 					<Text fontSize="18" bold my="1">
 						{userProfile.profile.name}
@@ -103,42 +111,44 @@ const Profile = () => {
 				<KeyboardAvoidingView keyboardVerticalOffset={5}>
 					<VStack>
 						<Center>
-							<FormControl w="90%" mb="2">
-								<FormControl.Label>Name</FormControl.Label>
+							<FormControl w="100%" mb="2">
+								<FormControl.Label ml="3">Name</FormControl.Label>
 								<Input
-									_focus={{ borderColor: Colors.Primary }}
+									variant={"underlined"}
+									_focus={{ borderColor: Colors.primary }}
 									defaultValue={userProfile.profile.name}
 									placeholder="Edit your name"
 									InputLeftElement={
 										<Icon
 											as={<MaterialIcons name="person" />}
 											size={5}
-											ml="2"
+											ml="3"
 											color="muted.400"
 										/>
 									}
 									onChangeText={(name) =>
-										setUpdateProfile({ ...updateProfile, name: name })
+										setUpdateProfile({ ...userProfile.profile, name: name })
 									}
 								/>
 							</FormControl>
 
-							<FormControl w="90%" my="2">
-								<FormControl.Label>Status</FormControl.Label>
+							<FormControl w="100%" my="2">
+								<FormControl.Label ml="3">Status</FormControl.Label>
 								<Input
-									_focus={{ borderColor: Colors.Primary }}
+									variant={"underlined"}
+									_focus={{ borderColor: Colors.primary }}
 									defaultValue={userProfile.profile.status}
 									placeholder="Edit your status"
 									InputLeftElement={
 										<Icon
 											as={<AntDesign name="profile" />}
 											size={5}
-											ml="2"
+											ml="3"
 											color="muted.400"
 										/>
 									}
 									onChangeText={(status) =>
-										setUpdateProfile({ ...updateProfile, status })
+										setUpdateProfile({ ...userProfile.profile, status })
 									}
 								/>
 							</FormControl>
@@ -149,13 +159,13 @@ const Profile = () => {
 					onPress={handleSubmit}
 					m="5"
 					alignSelf="center"
-					w="25%"
-					style={{ backgroundColor: Colors.Primary }}
+					w="40%"
+					style={{ backgroundColor: Colors.primary }}
 					_text={{
 						color: "#fff",
 					}}
 				>
-					Update
+					Update Profile
 				</Button>
 			</ScrollView>
 		</Box>
