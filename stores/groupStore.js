@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { instance } from "./instance";
-import profileStore from "./ProfileStore";
+import { socket } from "./instance";
 
 class GroupStore {
   groups = [];
@@ -108,6 +108,11 @@ class GroupStore {
       const group = this.groups.find((group) => group._id === groupId);
       const res = await instance.post(`/groups/${groupId}/addChat`, newMessage);
       group.chat.push(res.data);
+      const payload = {
+        _id: groupId,
+        response: res.data
+      }
+      socket.emit('group-message', (payload))
     } catch (error) {
       console.log(error)
     }
@@ -138,6 +143,12 @@ class GroupStore {
       });
     }
   };
+
+  receiveMessage = (payload) => {
+    console.log('recieved message in store')
+    const group = this.groups.find((group) => group._id === payload._id);
+    group.chat.push(payload.response);
+  }
 }
 
 const groupStore = new GroupStore();
