@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-	Avatar,
 	Center,
 	Icon,
 	Input,
@@ -11,12 +10,11 @@ import {
 	Pressable,
 	Button,
 	Box,
-	Divider,
 } from "native-base";
+import { Image, KeyboardAvoidingView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { observer } from "mobx-react";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
-import { KeyboardAvoidingView } from "react-native";
 
 // components
 import { Colors } from "../../utils/Colors";
@@ -43,17 +41,17 @@ const Profile = () => {
 		return <Text>Sign in please</Text>;
 	}
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		if (Platform.OS !== "web") {
-	// 			const { status } =
-	// 				await ImagePicker.requestMediaLibraryPermissionsAsync();
-	// 			if (status !== "granted") {
-	// 				alert("Sorry, we need camera roll permissions to make this work!");
-	// 			}
-	// 		}
-	// 	})();
-	// }, []);
+	useEffect(() => {
+		(async () => {
+			if (Platform.OS !== "web") {
+				const { status } =
+					await ImagePicker.requestMediaLibraryPermissionsAsync();
+				if (status !== "granted") {
+					alert("Sorry, we need camera roll permissions to make this work!");
+				}
+			}
+		})();
+	}, []);
 
 	const _pickImage = async () => {
 		try {
@@ -83,51 +81,30 @@ const Profile = () => {
 	const handleSubmit = () => {
 		profileStore.updateProfile(userProfile._id, updateProfile);
 		console.log(updateProfile);
-		//needs completing
 	};
 
 	return (
 		<Box flex="1" w="100%" bg="#f5f5f5">
 			<ScrollView>
-				<VStack mt="10" mb="2" mx="1">
-					<Center space="3">
-						<Pressable onPress={_pickImage}>
-							<VStack position="relative">
-								<Text
-									position="absolute"
-									top={70}
-									left="23"
-									zIndex={1}
-									color="#737373"
-									fontSize="15"
-								>
-									Edit Image
-								</Text>
-								<Avatar
-									size={120}
-									source={{
-										uri: baseURL + userProfile.profile.image,
-									}}
-								/>
-							</VStack>
-						</Pressable>
-						<Text fontSize="18" bold my="1">
-							{userProfile.profile.name}
-						</Text>
-						<Text fontSize="14" my="1">
-							{userProfile.profile.status}
-						</Text>
-					</Center>
+				<VStack mt="10" mb="2" mx="1" alignItems="center">
+					<Pressable onPress={_pickImage}>
+						<Image
+							style={{ width: 120, height: 120, borderRadius: 100 }}
+							source={{ uri: baseURL + userProfile.profile.image }}
+						/>
+					</Pressable>
+					<Text fontSize="18" bold my="1">
+						{userProfile.profile.name}
+					</Text>
+					<Text fontSize="14" my="1">
+						{userProfile.profile.status}
+					</Text>
 				</VStack>
 
-				<Divider mb="5" />
 				<KeyboardAvoidingView keyboardVerticalOffset={5}>
 					<VStack>
-						{/* <Heading size="md" mx="5">
-							Edit Profile
-						</Heading> */}
 						<Center>
-							<FormControl w="90%">
+							<FormControl w="90%" mb="2">
 								<FormControl.Label>Name</FormControl.Label>
 								<Input
 									_focus={{ borderColor: Colors.Primary }}
@@ -142,7 +119,7 @@ const Profile = () => {
 										/>
 									}
 									onChangeText={(name) =>
-										setUpdateProfile({ ...updateProfile, name })
+										setUpdateProfile({ ...updateProfile, name: name })
 									}
 								/>
 							</FormControl>
