@@ -90,7 +90,9 @@ class GroupStore {
       const res = await instance.put(`/groups/${group._id}/members`, {
         phoneNumber: phoneNumber.phoneNumber,
       });
-      group.members.push(member._id);
+      runInAction(() => {
+        group.members.push(res.data.members[res.data.members.length - 1]);
+      });
       toast.show({
         title: "Poll Created!",
         status: "success",

@@ -34,9 +34,7 @@ const CreateGroup = ({ navigation }) => {
 	});
 	const [imageSent, setImageSent] = useState(false);
 
-	console.log(`/media/${group.image.name}`);
-
-	http: useEffect(() => {
+	useEffect(() => {
 		(async () => {
 			const { status } = await Contacts.requestPermissionsAsync();
 			if (status === "granted") {
@@ -46,7 +44,6 @@ const CreateGroup = ({ navigation }) => {
 
 				if (data.length > 0) {
 					const contact = data[0];
-					console.log(contact);
 				}
 			}
 		})();
@@ -81,7 +78,6 @@ const CreateGroup = ({ navigation }) => {
 
 	const handleSubmit = () => {
 		groupStore.createGroup(group, toast, navigation);
-		console.log({ group });
 	};
 
 	return (

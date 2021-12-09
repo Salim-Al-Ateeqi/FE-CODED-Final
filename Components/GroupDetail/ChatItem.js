@@ -11,8 +11,7 @@ import { Avatar, HStack, Image, Center, Text} from 'native-base'
 
 const ChatItem = ({ chatData }) => {
 
-    const userProfile = profileStore.profiles.find(profile => profile._id === chatData.sentFrom)
-    console.log(userProfile._id);
+    const userProfile = profileStore.profiles.find(profile => profile._id === chatData.sentFrom);
 
     const color = authStore.user._id === chatData.sentFrom ? '#99CCFF' : Colors.Primary
 

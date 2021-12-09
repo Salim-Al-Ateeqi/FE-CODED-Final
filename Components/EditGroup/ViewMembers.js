@@ -15,7 +15,6 @@ import {
 import { baseURL } from "../../stores/baseURL";
 
 const ViewMembers = ({ member }) => {
-	console.log(member);
 	return (
 		<Pressable bg="white">
 			<Box pl="4" pr="5" py="2">
