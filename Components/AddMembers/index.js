@@ -24,18 +24,17 @@ import profileStore from "../../stores/ProfileStore";
 
 const AddMembers = ({ navigation, route }) => {
   const { group } = route.params;
-  const [member, setMember] = useState({
+  const [phoneNumber, setPhoneNumber] = useState({
     phoneNumber: "",
   });
 
-  const newMember = profileStore.profiles.find(
-    (profile) => profile.phoneNumber === member.phoneNumber
-  );
+  // const newMember = profileStore.profiles.find(
+  //   (profile) => profile.phoneNumber === member.phoneNumber
+  // );
   const toast = useToast();
 
   const handleSubmit = () => {
-    console.log("newMember in componenet:", newMember);
-    groupStore.addMembersToGroup(newMember, group, navigation, toast);
+    groupStore.addMembersToGroup(phoneNumber, group, navigation, toast);
   };
   return (
     <KeyboardAwareScrollView>
@@ -61,7 +60,7 @@ const AddMembers = ({ navigation, route }) => {
                   keyboardType="number-pad"
                   _focus={{ borderColor: Colors.Primary }}
                   onChangeText={(phoneNumber) =>
-                    setMember({ ...member, phoneNumber })
+                    setPhoneNumber({ ...phoneNumber, phoneNumber })
                   }
                 />
               </FormControl>
