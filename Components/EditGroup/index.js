@@ -14,6 +14,7 @@ import {
 	Divider,
 	useToast,
 	HStack,
+	Badge,
 } from "native-base";
 import { Image } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -29,6 +30,7 @@ import groupStore from "../../stores/groupStore";
 import { baseURL } from "../../stores/baseURL";
 
 const EditGroup = ({ route, navigation }) => {
+	const [focusOnInput, setFocusOnInput] = useState(false);
 	const [imageChanged, setImageChanged] = useState(false);
 	const [updatedGroup, setUpdatedGroup] = useState({
 		name: "",
@@ -84,6 +86,7 @@ const EditGroup = ({ route, navigation }) => {
 
 	const handleUpdate = async () => {
 		groupStore.updateGroup(group._id, updatedGroup, navigation, toast);
+
 		setImageChanged(false);
 	};
 	return (
@@ -94,21 +97,55 @@ const EditGroup = ({ route, navigation }) => {
 						<Pressable onPress={_pickImage}>
 							{group.image ? (
 								!imageChanged ? (
-									<Image
-										style={{ width: 120, height: 120, borderRadius: 100 }}
-										alt="Group Image"
-										source={{
-											uri: baseURL + group.image,
-										}}
-									/>
+									<Box position={"relative"}>
+										<Badge
+											position={"absolute"}
+											top={83}
+											p={1}
+											rounded={50}
+											alignSelf="flex-end"
+											zIndex={1}
+											style={{ backgroundColor: Colors.lightBg }}
+										>
+											<Icon
+												as={<MaterialIcons name="edit" />}
+												size={6}
+												color="muted.400"
+											/>
+										</Badge>
+										<Image
+											style={{ width: 120, height: 120, borderRadius: 100 }}
+											alt="Group Image"
+											source={{
+												uri: baseURL + group.image,
+											}}
+										/>
+									</Box>
 								) : (
-									<Image
-										style={{ width: 120, height: 120, borderRadius: 100 }}
-										alt="Group Image"
-										source={{
-											uri: updatedGroup.image.uri,
-										}}
-									/>
+									<Box position={"relative"}>
+										<Badge
+											position={"absolute"}
+											top={83}
+											p={1}
+											rounded={50}
+											alignSelf="flex-end"
+											zIndex={1}
+											style={{ backgroundColor: Colors.lightBg }}
+										>
+											<Icon
+												as={<MaterialIcons name="edit" />}
+												size={6}
+												color="muted.400"
+											/>
+										</Badge>
+										<Image
+											style={{ width: 120, height: 120, borderRadius: 100 }}
+											alt="Group Image"
+											source={{
+												uri: updatedGroup.image.uri,
+											}}
+										/>
+									</Box>
 								)
 							) : (
 								<Image
@@ -128,6 +165,9 @@ const EditGroup = ({ route, navigation }) => {
 						<FormControl.Label ml="3">Group Name</FormControl.Label>
 						<HStack justifyContent="space-evenly">
 							<Input
+								returnKeyType="send"
+								onSubmitEditing={handleUpdate}
+								autoFocus={focusOnInput}
 								w="100%"
 								_focus={{ borderColor: Colors.primary }}
 								variant={"underlined"}
@@ -141,6 +181,15 @@ const EditGroup = ({ route, navigation }) => {
 										color="muted.400"
 									/>
 								}
+								InputRightElement={
+									<Icon
+										as={<MaterialIcons name="edit" />}
+										mr="3"
+										size={5}
+										color="muted.400"
+										onPress={() => console.log("pressed")}
+									/>
+								}
 								onChangeText={(name) =>
 									setUpdatedGroup({ ...group.name, name })
 								}
@@ -149,17 +198,17 @@ const EditGroup = ({ route, navigation }) => {
 					</FormControl>
 					<Button
 						alignSelf={"center"}
-						w="40%"
+						w="25%"
 						onPress={handleUpdate}
 						style={{ backgroundColor: Colors.primary }}
 						_text={{
 							color: "#fff",
 						}}
 					>
-						Update Profile
+						Save
 					</Button>
 
-					<VStack>
+					<VStack mb={5}>
 						<HStack w="100%">
 							<Text ml="5" mb="2">
 								{group.members.length} PARTICIPANTS

@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // components
@@ -14,14 +15,13 @@ import EditGroup from "../EditGroup";
 import GroupDetail from "../GroupDetail";
 import MenuIcon from "../GroupDetail/MenuIcon";
 import GroupLeftImage from "../GroupDetail/GroupLeftImage";
+import CreateGroup from "../CreateGroup";
 
 // stores
 import authStore from "../../stores/authStore";
-import { observer } from "mobx-react";
-import CreateGroup from "../CreateGroup";
 
 const RootNavigator = () => {
-	const { Navigator, Screen, Group } = createStackNavigator();
+	const { Navigator, Screen } = createStackNavigator();
 	return (
 		<Navigator>
 			{!authStore.user || !authStore.user.isValidated ? (

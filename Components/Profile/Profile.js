@@ -10,6 +10,7 @@ import {
 	Pressable,
 	Button,
 	Box,
+	Badge,
 } from "native-base";
 import { Image, KeyboardAvoidingView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
@@ -89,15 +90,49 @@ const Profile = () => {
 				<VStack mt="10" mb="2" mx="1" alignItems="center">
 					<Pressable onPress={_pickImage}>
 						{!imageChanged ? (
-							<Image
-								style={{ width: 120, height: 120, borderRadius: 100 }}
-								source={{ uri: baseURL + userProfile.profile.image }}
-							/>
+							<Box position={"relative"}>
+								<Badge
+									position={"absolute"}
+									top={83}
+									p={1}
+									rounded={50}
+									alignSelf="flex-end"
+									zIndex={1}
+									colorScheme="coolGray"
+								>
+									<Icon
+										as={<MaterialIcons name="edit" />}
+										size={6}
+										color="muted.400"
+									/>
+								</Badge>
+								<Image
+									style={{ width: 120, height: 120, borderRadius: 100 }}
+									source={{ uri: baseURL + userProfile.profile.image }}
+								/>
+							</Box>
 						) : (
-							<Image
-								style={{ width: 120, height: 120, borderRadius: 100 }}
-								source={{ uri: updateProfile.image.uri }}
-							/>
+							<Box position={"relative"}>
+								<Badge
+									position={"absolute"}
+									top={83}
+									p={1}
+									rounded={50}
+									alignSelf="flex-end"
+									zIndex={1}
+									colorScheme="coolGray"
+								>
+									<Icon
+										as={<MaterialIcons name="edit" />}
+										size={6}
+										color="muted.400"
+									/>
+								</Badge>
+								<Image
+									style={{ width: 120, height: 120, borderRadius: 100 }}
+									source={{ uri: updateProfile.image.uri }}
+								/>
+							</Box>
 						)}
 					</Pressable>
 					<Text fontSize="18" bold my="1">
@@ -126,6 +161,14 @@ const Profile = () => {
 											color="muted.400"
 										/>
 									}
+									InputRightElement={
+										<Icon
+											as={<MaterialIcons name="edit" />}
+											mr="3"
+											size={5}
+											color="muted.400"
+										/>
+									}
 									onChangeText={(name) =>
 										setUpdateProfile({ ...userProfile.profile, name: name })
 									}
@@ -144,6 +187,14 @@ const Profile = () => {
 											as={<AntDesign name="profile" />}
 											size={5}
 											ml="3"
+											color="muted.400"
+										/>
+									}
+									InputRightElement={
+										<Icon
+											as={<MaterialIcons name="edit" />}
+											mr="3"
+											size={5}
 											color="muted.400"
 										/>
 									}
