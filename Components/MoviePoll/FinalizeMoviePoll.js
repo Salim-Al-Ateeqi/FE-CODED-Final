@@ -16,6 +16,7 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import groupStore from "../../stores/groupStore";
 import styles from "./styles";
+import imdbStore from "../../stores/imdbStore";
 
 const FinalizeMoviePoll = ({ route, navigation }) => {
   const { movie } = route.params;
@@ -52,6 +53,7 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
   };
 
   const handleSubmit = () => {
+    imdbStore.clearSearchData();
     groupStore.createPoll(group._id, pollData, navigation, toast);
   };
 

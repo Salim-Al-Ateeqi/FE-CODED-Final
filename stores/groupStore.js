@@ -110,9 +110,9 @@ class GroupStore {
       group.chat.push(res.data);
       const payload = {
         _id: groupId,
-        response: res.data
-      }
-      socket.emit('group-message', (payload))
+        response: res.data,
+      };
+      socket.emit("group-message", payload);
     } catch (error) {
       console.log(error);
     }
@@ -143,11 +143,19 @@ class GroupStore {
     }
   };
 
+  submitVote = async (groupId, pollId, userVote) => {
+    const group = this.groups.find((group) => group._id === groupId);
+    const poll = group.polls.find((poll) => poll._id === pollId);
+    const res = await instance.put(`/polls/${pollId}/submitvote`, userVote);
+    console.log(res.data);
+    poll = res.data;
+  };
+
   receiveMessage = (payload) => {
-    console.log('recieved message in store')
+    console.log("recieved message in store");
     const group = this.groups.find((group) => group._id === payload._id);
     group.chat.push(payload.response);
-  }
+  };
 }
 
 const groupStore = new GroupStore();

@@ -22,7 +22,7 @@ class ImdbStore {
         api_key: apiKey,
         include_adult: false,
         page: 1,
-        language: "en-US"
+        language: "en-US",
       },
     };
     try {
@@ -34,6 +34,10 @@ class ImdbStore {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  clearSearchData = () => {
+    this.data = null;
   };
 }
 
