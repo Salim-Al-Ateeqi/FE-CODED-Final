@@ -26,6 +26,7 @@ class GroupStore {
       for (const key in group) {
         formData.append(key, group[key]);
       }
+      // REVIEW: Remove console log if done from it
       console.log("Hello");
       const res = await instance.post("/groups", formData);
       this.groups.push(res.data);
@@ -57,6 +58,7 @@ class GroupStore {
       const res = await instance.put(`/groups/${groupId}`, formData);
 
       runInAction(() => {
+        // REVIEW: Why this? just overwrite group with res.data
         for (const key in group) group[key] = res.data[key];
       });
 
@@ -146,7 +148,9 @@ class GroupStore {
   submitVote = async (groupId, pollId, userVote) => {
     const group = this.groups.find((group) => group._id === groupId);
     const poll = group.polls.find((poll) => poll._id === pollId);
+    // REVIEW: Where is the try-catch? :)))))))
     const res = await instance.put(`/polls/${pollId}/submitvote`, userVote);
+    // REVIEW: Remove console log
     console.log(res.data);
     poll = res.data;
   };

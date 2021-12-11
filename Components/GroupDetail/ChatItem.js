@@ -9,6 +9,7 @@ import profileStore from "../../stores/ProfileStore";
 import { baseURL } from "../../stores/baseURL";
 import { Colors } from "../../utils/Colors";
 
+// REVIEW: If this is a message, just call the component Message, makes more sense than ChatItem
 const ChatItem = ({ chatData, group }) => {
   const userProfile = profileStore.profiles.find(
     (profile) => profile._id === chatData.sentFrom

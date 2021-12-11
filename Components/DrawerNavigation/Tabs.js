@@ -11,19 +11,19 @@ import Home from "../Home/index";
 import Profile from "../Profile/Profile";
 
 const Drawer = createDrawerNavigator();
-
+// REVIEW: Remove unused imports and props
 const Tabs = ({ navigation }) => {
-	return (
-		<Box flex={1}>
-			<Drawer.Navigator
-				initialRouteName={Home}
-				drawerContent={(props) => <CustomDrawerContent {...props} />}
-			>
-				<Drawer.Screen name="Groups" component={Home} />
-				<Drawer.Screen name="Edit Profile" component={Profile} />
-			</Drawer.Navigator>
-		</Box>
-	);
+  return (
+    <Box flex={1}>
+      <Drawer.Navigator
+        initialRouteName={Home}
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+      >
+        <Drawer.Screen name="Groups" component={Home} />
+        <Drawer.Screen name="Edit Profile" component={Profile} />
+      </Drawer.Navigator>
+    </Box>
+  );
 };
 
 export default observer(Tabs);

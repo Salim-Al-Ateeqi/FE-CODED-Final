@@ -5,3 +5,5 @@ export const Colors = {
   darkBg: "#A7A2A9",
   //   yellow: "#FFAD05",
 };
+
+// REVIEW: Wrong folder name, these are assets not utils

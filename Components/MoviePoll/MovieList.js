@@ -6,9 +6,9 @@ import imdbStore from "../../stores/imdbStore";
 import MovieItem from "./MovieItem";
 
 const MovieList = ({ navigation, group }) => {
-  
   if (imdbStore.isLoading) return <Spinner />;
 
+  // REVIEW: Whyyyy data? Why?? </3
   const movieList = imdbStore.data.map((movie) => {
     if (movie.title && movie.poster_path) {
       return (

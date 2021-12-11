@@ -11,6 +11,7 @@ class ProfileStore {
   profiles = [];
   isLoading = true;
 
+  // REVIEW: Isn't this fetching all profiles? If yes, then it should `fetchProfiles`.
   fetchProfile = async () => {
     try {
       const res = await instance.get("/getprofiles");
@@ -24,6 +25,7 @@ class ProfileStore {
     }
   };
 
+  // REVIEW: If you're not gonna remove toast, remove it
   updateProfile = async (profileId, updateInfo, toast) => {
     try {
       const formData = new FormData();

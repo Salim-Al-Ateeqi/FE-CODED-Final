@@ -14,6 +14,7 @@ const MovieItem = ({ movie, navigation, group }) => {
         <Box>
           <Image
             source={{
+              // REVIEW: If it's a regular string with no variables interpolated, use quotations "" not 39foora ``
               uri: `https://image.tmdb.org/t/p/w500` + movie.poster_path,
             }}
             alt={movie.title}
@@ -23,7 +24,8 @@ const MovieItem = ({ movie, navigation, group }) => {
         <Box style={styles.movieInfo}>
           <Text style={styles.movieTitle}>{movie.original_title}</Text>{" "}
           <Text style={styles.descCategory}>Rating: </Text>
-          <Text>{movie.vote_average} ⭐</Text>{" "}
+          <Text>{movie.vote_average} ⭐</Text>
+          {/* REVIEW: Btw, {" "} might cause you an error if it's outside a <Text> component */}{" "}
           <Text style={styles.descCategory}>Release Date:</Text>
           <Text>{movie.release_date}</Text>
         </Box>
