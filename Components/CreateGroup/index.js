@@ -20,7 +20,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
 // components
-import { Colors } from "../../utils/Colors";
+import { Colors } from "../../assets/Theme/Colors";
 import groupStore from "../../stores/groupStore";
 
 // stores
@@ -29,7 +29,7 @@ import { baseURL } from "../../stores/baseURL";
 const CreateGroup = ({ navigation }) => {
 	const [group, setGroup] = useState({
 		name: "",
-		image: `/media/defaultUserImage.jpg`,
+		image: "/media/defaultUserImage.jpg",
 	});
 
 	// Check if the user change the image.

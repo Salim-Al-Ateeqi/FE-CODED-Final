@@ -16,7 +16,7 @@ import { Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // components
-import { Colors } from "../../utils/Colors";
+import { Colors } from "../../assets/Theme/Colors";
 
 // stores
 import authStore from "../../stores/authStore";
@@ -81,9 +81,7 @@ const CustomDrawerContent = (props) => {
 								rounded="md"
 								key={name}
 								bg={index === props.state.index ? "#dbf4ff" : "transparent"}
-								onPress={(event) => {
-									props.navigation.navigate(name);
-								}}
+								onPress={() => props.navigation.navigate(name)}
 							>
 								<HStack space="7" alignItems="center">
 									<Icon

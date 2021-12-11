@@ -1,28 +1,31 @@
+import React from "react";
 import { observer } from "mobx-react";
 import { Spinner } from "native-base";
-import React from "react";
-import { View, Text } from "react-native";
-import imdbStore from "../../stores/imdbStore";
+import { View } from "react-native";
+
+// components
 import MovieItem from "./MovieItem";
 
+// stores
+import movieStore from "../../stores/movieStore";
+
 const MovieList = ({ navigation, group }) => {
-  
-  if (imdbStore.isLoading) return <Spinner />;
+	if (movieStore.isLoading) return <Spinner />;
 
-  const movieList = imdbStore.data.map((movie) => {
-    if (movie.title && movie.poster_path) {
-      return (
-        <MovieItem
-          key={movie.id}
-          movie={movie}
-          navigation={navigation}
-          group={group}
-        />
-      );
-    }
-  });
+	const movieList = movieStore.movies.map((movie) => {
+		if (movie.title && movie.poster_path) {
+			return (
+				<MovieItem
+					key={movie.id}
+					movie={movie}
+					navigation={navigation}
+					group={group}
+				/>
+			);
+		}
+	});
 
-  return <View>{movieList}</View>;
+	return <View>{movieList}</View>;
 };
 
 export default observer(MovieList);

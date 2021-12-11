@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../utils/Colors";
+import { Colors } from "../../assets/Theme/Colors";
 
 const styles = StyleSheet.create({
 	//Movie Item

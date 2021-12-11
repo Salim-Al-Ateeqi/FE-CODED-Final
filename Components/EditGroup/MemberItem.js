@@ -14,7 +14,7 @@ import { Image } from "react-native";
 // stores
 import { baseURL } from "../../stores/baseURL";
 
-const ViewMembers = ({ member }) => {
+const MemberItem = ({ member }) => {
 	return (
 		<Pressable bg="white">
 			<Box pl="4" pr="5" py="2">
@@ -41,4 +41,4 @@ const ViewMembers = ({ member }) => {
 	);
 };
 
-export default observer(ViewMembers);
+export default observer(MemberItem);

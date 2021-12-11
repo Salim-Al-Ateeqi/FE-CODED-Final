@@ -1,5 +1,5 @@
 import React from "react";
-import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Box } from "native-base";
 import { observer } from "mobx-react";
 
@@ -12,7 +12,7 @@ import Profile from "../Profile/Profile";
 
 const Drawer = createDrawerNavigator();
 
-const Tabs = ({ navigation }) => {
+const Tabs = () => {
 	return (
 		<Box flex={1}>
 			<Drawer.Navigator

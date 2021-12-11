@@ -18,7 +18,7 @@ import IntlPhoneInput from "react-native-intl-phone-input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // components
-import { Colors } from "../../../utils/Colors";
+import { Colors } from "../../../assets/Theme/Colors";
 
 // stores
 import authStore from "../../../stores/authStore";

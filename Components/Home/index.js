@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
 import {
 	ScrollView,
@@ -12,14 +12,12 @@ import {
 
 // components
 import GroupItem from "./GroupItem";
-import Search from "../Search/Search";
-import { Colors } from "../../utils/Colors";
+import Search from "../Search/";
 
 // stores
 import groupStore from "../../stores/groupStore";
 import authStore from "../../stores/authStore";
 import { socket } from "../../stores/instance";
-
 
 const Home = ({ navigation }) => {
 	const [query, setQuery] = useState("");
@@ -27,22 +25,20 @@ const Home = ({ navigation }) => {
 		return <Spinner />;
 	}
 
-	const userId = authStore.user ? authStore.user._id : "";
+	const user = authStore.user ?? "";
 
-	const data = authStore.user
-	socket.emit('authUser', data)
+	const data = authStore.user;
+	socket.emit("authUser", data);
 
 	const groupList = groupStore.groups
 		.filter((_group) => _group.name.toLowerCase().includes(query.toLowerCase()))
-		.filter((__group) => __group.members.includes(userId))
+		.filter((__group) => __group.members.includes(user._id))
 		.map((group) => (
 			<GroupItem navigation={navigation} group={group} key={group._id} />
 		));
 
 	const handlePress = () => {
-		if (authStore) {
-			navigation.navigate("CreateGroup");
-		}
+		navigation.navigate("CreateGroup");
 	};
 
 	return (

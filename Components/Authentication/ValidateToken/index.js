@@ -14,9 +14,9 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { ScrollView } from "react-native-gesture-handler";
 import authStore from "../../../stores/authStore";
 import { observer } from "mobx-react";
-import { Colors } from "../../../utils/Colors";
+import { Colors } from "../../../assets/Theme/Colors";
 
-const index = ({ navigation }) => {
+const ValidateTokens = ({ navigation }) => {
 	const toast = useToast();
 
 	const [userInput, setUserInput] = useState({ SMSToken: "" });
@@ -101,4 +101,4 @@ const index = ({ navigation }) => {
 	);
 };
 
-export default observer(index);
+export default observer(ValidateTokens);

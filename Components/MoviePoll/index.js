@@ -14,10 +14,10 @@ import { ScrollView } from "react-native-gesture-handler";
 
 // components
 import MovieList from "./MovieList";
-import { Colors } from "../../utils/Colors";
+import { Colors } from "../../assets/Theme/Colors";
 
 // stores
-import imdbStore from "../../stores/imdbStore";
+import movieStore from "../../stores/movieStore";
 
 const index = ({ navigation, route }) => {
 	const { group } = route.params;
@@ -25,7 +25,7 @@ const index = ({ navigation, route }) => {
 	const [query, setQuery] = useState("");
 
 	const handleSubmit = () => {
-		imdbStore.fetchMovies(query);
+		movieStore.fetchMovies(query);
 		setQuery("");
 	};
 
@@ -65,7 +65,7 @@ const index = ({ navigation, route }) => {
 							Find
 						</Button>
 						<VStack w="100%" mt="1">
-							{imdbStore.data && (
+							{movieStore.movies && (
 								<MovieList navigation={navigation} group={group} />
 							)}
 						</VStack>

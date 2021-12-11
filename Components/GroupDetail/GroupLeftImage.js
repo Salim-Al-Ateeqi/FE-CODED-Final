@@ -7,8 +7,6 @@ import { Heading, HStack, Pressable } from "native-base";
 import { baseURL } from "../../stores/baseURL";
 
 const GroupLeftImage = ({ group, navigation }) => {
-	const defaultImage = baseURL + `/media/defaultUserImage.jpg`;
-	console.log(defaultImage);
 	return (
 		<Pressable onPress={() => navigation.navigate("EditGroup", { group })}>
 			<HStack space={4} alignItems="center" mb="2">
@@ -20,7 +18,7 @@ const GroupLeftImage = ({ group, navigation }) => {
 						borderRadius: 30,
 						marginBottom: 5,
 					}}
-					defaultSource={require("../../utils/Media/defaultUserImage.jpg")}
+					defaultSource={require("../../assets/Media/defaultUserImage.jpg")}
 					source={{
 						uri: baseURL + group.image,
 					}}

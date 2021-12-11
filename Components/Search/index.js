@@ -3,7 +3,7 @@ import { Box, Icon, Input } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
 // components
-import { Colors } from "../../utils/Colors";
+import { Colors } from "../../assets/Theme/Colors";
 
 export default function Search({ setQuery }) {
 	return (
@@ -17,7 +17,6 @@ export default function Search({ setQuery }) {
 				_focus={{
 					borderColor: Colors.primary,
 				}}
-				returnKeyType="search"
 				onChangeText={(value) => setQuery(value)}
 				placeholder="Search for a group"
 				bg="#fff"
