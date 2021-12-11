@@ -12,6 +12,7 @@ import {
 	Center,
 	ScrollView,
 	Pressable,
+	Badge,
 } from "native-base";
 
 import { Image, KeyboardAvoidingView } from "react-native";
@@ -89,17 +90,51 @@ const CreateGroup = ({ navigation }) => {
 					<Pressable onPress={_pickImage}>
 						<VStack alignItems="center">
 							{!imageChanged ? (
-								<Image
-									style={{ width: 120, height: 120, borderRadius: 100 }}
-									source={{
-										uri: baseURL + group.image,
-									}}
-								/>
+								<Box position={"relative"}>
+									<Badge
+										position={"absolute"}
+										top={81}
+										p={1}
+										rounded={50}
+										alignSelf="flex-end"
+										zIndex={1}
+										colorScheme="coolGray"
+									>
+										<Icon
+											as={<MaterialIcons name="edit" />}
+											size={6}
+											color="muted.400"
+										/>
+									</Badge>
+									<Image
+										style={{ width: 120, height: 120, borderRadius: 100 }}
+										source={{
+											uri: baseURL + group.image,
+										}}
+									/>
+								</Box>
 							) : (
-								<Image
-									style={{ width: 120, height: 120, borderRadius: 100 }}
-									source={{ uri: group.image.uri }}
-								/>
+								<Box position={"relative"}>
+									<Badge
+										position={"absolute"}
+										top={83}
+										p={1}
+										rounded={50}
+										alignSelf="flex-end"
+										zIndex={1}
+										colorScheme="coolGray"
+									>
+										<Icon
+											as={<MaterialIcons name="edit" />}
+											size={6}
+											color="muted.400"
+										/>
+									</Badge>
+									<Image
+										style={{ width: 120, height: 120, borderRadius: 100 }}
+										source={{ uri: group.image.uri }}
+									/>
+								</Box>
 							)}
 						</VStack>
 					</Pressable>

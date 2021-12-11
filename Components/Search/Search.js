@@ -17,6 +17,7 @@ export default function Search({ setQuery }) {
 				_focus={{
 					borderColor: Colors.primary,
 				}}
+				returnKeyType="search"
 				onChangeText={(value) => setQuery(value)}
 				placeholder="Search for a group"
 				bg="#fff"
