@@ -19,6 +19,7 @@ import CreateGroup from "../CreateGroup";
 
 // stores
 import authStore from "../../stores/authStore";
+import groupStore from "../../stores/groupStore";
 
 const RootNavigator = () => {
 	const { Navigator, Screen } = createStackNavigator();
@@ -72,8 +73,12 @@ const RootNavigator = () => {
 						component={EditGroup}
 						options={({ route, navigation }) => {
 							const { group } = route.params;
+							const foundGroup = groupStore.groups.find(
+								(_group) => _group._id === group._id
+							);
+
 							return {
-								headerTitle: `${group.name} info`,
+								headerTitle: `Group info`,
 							};
 						}}
 					/>
@@ -90,12 +95,16 @@ const RootNavigator = () => {
 						component={GroupDetail}
 						options={({ route, navigation }) => {
 							const { group } = route.params;
+							const foundGroup = groupStore.groups.find(
+								(_group) => _group._id === group._id
+							);
+
 							return {
 								headerTitle: () => (
-									<GroupLeftImage navigation={navigation} group={group} />
+									<GroupLeftImage navigation={navigation} group={foundGroup} />
 								),
 								headerRight: () => (
-									<MenuIcon navigation={navigation} group={group} />
+									<MenuIcon navigation={navigation} group={foundGroup} />
 								),
 							};
 						}}
