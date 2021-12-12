@@ -67,6 +67,15 @@ class ProfileStore {
     });
   };
 
+  getUserProfile = async () => {
+    try {
+      const res = await instance.get("/newprofile");
+      this.profile.push(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   addGroupToProfile = (member, group) => {
     member.groups.push(group._id);
   };
