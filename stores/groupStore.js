@@ -160,11 +160,14 @@ class GroupStore {
   };
 
   submitVote = async (groupId, pollId, userVote) => {
-    const group = this.groups.find((group) => group._id === groupId);
-    const poll = group.polls.find((poll) => poll._id === pollId);
-    const res = await instance.put(`/polls/${pollId}/submitvote`, userVote);
-    console.log(res.data);
-    poll = res.data;
+    try {
+      const group = this.groups.find((group) => group._id === groupId);
+      const poll = group.polls.find((poll) => poll._id === pollId);
+      const res = await instance.put(`/polls/${pollId}/submitvote`, userVote);
+      poll = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   receiveMessage = (payload) => {
