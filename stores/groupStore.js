@@ -143,13 +143,15 @@ class GroupStore {
       const group = this.groups.find((group) => group._id === groupId);
       const res = await instance.post(`/groups/${groupId}/polls`, pollData);
       group.polls.push(res.data);
+      console.log("res.data in store:", res.data);
+      socket.emit("create-poll", res.data);
       toast.show({
         title: "Poll Created!",
         status: "success",
         placement: "top",
         duration: 1500,
       });
-      navigation.navigate("GroupDetail", { group: group });
+      navigation.navigate("GroupDetail", { group });
     } catch (error) {
       console.log(error);
       toast.show({
@@ -195,6 +197,14 @@ class GroupStore {
     const group = this.groups.find((group) => group._id === payload._id);
     const newestMember = payload.members[group.members.length - 1];
     group.members.push(newestMember);
+  };
+
+  recievePoll = (data) => {
+    const group = this.groups.find((group) => group._id === data.group);
+    const pollexists = group.polls.find((poll) => poll._id === data._id);
+    if (!pollexists) {
+      group.poll.push(data);
+    }
   };
 }
 

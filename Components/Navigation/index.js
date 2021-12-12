@@ -38,6 +38,11 @@ const RootNavigator = () => {
     groupStore.receiveUpdatedGroupMembers(payload);
   });
 
+  socket.on("recieve-poll", (data) => {
+    groupStore.recievePoll(data);
+    console.log("data in nav:", data);
+  });
+
   return (
     <Navigator>
       {!authStore.user || !authStore.user.isValidated ? (
