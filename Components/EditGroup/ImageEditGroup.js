@@ -57,8 +57,6 @@ const ImageEditGroup = ({
 		}
 	};
 
-	const defaultImage = "/media/defaultUserImage.jpg";
-
 	return (
 		<VStack mt="10" mb="7" mx="1">
 			<Center space="3">
