@@ -17,7 +17,7 @@ import { baseURL } from "../../stores/baseURL";
 const MemberItem = ({ member }) => {
 	return (
 		<Pressable bg="white">
-			<Box pl="4" pr="5" py="2">
+			<Box flex={1} justifyContent={"center"} pl="5" pr="5" py="2" h={55}>
 				<HStack alignItems="center" space={3}>
 					<Image
 						borderRadius="50"

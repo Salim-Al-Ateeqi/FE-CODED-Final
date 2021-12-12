@@ -1,21 +1,6 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react";
-import {
-	Center,
-	Icon,
-	Input,
-	Text,
-	VStack,
-	FormControl,
-	ScrollView,
-	Pressable,
-	Button,
-	Box,
-	Divider,
-	useToast,
-	HStack,
-	Badge,
-} from "native-base";
+import { Center, Icon, VStack, Pressable, Box, Badge } from "native-base";
 import { Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";

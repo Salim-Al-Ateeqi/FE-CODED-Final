@@ -28,7 +28,7 @@ const MenuIcon = ({ navigation, group }) => {
 					);
 				}}
 			>
-				<Box w="100%" px={4} justifyContent="center">
+				<Box w="100%" px={3} justifyContent="center">
 					<Menu.Item
 						onPress={() => navigation.navigate("MoviePoll", { group: group })}
 					>

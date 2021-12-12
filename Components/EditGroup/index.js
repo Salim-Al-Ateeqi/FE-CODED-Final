@@ -16,6 +16,7 @@ import { Colors } from "../../assets/Theme/Colors";
 import MemberItem from "./MemberItem";
 import ImageEditGroup from "./ImageEditGroup";
 import InputEditGroup from "./InputEditGroup";
+import AddMembersButton from "./AddMembersButton";
 
 // stores
 import profileStore from "../../stores/ProfileStore";
@@ -60,8 +61,9 @@ const EditGroup = ({ route, navigation }) => {
 					/>
 
 					<Button
-						alignSelf={"center"}
+						alignSelf={"flex-end"}
 						w="25%"
+						mr={3}
 						onPress={handleUpdate}
 						style={{ backgroundColor: Colors.primary }}
 						_text={{
@@ -73,10 +75,13 @@ const EditGroup = ({ route, navigation }) => {
 
 					<VStack mb={5}>
 						<HStack w="100%">
-							<Text ml="5" mb="2">
-								{group.members.length} PARTICIPANTS
+							<Text fontSize={12} ml="3" mb="2">
+								{group.members.length} MEMBERS
 							</Text>
 						</HStack>
+						<Divider />
+
+						<AddMembersButton navigation={navigation} group={group} />
 						<Divider />
 						{groupMembers}
 					</VStack>

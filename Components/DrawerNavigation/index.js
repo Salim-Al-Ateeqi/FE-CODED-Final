@@ -8,7 +8,7 @@ import CustomDrawerContent from "./CustomDrawerContent";
 
 // screens
 import Home from "../Home/index";
-import Profile from "../Profile/Profile";
+import Profile from "../Profile";
 
 const Drawer = createDrawerNavigator();
 

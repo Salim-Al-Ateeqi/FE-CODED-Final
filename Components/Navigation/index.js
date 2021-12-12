@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // components
 import Signup from "../Authentication/Signup";
 import Signin from "../Authentication/Signin";
-import Tabs from "../DrawerNavigation/Tabs";
+import Tabs from "../DrawerNavigation/";
 import ValidateToken from "../Authentication/ValidateToken";
 import CreateCustomPoll from "../CreateCustomPoll";
 import MoviePoll from "../MoviePoll";
