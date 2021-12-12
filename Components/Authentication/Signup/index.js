@@ -120,6 +120,8 @@ const Signup = ({ navigation }) => {
 							<FormControl>
 								<FormControl.Label>Name</FormControl.Label>
 								<Input
+									keyboardType="name-phone-pad"
+									returnKeyType="next"
 									bg="#fff"
 									h="50"
 									type="text"
@@ -134,6 +136,8 @@ const Signup = ({ navigation }) => {
 							<FormControl>
 								<FormControl.Label>Password</FormControl.Label>
 								<Input
+									keyboardType="name-phone-pad"
+									returnKeyType="next"
 									bg="#fff"
 									h="50"
 									type="password"
@@ -146,6 +150,8 @@ const Signup = ({ navigation }) => {
 							<FormControl>
 								<FormControl.Label>Confirm Password</FormControl.Label>
 								<Input
+									keyboardType="name-phone-pad"
+									returnKeyType="next"
 									bg="#fff"
 									h="50"
 									type="password"

@@ -19,25 +19,29 @@ const DrawerProfile = () => {
 
 	return (
 		<Box px="3">
-			<HStack>
-				<Image
-					source={{
-						uri: baseURL + userProfile.profile.image,
-					}}
-					style={{ width: 60, height: 60, borderRadius: 100 }}
-				/>
-				<VStack mx="3">
-					<Text bold color="gray.700">
-						{userProfile.profile.name}
-					</Text>
-					<Text fontSize="13" mt="1" color="gray.500" fontWeight="500">
-						{userProfile.profile.status}
-					</Text>
-					<Text fontSize="12" mt="1" color="gray.500" fontWeight="500">
-						{userProfile.phoneNumber}
-					</Text>
-				</VStack>
-			</HStack>
+			{userProfile ? (
+				<HStack>
+					<Image
+						source={{
+							uri: baseURL + userProfile.profile.image,
+						}}
+						style={{ width: 60, height: 60, borderRadius: 100 }}
+					/>
+					<VStack mx="3">
+						<Text bold color="gray.700">
+							{userProfile.profile.name}
+						</Text>
+						<Text fontSize="13" mt="1" color="gray.500" fontWeight="500">
+							{userProfile.profile.status}
+						</Text>
+						<Text fontSize="12" mt="1" color="gray.500" fontWeight="500">
+							{userProfile.phoneNumber}
+						</Text>
+					</VStack>
+				</HStack>
+			) : (
+				<Text>Refresh The App please.</Text>
+			)}
 		</Box>
 	);
 };
