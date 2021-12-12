@@ -80,7 +80,7 @@ const GroupMenuIcon = ({ group, navigation, isOpen, onOpen, onClose }) => {
 							onPress={handleLeave}
 							startIcon={
 								<Icon
-									as={MaterialIcons}
+									as={<MaterialIcons name="logout" />}
 									color="trueGray.400"
 									mr="1"
 									size="6"
