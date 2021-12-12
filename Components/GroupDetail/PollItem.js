@@ -15,9 +15,6 @@ const PollItem = ({ pollData, group }) => {
   const pollCreator = profileStore.profiles.find(
     (user) => user._id === pollData.owner
   );
-  const userVoted = pollData.votes.find(
-    (vote) => vote.user === authStore.user._id
-  );
 
   useEffect(() => {
     const userVoted = pollData.votes.find(
@@ -47,12 +44,18 @@ const PollItem = ({ pollData, group }) => {
       <Text style={styles.by}>Created by {pollCreator.profile.name}</Text>
       {show && (
         <HStack>
-          <Button style={styles.button} onPress={() => handleSubmit("yes")}>
-            Yes
-          </Button>
           <Button style={styles.button} onPress={() => handleSubmit("no")}>
             No
           </Button>
+          <Button style={styles.button} onPress={() => handleSubmit("yes")}>
+            Yes
+          </Button>
+        </HStack>
+      )}
+      {!show && (
+        <HStack flex={1} px={5} space={10}>
+          <Text>{!pollData.noVotes ? 0 : pollData.noVotes} No</Text>
+          <Text>{!pollData.yesVotes ? 0 : pollData.yesVotes} Yes</Text>
         </HStack>
       )}
     </Container>
