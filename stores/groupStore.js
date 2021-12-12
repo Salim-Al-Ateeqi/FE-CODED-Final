@@ -27,7 +27,9 @@ class GroupStore {
         formData.append(key, group[key]);
       }
       const res = await instance.post("/groups", formData);
-      this.groups.push(res.data);
+      runInAction(() => {
+        this.groups.push(res.data);
+      });
       socket.emit("new-group", res.data);
       toast.show({
         title: "Group Created",
@@ -127,7 +129,9 @@ class GroupStore {
     try {
       const group = this.groups.find((group) => group._id === groupId);
       const res = await instance.post(`/groups/${groupId}/chats`, newMessage);
-      group.chat.push(res.data);
+      runInAction(() => {
+        group.chat.push(res.data);
+      });
       const payload = {
         _id: groupId,
         response: res.data,
@@ -142,8 +146,10 @@ class GroupStore {
     try {
       const group = this.groups.find((group) => group._id === groupId);
       const res = await instance.post(`/groups/${groupId}/polls`, pollData);
-      group.polls.push(res.data);
-      console.log("res.data in store:", res.data);
+      runInAction(() => {
+        group.polls.push(res.data);
+      });
+
       socket.emit("create-poll", res.data);
       toast.show({
         title: "Poll Created!",
@@ -182,28 +188,36 @@ class GroupStore {
       (message) => message._id === payload.response._id
     );
     if (!chatexists) {
-      group.chat.push(payload.response);
+      runInAction(() => {
+        group.chat.push(payload.response);
+      });
     }
   };
 
   receiveGroup = (payload) => {
     const group = this.groups.find((group) => group._id === payload._id);
     if (!group) {
-      this.groups.push(payload);
+      runInAction(() => {
+        this.groups.push(payload);
+      });
     }
   };
 
   receiveUpdatedGroupMembers = (payload) => {
     const group = this.groups.find((group) => group._id === payload._id);
     const newestMember = payload.members[group.members.length - 1];
-    group.members.push(newestMember);
+    runInAction(() => {
+      group.members.push(newestMember);
+    });
   };
 
   recievePoll = (data) => {
     const group = this.groups.find((group) => group._id === data.group);
     const pollexists = group.polls.find((poll) => poll._id === data._id);
     if (!pollexists) {
-      group.poll.push(data);
+      runInAction(() => {
+        group.polls.push(data);
+      });
     }
   };
 }
