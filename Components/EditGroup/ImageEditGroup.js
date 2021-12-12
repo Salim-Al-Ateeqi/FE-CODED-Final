@@ -10,12 +10,14 @@ import { Colors } from "../../assets/Theme/Colors";
 
 // stores
 import { baseURL } from "../../stores/baseURL";
+import profileStore from "../../stores/ProfileStore";
 
 const ImageEditGroup = ({
 	group,
 	updatedGroup,
 	imageChanged,
 	setImageChanged,
+	setUpdatedGroup,
 }) => {
 	useEffect(() => {
 		(async () => {
@@ -79,6 +81,7 @@ const ImageEditGroup = ({
 								/>
 							</Badge>
 							<Image
+								defaultSource={require("../../assets/Media/defaultUserImage.jpg")}
 								style={{ width: 120, height: 120, borderRadius: 100 }}
 								alt="Group Image"
 								source={{
@@ -104,6 +107,7 @@ const ImageEditGroup = ({
 								/>
 							</Badge>
 							<Image
+								defaultSource={require("../../assets/Media/defaultUserImage.jpg")}
 								style={{ width: 120, height: 120, borderRadius: 100 }}
 								alt="Group Image"
 								source={{
