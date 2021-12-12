@@ -23,6 +23,7 @@ import profileStore from "../../stores/ProfileStore";
 import groupStore from "../../stores/groupStore";
 import { socket } from "../../stores/instance";
 
+
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
 
@@ -83,16 +84,31 @@ const RootNavigator = () => {
               headerTitle: "Add Members",
             }}
           />
-          <Screen
-            name="EditGroup"
-            component={EditGroup}
-            options={({ route, navigation }) => {
-              const { group } = route.params;
-              return {
-                headerTitle: `${group.name} info`,
-              };
-            }}
-          />
+// Note : Merge Conflict! Confirm Updated version:
+//           <Screen
+//             name="EditGroup"
+//             component={EditGroup}
+//             options={({ route, navigation }) => {
+//               const { group } = route.params;
+//               return {
+//                 headerTitle: `${group.name} info`,
+//               };
+//             }}
+//           />
+					<Screen
+						name="EditGroup"
+						component={EditGroup}
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							const foundGroup = groupStore.groups.find(
+								(_group) => _group._id === group._id
+							);
+
+							return {
+								headerTitle: `Group info`,
+							};
+						}}
+					/>
           <Screen
             name="MoviePoll"
             component={MoviePoll}
@@ -101,21 +117,40 @@ const RootNavigator = () => {
               headerTitle: "Movie Poll",
             }}
           />
-          <Screen
-            name="GroupDetail"
-            component={GroupDetail}
-            options={({ route, navigation }) => {
-              const { group } = route.params;
-              return {
-                headerTitle: () => (
-                  <GroupLeftImage navigation={navigation} group={group} />
-                ),
-                headerRight: () => (
-                  <MenuIcon navigation={navigation} group={group} />
-                ),
-              };
-            }}
-          />
+// Note : Merge Conflict! Confirm Updated version:
+//           <Screen
+//             name="GroupDetail"
+//             component={GroupDetail}
+//             options={({ route, navigation }) => {
+//               const { group } = route.params;
+//               return {
+//                 headerTitle: () => (
+//                   <GroupLeftImage navigation={navigation} group={group} />
+//                 ),
+//                 headerRight: () => (
+//                   <MenuIcon navigation={navigation} group={group} />
+//                 ),
+//               };
+//             }}
+//           />
+					<Screen
+						name="GroupDetail"
+						component={GroupDetail}
+						options={({ route, navigation }) => {
+							const { group } = route.params;
+							const foundGroup = groupStore.groups.find(
+								(_group) => _group._id === group._id
+							);
+							return {
+								headerTitle: () => (
+									<GroupLeftImage navigation={navigation} group={foundGroup} />
+								),
+								headerRight: () => (
+									<MenuIcon navigation={navigation} group={foundGroup} />
+								),
+							};
+						}}
+					/>
           <Screen
             name="CreateGroup"
             component={CreateGroup}
