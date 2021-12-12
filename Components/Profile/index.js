@@ -7,10 +7,8 @@ import {
 	VStack,
 	FormControl,
 	ScrollView,
-	Pressable,
 	Button,
 	Box,
-	Badge,
 	useToast,
 } from "native-base";
 import { KeyboardAvoidingView } from "react-native";
@@ -27,7 +25,7 @@ import authStore from "../../stores/authStore";
 
 const Profile = () => {
 	const [imageChanged, setImageChanged] = useState(false);
-	const [updateProfile, setUpdateProfile] = useState({
+	const [updatedProfile, setUpdatedProfile] = useState({
 		name: "",
 		image: "",
 		status: "",
@@ -56,8 +54,7 @@ const Profile = () => {
 	);
 
 	const handleSubmit = () => {
-		profileStore.updateProfile(userProfile._id, updateProfile, toast);
-		setImageChanged(false);
+		profileStore.updateProfile(userProfile._id, updatedProfile, toast);
 	};
 
 	return (
@@ -65,9 +62,10 @@ const Profile = () => {
 			<ScrollView>
 				<ImageProfile
 					userProfile={userProfile}
-					updateProfile={updateProfile}
+					updatedProfile={updatedProfile}
 					imageChanged={imageChanged}
 					setImageChanged={setImageChanged}
+					setUpdatedProfile={setUpdatedProfile}
 				/>
 
 				<KeyboardAvoidingView keyboardVerticalOffset={5}>
@@ -97,7 +95,7 @@ const Profile = () => {
 										/>
 									}
 									onChangeText={(name) =>
-										setUpdateProfile({ ...userProfile.profile, name: name })
+										setUpdatedProfile({ ...userProfile.profile, name: name })
 									}
 								/>
 							</FormControl>
@@ -126,7 +124,7 @@ const Profile = () => {
 										/>
 									}
 									onChangeText={(status) =>
-										setUpdateProfile({ ...userProfile.profile, status })
+										setUpdatedProfile({ ...userProfile.profile, status })
 									}
 								/>
 							</FormControl>

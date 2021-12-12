@@ -10,8 +10,9 @@ import { baseURL } from "../../stores/baseURL";
 const ImageProfile = ({
 	userProfile,
 	imageChanged,
-	updateProfile,
 	setImageChanged,
+	updatedProfile,
+	setUpdatedProfile,
 }) => {
 	useEffect(() => {
 		(async () => {
@@ -43,7 +44,7 @@ const ImageProfile = ({
 					name: filename,
 					type: match ? `image/${match[1]}` : `image`,
 				};
-				setUpdateProfile({ ...userProfile.profile, image: image });
+				setUpdatedProfile({ ...userProfile.profile, image: image });
 				setImageChanged(true);
 			}
 		} catch (error) {
@@ -96,7 +97,7 @@ const ImageProfile = ({
 						</Badge>
 						<Image
 							style={{ width: 120, height: 120, borderRadius: 100 }}
-							source={{ uri: updateProfile.image.uri }}
+							source={{ uri: updatedProfile.image.uri }}
 						/>
 					</Box>
 				)}

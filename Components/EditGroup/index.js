@@ -41,7 +41,6 @@ const EditGroup = ({ route, navigation }) => {
 
 	const handleUpdate = async () => {
 		groupStore.updateGroup(group._id, updatedGroup, navigation, toast);
-		setImageChanged(false);
 	};
 
 	return (
@@ -52,6 +51,7 @@ const EditGroup = ({ route, navigation }) => {
 					updatedGroup={updatedGroup}
 					imageChanged={imageChanged}
 					setImageChanged={setImageChanged}
+					setUpdatedGroup={setUpdatedGroup}
 				/>
 
 				<VStack flex={1} space="5">
