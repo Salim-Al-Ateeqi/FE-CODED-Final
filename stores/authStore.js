@@ -34,6 +34,7 @@ class AuthStore {
 				status: "success",
 				title: `Account Created`,
 				placement: "top",
+				duration: 1500,
 			});
 		} catch (error) {
 			console.log("register error", error);
@@ -53,6 +54,7 @@ class AuthStore {
 					status: "success",
 					placement: "top",
 					title: `Welcome`,
+					duration: 1500,
 				});
 			}
 			// this.message = null;
@@ -108,6 +110,7 @@ class AuthStore {
 				title: "Logged out",
 				placement: "top",
 				description: "Hope to see you soon.",
+				duration: 1500,
 			});
 		} catch (error) {
 			console.log("logout error", error);
