@@ -35,8 +35,6 @@ const RootNavigator = () => {
   });
 
   socket.on("receive-new-member", (payload) => {
-    console.log("taking action from nav \n\n\n\n");
-    console.log(`${authStore.user._id} has recieved new update`);
     groupStore.receiveUpdatedGroupMembers(payload);
   });
 

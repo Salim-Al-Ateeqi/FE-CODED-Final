@@ -192,14 +192,9 @@ class GroupStore {
   };
 
   receiveUpdatedGroupMembers = (payload) => {
-    console.log("finding group in store");
     const group = this.groups.find((group) => group._id === payload._id);
-    console.log("found group");
     const newestMember = payload.members[group.members.length - 1];
-    console.log("found newest member: ", newestMember);
     group.members.push(newestMember);
-    console.log("new member added");
-    console.log(group);
   };
 }
 
