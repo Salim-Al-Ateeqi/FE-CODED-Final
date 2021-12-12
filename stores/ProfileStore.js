@@ -4,72 +4,72 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { instance } from "./instance";
 
 class ProfileStore {
-	constructor() {
-		makeAutoObservable(this);
-	}
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-	profiles = [];
-	isLoading = true;
+  profiles = [];
+  isLoading = true;
 
-	fetchProfiles = async () => {
-		try {
-			const res = await instance.get("/getprofiles");
+  fetchProfiles = async () => {
+    try {
+      const res = await instance.get("/profiles");
 
-			runInAction(() => {
-				this.profiles = res.data;
-				this.isLoading = false;
-			});
-		} catch (error) {
-			console.log("fetchProfile", error);
-		}
-	};
+      runInAction(() => {
+        this.profiles = res.data;
+        this.isLoading = false;
+      });
+    } catch (error) {
+      console.log("fetchProfile", error);
+    }
+  };
 
-	updateProfile = async (profileId, updateInfo, toast) => {
-		try {
-			const formData = new FormData();
-			for (const key in updateInfo) {
-				formData.append(key, updateInfo[key]);
-			}
-			const res = await instance.put("/updateprofile", formData);
+  updateProfile = async (profileId, updateInfo, toast) => {
+    try {
+      const formData = new FormData();
+      for (const key in updateInfo) {
+        formData.append(key, updateInfo[key]);
+      }
+      const res = await instance.put("/profiles", formData);
 
-			runInAction(() => {
-				this.profiles = this.profiles.map((_profile) =>
-					_profile._id === profileId ? res.data : _profile
-				);
-			});
+      runInAction(() => {
+        this.profiles = this.profiles.map((_profile) =>
+          _profile._id === profileId ? res.data : _profile
+        );
+      });
 
-			toast.show({
-				title: "Profile UpDated",
-				status: "success",
-				placement: "top",
-				duration: 1000,
-			});
-		} catch (error) {
-			console.log(error);
-			toast.show({
-				title: "Please Try Again.",
-				status: "error",
-				placement: "top",
-			});
-		}
-	};
+      toast.show({
+        title: "Profile UpDated",
+        status: "success",
+        placement: "top",
+        duration: 1000,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.show({
+        title: "Please Try Again.",
+        status: "error",
+        placement: "top",
+      });
+    }
+  };
 
-	pushNewUser = (userData) => {
-		this.profiles.push({
-			_id: this.user._id,
-			phoneNumber: userData.phoneNumber,
-			isValidated: false,
-			profile: {
-				name: "New User",
-				image: "/media/defaultUserImage.jpg",
-				groups: [],
-			},
-		});
-	};
+  pushNewUser = (userData) => {
+    this.profiles.push({
+      _id: this.user._id,
+      phoneNumber: userData.phoneNumber,
+      isValidated: false,
+      profile: {
+        name: "New User",
+        image: "/media/defaultUserImage.jpg",
+        groups: [],
+      },
+    });
+  };
 
-	addGroupToProfile = (member, group) => {
-		member.groups.push(group._id);
-	};
+  addGroupToProfile = (member, group) => {
+    member.groups.push(group._id);
+  };
 }
 
 const profileStore = new ProfileStore();

@@ -14,7 +14,7 @@
 
 //   fetchUsers = async () => {
 //     try {
-//       const res = await instance.get("/getprofiles");
+//       const res = await instance.get("/profiles");
 //       this.users = res.data;
 //       this.isLoading = false;
 //     } catch (error) {
