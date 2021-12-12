@@ -26,9 +26,6 @@ import authStore from "../../../stores/authStore";
 import profileStore from "../../../stores/ProfileStore";
 
 const Signup = ({ navigation }) => {
-	const toast = useToast();
-	const [number, setNumber] = useState("");
-
 	const [user, setUser] = useState({
 		phoneNumber: "",
 		password: "",
@@ -36,6 +33,7 @@ const Signup = ({ navigation }) => {
 	});
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [equalPassword, setEqualPassword] = useState(false);
+	const toast = useToast();
 
 	// To handle the IntlPhoneInput library we need to pass this function
 	const handleNumber = ({
@@ -172,7 +170,7 @@ const Signup = ({ navigation }) => {
 										color: "warmGray.200",
 									}}
 								>
-									I already have an account.{" "}
+									I already have an account.
 								</Text>
 								<Link
 									_text={{

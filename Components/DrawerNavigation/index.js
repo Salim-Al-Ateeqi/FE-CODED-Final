@@ -9,6 +9,8 @@ import CustomDrawerContent from "./CustomDrawerContent";
 // screens
 import Home from "../Home/index";
 import Profile from "../Profile";
+import AboutUs from "../AboutUs";
+import HelpAndFeedback from "../HelpAndFeedback";
 
 const Drawer = createDrawerNavigator();
 
@@ -20,7 +22,9 @@ const Tabs = () => {
 				drawerContent={(props) => <CustomDrawerContent {...props} />}
 			>
 				<Drawer.Screen name="Groups" component={Home} />
-				<Drawer.Screen name="Edit Profile" component={Profile} />
+				<Drawer.Screen name="Account" component={Profile} />
+				<Drawer.Screen name="About Us" component={AboutUs} />
+				<Drawer.Screen name="Feedback" component={HelpAndFeedback} />
 			</Drawer.Navigator>
 		</Box>
 	);

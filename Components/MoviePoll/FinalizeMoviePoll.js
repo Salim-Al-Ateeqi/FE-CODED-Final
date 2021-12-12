@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, Platform } from "react-native";
 import { observer } from "mobx-react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
