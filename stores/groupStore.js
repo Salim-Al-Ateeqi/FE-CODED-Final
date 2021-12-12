@@ -173,7 +173,12 @@ class GroupStore {
   receiveMessage = (payload) => {
     console.log("recieved message in store");
     const group = this.groups.find((group) => group._id === payload._id);
-    group.chat.push(payload.response);
+    const chatexists = group.chat.find(
+      (message) => message._id === payload.response._id
+    );
+    if (!chatexists) {
+      group.chat.push(payload.response);
+    }
   };
 }
 
