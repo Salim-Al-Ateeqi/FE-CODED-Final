@@ -28,6 +28,7 @@ class GroupStore {
       }
       const res = await instance.post("/groups", formData);
       this.groups.push(res.data);
+      socket.emit("new-group", res.data);
       toast.show({
         title: "Group Created",
         status: "success",
@@ -111,6 +112,7 @@ class GroupStore {
       runInAction(() => {
         group.members.push(res.data.members[res.data.members.length - 1]);
       });
+      socket.emit("adding-new-member", res.data);
       toast.show({
         title: "Member Added!",
         status: "success",
@@ -170,8 +172,9 @@ class GroupStore {
     }
   };
 
+  //Socket Function Below:
+
   receiveMessage = (payload) => {
-    console.log("recieved message in store");
     const group = this.groups.find((group) => group._id === payload._id);
     const chatexists = group.chat.find(
       (message) => message._id === payload.response._id
@@ -179,6 +182,24 @@ class GroupStore {
     if (!chatexists) {
       group.chat.push(payload.response);
     }
+  };
+
+  receiveGroup = (payload) => {
+    const group = this.groups.find((group) => group._id === payload._id);
+    if (!group) {
+      this.groups.push(payload);
+    }
+  };
+
+  receiveUpdatedGroupMembers = (payload) => {
+    console.log("finding group in store");
+    const group = this.groups.find((group) => group._id === payload._id);
+    console.log("found group");
+    const newestMember = payload.members[group.members.length - 1];
+    console.log("found newest member: ", newestMember);
+    group.members.push(newestMember);
+    console.log("new member added");
+    console.log(group);
   };
 }
 
