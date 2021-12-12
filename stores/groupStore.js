@@ -67,7 +67,7 @@ class GroupStore {
 				title: "Group UpDated!",
 				status: "success",
 				placement: "top",
-				duration: 1000,
+				duration: 1500,
 			});
 		} catch (error) {
 			console.log(error);
@@ -80,12 +80,26 @@ class GroupStore {
 		}
 	};
 
-	deleteGroup = async (groupId) => {
+	deleteGroup = async (groupId, toast) => {
 		try {
 			await instance.delete(`/groups/${groupId}`);
-			this.groups = this.groups.filter((group) => group._id !== groupId);
+			runInAction(() => {
+				this.groups = this.groups.filter((group) => group._id !== groupId);
+			});
+			toast.show({
+				title: "Group Deleted.",
+				status: "success",
+				placement: "top",
+				duration: 1500,
+			});
 		} catch (error) {
 			console.log(error);
+			toast.show({
+				title: "Something Went Wrong!",
+				description: "You Broke Something",
+				status: "error",
+				placement: "top",
+			});
 		}
 	};
 
@@ -134,6 +148,7 @@ class GroupStore {
 				title: "Poll Created!",
 				status: "success",
 				placement: "top",
+				duration: 1500,
 			});
 			navigation.navigate("GroupDetail", { group: group });
 		} catch (error) {

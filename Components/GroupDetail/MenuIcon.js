@@ -48,7 +48,7 @@ const MenuIcon = ({ navigation, group }) => {
 					{authStore.user._id === group.owner ? (
 						<Menu.Item onPress={handleDelete}>Delete Group</Menu.Item>
 					) : (
-						<Menu.Item onPress={handleLeave}>Leave Group</Menu.Item>
+						<Menu.Item onPress={handleLeave}>Exit Group</Menu.Item>
 					)}
 				</Box>
 			</Menu>

@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { Actionsheet, Icon, Box, Text, Divider } from "native-base";
+import { Actionsheet, Icon, Box, Text, Divider, useToast } from "native-base";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Path } from "react-native-svg";
+
+// components
+import AlertOnDelete from "../AlertOnDelete";
 
 // stores
 import groupStore from "../../stores/groupStore";
 import authStore from "../../stores/authStore";
 
 const GroupMenuIcon = ({ group, navigation, isOpen, onOpen, onClose }) => {
+	const [openAlert, setOpenAlert] = useState(false);
+	const toast = useToast();
+	const showAlert = () => setOpenAlert(true);
+
 	const handleDelete = () => {
-		groupStore.deleteGroup(group._id);
+		groupStore.deleteGroup(group._id, toast);
+		setOpenAlert(false);
 		onClose();
 	};
 
 	const handleLeave = () => {
 		console.log("Left Group");
+		setOpenAlert(false);
 		onClose();
 	};
 
@@ -62,7 +71,7 @@ const GroupMenuIcon = ({ group, navigation, isOpen, onOpen, onClose }) => {
 
 					{authStore.user._id === group.owner ? (
 						<Actionsheet.Item
-							onPress={handleDelete}
+							onPress={showAlert}
 							startIcon={
 								<Icon
 									as={MaterialIcons}
@@ -77,18 +86,18 @@ const GroupMenuIcon = ({ group, navigation, isOpen, onOpen, onClose }) => {
 						</Actionsheet.Item>
 					) : (
 						<Actionsheet.Item
-							onPress={handleLeave}
+							onPress={showAlert}
 							startIcon={
 								<Icon
-									as={<MaterialIcons name="logout" />}
+									as={<MaterialIcons />}
 									color="trueGray.400"
 									mr="1"
 									size="6"
-									name="delete"
+									name="logout"
 								/>
 							}
 						>
-							Leave Group
+							Exit Group
 						</Actionsheet.Item>
 					)}
 
@@ -114,6 +123,15 @@ const GroupMenuIcon = ({ group, navigation, isOpen, onOpen, onClose }) => {
 					</Actionsheet.Item>
 				</Actionsheet.Content>
 			</Actionsheet>
+			<AlertOnDelete
+				group={group}
+				handleDelete={handleDelete}
+				handleLeave={handleLeave}
+				openAlert={openAlert}
+				setOpenAlert={setOpenAlert}
+				onClose={onClose}
+				navigation={navigation}
+			/>
 		</>
 	);
 };

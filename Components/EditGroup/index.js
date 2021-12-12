@@ -9,6 +9,7 @@ import {
 	Divider,
 	useToast,
 	HStack,
+	Spacer,
 } from "native-base";
 
 // components
@@ -17,6 +18,7 @@ import MemberItem from "./MemberItem";
 import ImageEditGroup from "./ImageEditGroup";
 import InputEditGroup from "./InputEditGroup";
 import AddMembersButton from "./AddMembersButton";
+import DeleteGroupButton from "./DeleteGroupButton";
 
 // stores
 import profileStore from "../../stores/ProfileStore";
@@ -86,6 +88,10 @@ const EditGroup = ({ route, navigation }) => {
 						<Divider />
 						{groupMembers}
 					</VStack>
+					<Box flex={1} justifyContent={"flex-end"}>
+						<DeleteGroupButton group={group} navigation={navigation} />
+						<Divider mb={2} />
+					</Box>
 				</VStack>
 			</ScrollView>
 		</Box>
