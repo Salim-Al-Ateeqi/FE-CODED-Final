@@ -135,14 +135,15 @@ const Profile = () => {
 				</KeyboardAvoidingView>
 
 				<Button
-					onPress={handleSubmit}
-					m="5"
-					alignSelf="center"
 					w="25%"
+					mr={3}
+					mt={3}
+					alignSelf={"flex-end"}
 					style={{ backgroundColor: Colors.primary }}
 					_text={{
-						color: "#fff",
+						color: Colors.lightBg,
 					}}
+					onPress={handleSubmit}
 				>
 					Save
 				</Button>

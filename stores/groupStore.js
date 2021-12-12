@@ -32,7 +32,9 @@ class GroupStore {
 				title: "Group Created",
 				status: "success",
 				placement: "top",
+				duration: 1500,
 			});
+
 			navigation.goBack();
 		} catch (error) {
 			console.log(error);

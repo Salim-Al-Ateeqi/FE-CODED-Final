@@ -9,14 +9,16 @@ import {
 	Icon,
 	Box,
 	Divider,
+	useDisclose,
 } from "native-base";
-import { KeyboardAvoidingView } from "react-native";
+import { KeyboardAvoidingView, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 // components
 import { Colors } from "../../assets/Theme/Colors";
 import ChatItem from "./ChatItem";
 import PollItem from "./PollItem";
+import StaggerButton from "./StaggerButton";
 
 // stores
 import groupStore from "../../stores/groupStore";
@@ -27,6 +29,7 @@ import { Platform } from "react-native";
 const GroupDetail = ({ route, navigation }) => {
 	const [newMessage, setNewMessage] = useState("");
 	const { group } = route.params;
+	const { isOpen, onToggle, onClose } = useDisclose();
 
 	if (groupStore.isLoading) {
 		return <Spinner />;
@@ -70,6 +73,14 @@ const GroupDetail = ({ route, navigation }) => {
 
 			<Divider mb="2" />
 
+			<StaggerButton
+				navigation={navigation}
+				group={group}
+				onToggle={onToggle}
+				isOpen={isOpen}
+				onClose={onClose}
+			/>
+
 			<KeyboardAvoidingView>
 				<VStack alignItems="center" mb="5">
 					<HStack alignItems="center">
@@ -89,12 +100,15 @@ const GroupDetail = ({ route, navigation }) => {
 							onChangeText={(newMessage) => setNewMessage(newMessage)}
 							borderWidth="0"
 							InputLeftElement={
-								<Icon
-									size="sm"
-									ml="3"
-									color={Colors.primary}
-									as={<AntDesign name="pluscircle" />}
-								/>
+								<TouchableOpacity>
+									<Icon
+										onPress={onToggle}
+										size="sm"
+										ml="3"
+										color={Colors.primary}
+										as={<AntDesign name="pluscircle" />}
+									/>
+								</TouchableOpacity>
 							}
 						/>
 						<MaterialCommunityIcons

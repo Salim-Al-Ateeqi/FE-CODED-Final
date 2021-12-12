@@ -56,6 +56,7 @@ const EditGroup = ({ route, navigation }) => {
 					<InputEditGroup
 						group={group}
 						updatedGroup={updatedGroup}
+						setUpdatedGroup={setUpdatedGroup}
 						focusOnInput={focusOnInput}
 						handleUpdate={handleUpdate}
 					/>
@@ -64,11 +65,11 @@ const EditGroup = ({ route, navigation }) => {
 						alignSelf={"flex-end"}
 						w="25%"
 						mr={3}
-						onPress={handleUpdate}
 						style={{ backgroundColor: Colors.primary }}
 						_text={{
-							color: "#fff",
+							color: Colors.lightBg,
 						}}
+						onPress={handleUpdate}
 					>
 						Save
 					</Button>

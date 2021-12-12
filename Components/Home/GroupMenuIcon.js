@@ -1,15 +1,21 @@
 import React from "react";
-import { Actionsheet, useDisclose, Icon, Box, Text } from "native-base";
+import { observer } from "mobx-react";
+import { Actionsheet, Icon, Box, Text, Divider } from "native-base";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Path } from "react-native-svg";
 
 // stores
 import groupStore from "../../stores/groupStore";
+import authStore from "../../stores/authStore";
 
-const GroupMenuIcon = ({ group, navigation }) => {
-	const { isOpen, onOpen, onClose } = useDisclose();
+const GroupMenuIcon = ({ group, navigation, isOpen, onOpen, onClose }) => {
 	const handleDelete = () => {
 		groupStore.deleteGroup(group._id);
+		onClose();
+	};
+
+	const handleLeave = () => {
+		console.log("Left Group");
 		onClose();
 	};
 
@@ -54,20 +60,39 @@ const GroupMenuIcon = ({ group, navigation }) => {
 						Group Info
 					</Actionsheet.Item>
 
-					<Actionsheet.Item
-						onPress={handleDelete}
-						startIcon={
-							<Icon
-								as={MaterialIcons}
-								color="trueGray.400"
-								mr="1"
-								size="6"
-								name="delete"
-							/>
-						}
-					>
-						Leave Group
-					</Actionsheet.Item>
+					{authStore.user._id === group.owner ? (
+						<Actionsheet.Item
+							onPress={handleDelete}
+							startIcon={
+								<Icon
+									as={MaterialIcons}
+									color="trueGray.400"
+									mr="1"
+									size="6"
+									name="delete"
+								/>
+							}
+						>
+							Delete Group
+						</Actionsheet.Item>
+					) : (
+						<Actionsheet.Item
+							onPress={handleLeave}
+							startIcon={
+								<Icon
+									as={MaterialIcons}
+									color="trueGray.400"
+									mr="1"
+									size="6"
+									name="delete"
+								/>
+							}
+						>
+							Leave Group
+						</Actionsheet.Item>
+					)}
+
+					<Divider mt={2} />
 
 					<Actionsheet.Item
 						p={3}
@@ -93,4 +118,4 @@ const GroupMenuIcon = ({ group, navigation }) => {
 	);
 };
 
-export default GroupMenuIcon;
+export default observer(GroupMenuIcon);

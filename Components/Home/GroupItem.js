@@ -5,10 +5,10 @@ import {
 	Text,
 	HStack,
 	Pressable,
-	Avatar,
 	VStack,
 	Spacer,
 	Divider,
+	useDisclose,
 } from "native-base";
 import { Image } from "react-native";
 import moment from "moment";
@@ -20,12 +20,14 @@ import GroupMenuIcon from "./GroupMenuIcon";
 import { baseURL } from "../../stores/baseURL";
 
 const GroupItem = ({ group, navigation }) => {
+	const { isOpen, onOpen, onClose } = useDisclose();
 	const updateTime = moment(group.updatedAt).format("LT");
 
 	return (
 		<Box>
 			<Pressable
 				onPress={() => navigation.navigate("GroupDetail", { group })}
+				onLongPress={onOpen}
 				bg="white"
 			>
 				<Box pl="4" pr="5" py="2">
@@ -46,7 +48,13 @@ const GroupItem = ({ group, navigation }) => {
 
 						<Text>{updateTime}</Text>
 
-						<GroupMenuIcon group={group} navigation={navigation} />
+						<GroupMenuIcon
+							group={group}
+							navigation={navigation}
+							isOpen={isOpen}
+							onOpen={onOpen}
+							onClose={onClose}
+						/>
 					</HStack>
 				</Box>
 				<Divider />

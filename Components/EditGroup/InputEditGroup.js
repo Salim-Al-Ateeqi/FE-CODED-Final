@@ -9,6 +9,7 @@ import { Colors } from "../../assets/Theme/Colors";
 const InputEditGroup = ({
 	group,
 	updatedGroup,
+	setUpdatedGroup,
 	focusOnInput,
 	handleUpdate,
 }) => {
@@ -18,7 +19,7 @@ const InputEditGroup = ({
 			<HStack justifyContent="space-evenly">
 				<Input
 					returnKeyType="send"
-					onSubmitEditing={handleUpdate}
+					// onSubmitEditing={handleUpdate}
 					autoFocus={focusOnInput}
 					w="100%"
 					_focus={{ borderColor: Colors.primary }}

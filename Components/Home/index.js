@@ -21,6 +21,7 @@ import { socket } from "../../stores/instance";
 
 const Home = ({ navigation }) => {
 	const [query, setQuery] = useState("");
+
 	if (groupStore.isLoading) {
 		return <Spinner />;
 	}
@@ -34,7 +35,7 @@ const Home = ({ navigation }) => {
 		.filter((_group) => _group.name.toLowerCase().includes(query.toLowerCase()))
 		.filter((__group) => __group.members.includes(user._id))
 		.map((group) => (
-			<GroupItem navigation={navigation} group={group} key={group._id} />
+			<GroupItem key={group._id} navigation={navigation} group={group} />
 		));
 
 	const handlePress = () => {
