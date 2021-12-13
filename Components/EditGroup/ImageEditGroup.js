@@ -49,8 +49,13 @@ const ImageEditGroup = ({
 					name: filename,
 					type: match ? `image/${match[1]}` : image,
 				};
-				setUpdatedGroup({ ...group.image, image: image });
-				setImageChanged(true);
+				if (updatedGroup.name === "") {
+					setUpdatedGroup({ ...updatedGroup, name: group.name, image: image });
+					setImageChanged(true);
+				} else {
+					setUpdatedGroup({ ...updatedGroup, image: image });
+					setImageChanged(true);
+				}
 			}
 		} catch (error) {
 			console.log(error);
