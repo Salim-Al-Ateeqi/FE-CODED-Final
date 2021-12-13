@@ -67,7 +67,7 @@ class GroupStore {
       });
 
       toast.show({
-        title: "Group UpDated!",
+        title: "Group Updated!",
         status: "success",
         placement: "top",
         duration: 1500,
