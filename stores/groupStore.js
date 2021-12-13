@@ -171,10 +171,11 @@ class GroupStore {
 
   submitVote = async (groupId, pollId, userVote) => {
     try {
-      const group = this.groups.find((group) => group._id === groupId);
-      const poll = group.polls.find((poll) => poll._id === pollId);
+      let group = this.groups.find((group) => group._id === groupId);
+      let poll = group.polls.find((poll) => poll._id === pollId);
       const res = await instance.put(`/polls/${pollId}/submitvote`, userVote);
-      poll = res.data;
+      socket.emit("submit-poll-vote", res.data);
+      poll.votes.push(res.data.votes[res.data.votes.length - 1]);
     } catch (error) {
       console.log(error);
     }
@@ -218,6 +219,17 @@ class GroupStore {
       runInAction(() => {
         group.polls.push(data);
       });
+    }
+  };
+
+  revievePollVote = (data) => {
+    const group = this.groups.find((group) => group._id === data.group);
+    const poll = group.polls.find((poll) => data._id === poll._id);
+    const voteExists = poll.votes.find((vote) => vote._id === data.votes._id);
+    console.log("data being recieved", data);
+    if (!voteExists) {
+      poll.votes.push(data.votes[data.votes.length - 1]);
+      console.log("its being pushed here:", group.polls.votes);
     }
   };
 }

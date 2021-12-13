@@ -23,7 +23,6 @@ import StaggerButton from "./StaggerButton";
 // stores
 import groupStore from "../../stores/groupStore";
 import authStore from "../../stores/authStore";
-import { socket } from "../../stores/instance";
 import { Platform } from "react-native";
 
 const GroupDetail = ({ route, navigation }) => {

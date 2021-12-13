@@ -1,8 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { createStackNavigator } from "@react-navigation/stack";
+import io from "socket.io-client";
 
-// components
+// Components
 import Signup from "../Authentication/Signup";
 import Signin from "../Authentication/Signin";
 import Tabs from "../DrawerNavigation/";
@@ -17,7 +18,7 @@ import MenuIcon from "../GroupDetail/MenuIcon";
 import GroupLeftImage from "../GroupDetail/GroupLeftImage";
 import CreateGroup from "../CreateGroup";
 
-// stores
+// Stores
 import authStore from "../../stores/authStore";
 import profileStore from "../../stores/ProfileStore";
 import groupStore from "../../stores/groupStore";
@@ -26,21 +27,30 @@ import { socket } from "../../stores/instance";
 const RootNavigator = () => {
   const { Navigator, Screen } = createStackNavigator();
 
+  // SOCKETS
+  // Recieve new message: new messages are displayed too all memebers in a group
   socket.on("new-message", (payload) => {
     groupStore.receiveMessage(payload);
   });
 
+  // Recieve group
   socket.on("group-list-update", (payload) => {
     groupStore.receiveGroup(payload);
   });
 
+  // Recieve new members: when you add a member, that group is displayed
   socket.on("receive-new-member", (payload) => {
     groupStore.receiveUpdatedGroupMembers(payload);
   });
 
+  // Recieve new poll: when poll is created all members in a group can see it
   socket.on("recieve-poll", (data) => {
     groupStore.recievePoll(data);
-    console.log("data in nav:", data);
+  });
+
+  // Recieve new poll vote: members of a group chat will see the votes on a poll
+  socket.on("recieve-poll-vote", (data) => {
+    groupStore.revievePollVote(data);
   });
 
   return (
