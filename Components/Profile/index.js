@@ -45,8 +45,6 @@ const Profile = () => {
 		profileStore.updateProfile(userProfile._id, updatedProfile, toast);
 	};
 
-	console.log("updatedProfile", updatedProfile);
-	console.log(imageChanged);
 	return (
 		<Box flex="1" w="100%" bg="#f5f5f5">
 			<ScrollView>

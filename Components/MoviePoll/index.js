@@ -48,6 +48,9 @@ const index = ({ navigation, route }) => {
 							<FormControl>
 								<FormControl.Label>Search By Title</FormControl.Label>
 								<Input
+									returnKeyType="search"
+									onSubmitEditing={handleSubmit}
+									bg={"#fff"}
 									placeholder="Enter title"
 									value={query}
 									_focus={{
