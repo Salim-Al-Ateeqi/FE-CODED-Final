@@ -10,7 +10,7 @@ import {
 	Divider,
 	useDisclose,
 } from "native-base";
-import { Image } from "react-native";
+import { Image, TouchableHighlight } from "react-native";
 import moment from "moment";
 
 // components
@@ -25,10 +25,11 @@ const GroupItem = ({ group, navigation }) => {
 
 	return (
 		<Box>
-			<Pressable
-				onPress={() => navigation.navigate("GroupDetail", { group })}
+			<TouchableHighlight
+				underlayColor="#DDDDDD"
+				activeOpacity={0.9}
 				onLongPress={onOpen}
-				bg="white"
+				onPress={() => navigation.navigate("GroupDetail", { group })}
 			>
 				<Box pl="4" pr="5" py="2">
 					<HStack alignItems="center" space={3}>
@@ -57,8 +58,8 @@ const GroupItem = ({ group, navigation }) => {
 						/>
 					</HStack>
 				</Box>
-				<Divider />
-			</Pressable>
+			</TouchableHighlight>
+			<Divider />
 		</Box>
 	);
 };
