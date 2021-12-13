@@ -21,6 +21,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 // components
 import { Colors } from "../../../assets/Theme/Colors";
+import SpinnerPage from "../../SpinnerPage";
 
 // stores
 import authStore from "../../../stores/authStore";
@@ -35,6 +36,8 @@ const Signup = ({ navigation }) => {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [equalPassword, setEqualPassword] = useState(false);
 	const toast = useToast();
+
+	if (authStore.isLoading) return <SpinnerPage />;
 
 	// To handle the IntlPhoneInput library we need to pass this function
 	const handleNumber = ({

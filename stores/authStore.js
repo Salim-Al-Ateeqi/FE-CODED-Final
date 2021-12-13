@@ -10,7 +10,7 @@ class AuthStore {
 
 	user = null;
 	message = null;
-	isLoading = true;
+	isLoading = false;
 
 	setUser = async (token) => {
 		try {
@@ -106,6 +106,7 @@ class AuthStore {
 				this.message = null;
 			});
 			navigation.navigate("Signup");
+			this.isLoading = false;
 			toast.show({
 				status: "success",
 				title: "Logged out",
@@ -129,10 +130,10 @@ class AuthStore {
 				const userExp = user.exp * 1000;
 				if (userExp > Date.now()) {
 					this.setUser(token);
-					this.isLoading(false);
+					this.isLoading = true;
 				} else {
 					this.logout();
-					this.isLoading(false);
+					this.isLoading = false;
 				}
 			}
 		} catch (error) {
