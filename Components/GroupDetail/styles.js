@@ -3,7 +3,7 @@ import { Colors } from "../../assets/Theme/Colors";
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: Colors.darkBg,
+    backgroundColor: Colors.primary,
     opacity: 50,
     marginLeft: "auto",
     marginRight: "auto",
@@ -26,26 +26,36 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: "auto",
     marginRight: "auto",
+    color: Colors.lightBg,
   },
   by: {
     textAlign: "center",
     marginTop: 10,
     marginLeft: "auto",
     marginRight: "auto",
+    color: Colors.lightBg,
   },
   button: {
     marginTop: 10,
-    marginLeft: 10,
-    marginRight: "auto",
     width: 70,
-    padding: 10,
-    backgroundColor: Colors.primary,
+    marginHorizontal: 5,
+    backgroundColor: Colors.secondary,
   },
   pollButton: {
     backgroundColor: Colors.secondary,
     borderRadius: 50,
     marginBottom: 15,
   },
+  voteCount: {
+    marginTop: 10,
+    borderRadius: 50,
+    height: 25,
+    width: 50,
+    marginHorizontal: 5,
+
+    backgroundColor: Colors.yellow,
+  },
+  center: { marginLeft: "auto", marginRight: "auto" },
 });
 
 export default styles;

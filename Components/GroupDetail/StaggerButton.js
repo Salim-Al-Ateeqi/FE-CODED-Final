@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, IconButton, Stagger, Icon } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Colors } from "../../assets/Theme/Colors";
 import styles from "./styles";
 
 const StaggerButton = ({ navigation, group, onToggle, isOpen, onClose }) => {
