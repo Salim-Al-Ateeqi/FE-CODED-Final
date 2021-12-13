@@ -53,6 +53,11 @@ const RootNavigator = () => {
     groupStore.revievePollVote(data);
   });
 
+  // Recieve updated profile: User can
+  socket.on("recieve-updated-profile", (data) => {
+    profileStore.recieveUpdatedProfile(data);
+  });
+
   return (
     <Navigator>
       {!authStore.user || !authStore.user.isValidated ? (

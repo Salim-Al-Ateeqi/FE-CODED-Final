@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 // stores
-import { instance } from "./instance";
+import { instance, socket } from "./instance";
 
 class ProfileStore {
   constructor() {
@@ -37,7 +37,7 @@ class ProfileStore {
           _profile._id === profileId ? res.data : _profile
         );
       });
-
+      socket.emit("update-profile", res.data);
       toast.show({
         title: "Profile UpDated",
         status: "success",
@@ -78,6 +78,12 @@ class ProfileStore {
 
   addGroupToProfile = (member, group) => {
     member.groups.push(group._id);
+  };
+
+  recieveUpdatedProfile = (data) => {
+    const profile = this.profiles.find((profile) => profile._id === data._id);
+    for (const key in profile) profile[key] = data[key];
+    console.log("profile in profile store", profile);
   };
 }
 

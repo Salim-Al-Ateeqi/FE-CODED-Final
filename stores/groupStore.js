@@ -226,10 +226,8 @@ class GroupStore {
     const group = this.groups.find((group) => group._id === data.group);
     const poll = group.polls.find((poll) => data._id === poll._id);
     const voteExists = poll.votes.find((vote) => vote._id === data.votes._id);
-    console.log("data being recieved", data);
     if (!voteExists) {
       poll.votes.push(data.votes[data.votes.length - 1]);
-      console.log("its being pushed here:", group.polls.votes);
     }
   };
 }
