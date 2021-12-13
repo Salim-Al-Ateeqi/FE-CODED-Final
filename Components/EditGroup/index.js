@@ -9,7 +9,6 @@ import {
 	Divider,
 	useToast,
 	HStack,
-	Spacer,
 } from "native-base";
 
 // components
@@ -31,17 +30,19 @@ const EditGroup = ({ route, navigation }) => {
 		name: "",
 		image: "",
 	});
+	const toast = useToast();
 
 	const { group } = route.params;
-	const toast = useToast();
 
 	const groupMembers = profileStore.profiles
 		.filter((profile) => group.members.includes(profile._id))
 		.map((member) => <MemberItem key={member._id} member={member} />);
 
-	const handleUpdate = async () => {
+	const handleUpdate = () => {
 		groupStore.updateGroup(group._id, updatedGroup, navigation, toast);
 	};
+
+	console.log(updatedGroup);
 
 	return (
 		<Box flex="1" w="100%" bg="#fff">
@@ -49,9 +50,9 @@ const EditGroup = ({ route, navigation }) => {
 				<ImageEditGroup
 					group={group}
 					updatedGroup={updatedGroup}
+					setUpdatedGroup={setUpdatedGroup}
 					imageChanged={imageChanged}
 					setImageChanged={setImageChanged}
-					setUpdatedGroup={setUpdatedGroup}
 				/>
 
 				<VStack flex={1} space="5">
@@ -59,6 +60,7 @@ const EditGroup = ({ route, navigation }) => {
 						group={group}
 						updatedGroup={updatedGroup}
 						setUpdatedGroup={setUpdatedGroup}
+						imageChanged={imageChanged}
 						focusOnInput={focusOnInput}
 						handleUpdate={handleUpdate}
 					/>
