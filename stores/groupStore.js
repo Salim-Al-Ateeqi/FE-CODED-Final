@@ -65,7 +65,7 @@ class GroupStore {
           _group._id === groupId ? res.data : _group
         );
       });
-
+      socket.emit("edit-group", res.data);
       toast.show({
         title: "Group Updated!",
         status: "success",
@@ -89,6 +89,7 @@ class GroupStore {
       runInAction(() => {
         this.groups = this.groups.filter((group) => group._id !== groupId);
       });
+      socket.emit("delete-group", groupId);
       toast.show({
         title: "Group Deleted.",
         status: "success",
@@ -229,8 +230,24 @@ class GroupStore {
     const poll = group.polls.find((poll) => data._id === poll._id);
     const voteExists = poll.votes.find((vote) => vote._id === data.votes._id);
     if (!voteExists) {
-      for (const key in poll) poll[key] = data[key];
+      runInAction(() => {
+        for (const key in poll) poll[key] = data[key];
+      });
     }
+  };
+
+  recieveEditedGroup = (data) => {
+    const group = this.groups.find((group) => group._id === data._id);
+    runInAction(() => {
+      for (const key in group) group[key] = data[key];
+    });
+  };
+
+  recieveDeletedGroup = (data) => {
+    // const deletedGroup = this.groups.find((group) => group._id === data);
+    runInAction(() => {
+      this.groups = this.groups.filter((group) => group._id !== data);
+    });
   };
 }
 
