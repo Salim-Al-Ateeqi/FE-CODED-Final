@@ -100,6 +100,8 @@ const Signin = ({ navigation }) => {
 							<FormControl>
 								<FormControl.Label>Password</FormControl.Label>
 								<Input
+									onSubmitEditing={handleSubmit}
+									returnKeyType="go"
 									bg="#fff"
 									placeholder="Enter your password"
 									type="password"

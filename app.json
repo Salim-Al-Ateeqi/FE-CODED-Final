@@ -1,32 +1,30 @@
 {
-  "expo": {
-    "name": "FE-CODED-Final",
-    "slug": "FE-CODED-Final",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+	"expo": {
+		"name": "FE-CODED-Final",
+		"slug": "FE-CODED-Final",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/Media/PollLogo.png",
+		"splash": {
+			"image": "./assets/Media/PollLogo.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#F4F7F5"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/Media/PollLogo.png",
+				"backgroundColor": "#FFFFFF"
+			}
+		},
+		"web": {
+			"favicon": "./assets/Media/PollLogo.png"
+		}
+	}
 }

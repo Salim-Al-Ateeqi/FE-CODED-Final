@@ -10,6 +10,7 @@ class AuthStore {
 
 	user = null;
 	message = null;
+	isLoading = true;
 
 	setUser = async (token) => {
 		try {
@@ -128,8 +129,10 @@ class AuthStore {
 				const userExp = user.exp * 1000;
 				if (userExp > Date.now()) {
 					this.setUser(token);
+					this.isLoading(false);
 				} else {
 					this.logout();
+					this.isLoading(false);
 				}
 			}
 		} catch (error) {
