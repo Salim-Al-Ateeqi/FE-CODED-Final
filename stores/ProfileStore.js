@@ -76,14 +76,11 @@ class ProfileStore {
     }
   };
 
-  addGroupToProfile = (member, group) => {
-    member.groups.push(group._id);
-  };
-
   recieveUpdatedProfile = (data) => {
     const profile = this.profiles.find((profile) => profile._id === data._id);
-    for (const key in profile) profile[key] = data[key];
-    console.log("profile in profile store", profile);
+    runInAction(() => {
+      for (const key in profile) profile[key] = data[key];
+    });
   };
 }
 

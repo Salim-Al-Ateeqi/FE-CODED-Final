@@ -58,6 +58,16 @@ const RootNavigator = () => {
     profileStore.recieveUpdatedProfile(data);
   });
 
+  // Recieve updated group
+  socket.on("recieve-edited-group", (data) => {
+    groupStore.recieveEditedGroup(data);
+  });
+
+  // Recieve Deleted group
+  socket.on("recieve-deleted-group", (data) => {
+    groupStore.recieveDeletedGroup(data);
+  });
+
   return (
     <Navigator>
       {!authStore.user || !authStore.user.isValidated ? (
