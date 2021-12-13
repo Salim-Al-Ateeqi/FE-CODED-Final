@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: "auto",
     marginRight: "auto",
+    width: 150,
     color: Colors.lightBg,
   },
   by: {
