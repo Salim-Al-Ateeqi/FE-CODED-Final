@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
 import {
 	Box,
 	Heading,
@@ -12,9 +13,12 @@ import {
 } from "native-base";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ScrollView } from "react-native-gesture-handler";
-import authStore from "../../../stores/authStore";
-import { observer } from "mobx-react";
+
+// components
 import { Colors } from "../../../assets/Theme/Colors";
+
+// stores
+import authStore from "../../../stores/authStore";
 import profileStore from "../../../stores/ProfileStore";
 
 const ValidateTokens = ({ navigation }) => {
@@ -37,6 +41,7 @@ const ValidateTokens = ({ navigation }) => {
 	const handleSubmit = () => {
 		checkMatchingToken();
 		authStore.validateToken(userInput, toast, navigation);
+		profileStore.fetchProfiles();
 	};
 
 	return (
