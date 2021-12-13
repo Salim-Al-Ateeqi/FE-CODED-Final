@@ -45,15 +45,17 @@ const Profile = () => {
 		profileStore.updateProfile(userProfile._id, updatedProfile, toast);
 	};
 
+	console.log("updatedProfile", updatedProfile);
+	console.log(imageChanged);
 	return (
 		<Box flex="1" w="100%" bg="#f5f5f5">
 			<ScrollView>
 				<ImageProfile
 					userProfile={userProfile}
 					updatedProfile={updatedProfile}
+					setUpdatedProfile={setUpdatedProfile}
 					imageChanged={imageChanged}
 					setImageChanged={setImageChanged}
-					setUpdatedProfile={setUpdatedProfile}
 				/>
 
 				<KeyboardAvoidingView keyboardVerticalOffset={5}>
@@ -83,7 +85,9 @@ const Profile = () => {
 										/>
 									}
 									onChangeText={(name) =>
-										setUpdatedProfile({ ...userProfile.profile, name: name })
+										imageChanged
+											? setUpdatedProfile({ ...updatedProfile, name })
+											: setUpdatedProfile({ ...userProfile.profile, name })
 									}
 								/>
 							</FormControl>
@@ -112,7 +116,9 @@ const Profile = () => {
 										/>
 									}
 									onChangeText={(status) =>
-										setUpdatedProfile({ ...userProfile.profile, status })
+										imageChanged
+											? setUpdatedProfile({ ...updatedProfile, status })
+											: setUpdatedProfile({ ...userProfile.profile, status })
 									}
 								/>
 							</FormControl>
