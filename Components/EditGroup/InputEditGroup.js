@@ -10,6 +10,7 @@ const InputEditGroup = ({
 	group,
 	updatedGroup,
 	setUpdatedGroup,
+	imageChanged,
 	focusOnInput,
 	handleUpdate,
 }) => {
@@ -43,7 +44,11 @@ const InputEditGroup = ({
 							onPress={() => console.log("pressed")}
 						/>
 					}
-					onChangeText={(name) => setUpdatedGroup({ ...group.name, name })}
+					onChangeText={(name) =>
+						imageChanged
+							? setUpdatedGroup({ ...updatedGroup, name })
+							: setUpdatedGroup({ ...group.name, name })
+					}
 				/>
 			</HStack>
 		</FormControl>

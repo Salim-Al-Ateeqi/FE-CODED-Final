@@ -52,12 +52,16 @@ const PollItem = ({ pollData, group }) => {
           </Button>
         </HStack>
       )}
-      {/* {!show && (
-        <HStack flex={1} px={5} space={10}>
-          <Text>{!pollData.noVotes ? 0 : pollData.noVotes} No</Text>
-          <Text>{!pollData.yesVotes ? 0 : pollData.yesVotes} Yes</Text>
+      {!show && (
+        <HStack flex={1} px={2} space={10}>
+          <Center borderRadius={50} bg={"#DA4644"} w={50} h={25}>
+            <Text>{!pollData.noVotes ? 0 : pollData.noVotes} No</Text>
+          </Center>
+          <Center borderRadius={50} bg={"#8A9B68"} w={50} h={25}>
+            <Text>{!pollData.yesVotes ? 0 : pollData.yesVotes} Yes</Text>
+          </Center>
         </HStack>
-      )} */}
+      )}
     </Container>
   );
 };

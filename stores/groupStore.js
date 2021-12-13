@@ -38,7 +38,7 @@ class GroupStore {
         duration: 1500,
       });
 
-      navigation.goBack();
+      navigation.navigate("Tabs");
     } catch (error) {
       console.log(error);
       toast.show({
@@ -67,7 +67,7 @@ class GroupStore {
       });
 
       toast.show({
-        title: "Group UpDated!",
+        title: "Group Updated!",
         status: "success",
         placement: "top",
         duration: 1500,
@@ -174,8 +174,10 @@ class GroupStore {
       let group = this.groups.find((group) => group._id === groupId);
       let poll = group.polls.find((poll) => poll._id === pollId);
       const res = await instance.put(`/polls/${pollId}/submitvote`, userVote);
-      socket.emit("submit-poll-vote", res.data);
       poll.votes.push(res.data.votes[res.data.votes.length - 1]);
+      poll.noVotes = res.data.noVotes;
+      poll.yesVotes = res.data.yesVotes;
+      socket.emit("submit-poll-vote", res.data);
     } catch (error) {
       console.log(error);
     }
@@ -222,12 +224,12 @@ class GroupStore {
     }
   };
 
-  revievePollVote = (data) => {
+  receivePollVote = (data) => {
     const group = this.groups.find((group) => group._id === data.group);
     const poll = group.polls.find((poll) => data._id === poll._id);
     const voteExists = poll.votes.find((vote) => vote._id === data.votes._id);
     if (!voteExists) {
-      poll.votes.push(data.votes[data.votes.length - 1]);
+      for (const key in poll) poll[key] = data[key];
     }
   };
 }

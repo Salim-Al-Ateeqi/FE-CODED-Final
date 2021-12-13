@@ -39,7 +39,7 @@ class ProfileStore {
       });
       socket.emit("update-profile", res.data);
       toast.show({
-        title: "Profile UpDated",
+        title: "Profile Updated",
         status: "success",
         placement: "top",
         duration: 1000,
