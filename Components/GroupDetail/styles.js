@@ -41,6 +41,11 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: Colors.primary,
   },
+  pollButton: {
+    backgroundColor: Colors.secondary,
+    borderRadius: 50,
+    marginBottom: 15,
+  },
 });
 
 export default styles;
