@@ -49,8 +49,8 @@ const RootNavigator = () => {
   });
 
   // Recieve new poll vote: members of a group chat will see the votes on a poll
-  socket.on("recieve-poll-vote", (data) => {
-    groupStore.revievePollVote(data);
+  socket.on("receive-poll-vote", (data) => {
+    groupStore.receivePollVote(data);
   });
 
   return (

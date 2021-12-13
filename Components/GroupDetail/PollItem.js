@@ -52,12 +52,12 @@ const PollItem = ({ pollData, group }) => {
           </Button>
         </HStack>
       )}
-      {/* {!show && (
+      {!show && (
         <HStack flex={1} px={5} space={10}>
           <Text>{!pollData.noVotes ? 0 : pollData.noVotes} No</Text>
           <Text>{!pollData.yesVotes ? 0 : pollData.yesVotes} Yes</Text>
         </HStack>
-      )} */}
+      )}
     </Container>
   );
 };
