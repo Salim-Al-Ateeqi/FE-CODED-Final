@@ -46,7 +46,7 @@ const Home = ({ navigation }) => {
 	};
 
 	return (
-		<Box bg="white" flex="1">
+		<Box bg="white" flex="1" mb={2}>
 			<ScrollView>
 				<Divider />
 				<VStack mt="1">
