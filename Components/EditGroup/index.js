@@ -53,7 +53,7 @@ const EditGroup = ({ route, navigation }) => {
 					setImageChanged={setImageChanged}
 				/>
 
-				<VStack flex={1} space="5">
+				<VStack space="5">
 					<InputEditGroup
 						group={group}
 						updatedGroup={updatedGroup}
@@ -88,11 +88,11 @@ const EditGroup = ({ route, navigation }) => {
 						<Divider />
 						{groupMembers}
 					</VStack>
-					<Box flex={1} justifyContent={"flex-end"}>
-						<DeleteGroupButton group={group} navigation={navigation} />
-						<Divider mb={2} />
-					</Box>
 				</VStack>
+
+				<Divider mt={5} />
+				<DeleteGroupButton group={group} navigation={navigation} />
+				<Divider mb={2} />
 			</ScrollView>
 		</Box>
 	);
