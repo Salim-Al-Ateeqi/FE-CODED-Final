@@ -40,22 +40,26 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 70,
     marginHorizontal: 5,
-    backgroundColor: Colors.secondary,
+    backgroundColor: Colors.primary,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
   pollButton: {
     backgroundColor: Colors.secondary,
     borderRadius: 50,
-    marginBottom: 15,
+    marginTop: 5,
+    marginBottom: 5,
   },
   voteCount: {
     marginTop: 10,
-    borderRadius: 50,
     height: 25,
-    width: 50,
+    width: 70,
     marginHorizontal: 5,
-
-    backgroundColor: Colors.yellow,
+    backgroundColor: Colors.secondary,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
   },
+  color: { color: "white" },
   center: { marginLeft: "auto", marginRight: "auto" },
 });
 
