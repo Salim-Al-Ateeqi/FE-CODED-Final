@@ -7,8 +7,8 @@ import {
   Button,
   Box,
   Divider,
-  useToast,
   HStack,
+  useToast,
 } from "native-base";
 
 // components
@@ -53,27 +53,26 @@ const EditGroup = ({ route, navigation }) => {
     navigation.navigate("Groups");
   });
 
-=======
-	return (
-		<Box flex="1" w="100%" bg="#fff">
-			<ScrollView>
-				<ImageEditGroup
-					group={group}
-					updatedGroup={updatedGroup}
-					setUpdatedGroup={setUpdatedGroup}
-					imageChanged={imageChanged}
-					setImageChanged={setImageChanged}
-				/>
+  return (
+    <Box flex="1" w="100%" bg="#fff">
+      <ScrollView>
+        <ImageEditGroup
+          group={group}
+          updatedGroup={updatedGroup}
+          setUpdatedGroup={setUpdatedGroup}
+          imageChanged={imageChanged}
+          setImageChanged={setImageChanged}
+        />
 
-				<VStack space="5">
-					<InputEditGroup
-						group={group}
-						updatedGroup={updatedGroup}
-						setUpdatedGroup={setUpdatedGroup}
-						imageChanged={imageChanged}
-						focusOnInput={focusOnInput}
-						handleUpdate={handleUpdate}
-					/>
+        <VStack space="5">
+          <InputEditGroup
+            group={group}
+            updatedGroup={updatedGroup}
+            setUpdatedGroup={setUpdatedGroup}
+            imageChanged={imageChanged}
+            focusOnInput={focusOnInput}
+            handleUpdate={handleUpdate}
+          />
 
           <Button
             alignSelf={"flex-end"}
@@ -95,18 +94,18 @@ const EditGroup = ({ route, navigation }) => {
               </Text>
             </HStack>
             <Divider />
-						<AddMembersButton navigation={navigation} group={group} />
-						<Divider />
-						{groupMembers}
-					</VStack>
-				</VStack>
+            <AddMembersButton navigation={navigation} group={group} />
+            <Divider />
+            {groupMembers}
+          </VStack>
+        </VStack>
 
-				<Divider mt={5} />
-				<DeleteGroupButton group={group} navigation={navigation} />
-				<Divider mb={2} />
-			</ScrollView>
-		</Box>
-	);
+        <Divider mt={5} />
+        <DeleteGroupButton group={group} navigation={navigation} />
+        <Divider mb={2} />
+      </ScrollView>
+    </Box>
+  );
 };
 
 export default observer(EditGroup);
