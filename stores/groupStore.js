@@ -36,6 +36,7 @@ class GroupStore {
 				status: "success",
 				placement: "top",
 				duration: 1500,
+				isClosable: false,
 			});
 
 			navigation.navigate("Tabs");
@@ -46,6 +47,7 @@ class GroupStore {
 				description: "You Broke Something",
 				status: "error",
 				placement: "top",
+				isClosable: false,
 			});
 		}
 	};
@@ -71,6 +73,7 @@ class GroupStore {
 				status: "success",
 				placement: "top",
 				duration: 1500,
+				isClosable: false,
 			});
 		} catch (error) {
 			console.log(error);
@@ -79,6 +82,7 @@ class GroupStore {
 				description: "You Broke Something",
 				status: "error",
 				placement: "top",
+				isClosable: false,
 			});
 		}
 	};
@@ -95,6 +99,7 @@ class GroupStore {
 				status: "success",
 				placement: "top",
 				duration: 1500,
+				isClosable: false,
 			});
 		} catch (error) {
 			console.log(error);
@@ -103,6 +108,7 @@ class GroupStore {
 				description: "You Broke Something",
 				status: "error",
 				placement: "top",
+				isClosable: false,
 			});
 		}
 	};
@@ -120,6 +126,7 @@ class GroupStore {
 				title: "Member Added!",
 				status: "success",
 				placement: "top",
+				isClosable: false,
 			});
 		} catch (error) {
 			console.log(error);
@@ -157,6 +164,7 @@ class GroupStore {
 				status: "success",
 				placement: "top",
 				duration: 1500,
+				isClosable: false,
 			});
 			navigation.navigate("GroupDetail", { group });
 		} catch (error) {
@@ -166,6 +174,7 @@ class GroupStore {
 				description: "Something happened somewhere!",
 				status: "error",
 				placement: "top",
+				isClosable: false,
 			});
 		}
 	};

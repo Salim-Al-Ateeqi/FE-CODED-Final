@@ -19,6 +19,7 @@ const HelpAndFeedBack = () => {
 		feedback: "",
 	});
 	const toast = useToast();
+	const id = "prevent-duplicate";
 
 	const handleSubmit = () => {
 		setFeedbackData("");
@@ -29,6 +30,7 @@ const HelpAndFeedBack = () => {
 				status: "success",
 				placement: "top",
 				duration: 2500,
+				isClosable: false,
 			});
 		}
 	};
