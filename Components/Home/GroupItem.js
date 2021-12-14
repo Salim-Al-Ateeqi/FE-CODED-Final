@@ -34,6 +34,7 @@ const GroupItem = ({ group, navigation }) => {
 				<Box pl="4" pr="5" py="2">
 					<HStack alignItems="center" space={3}>
 						<Image
+							defaultSource={require("../../assets/Media/defaultUserImage.jpg")}
 							borderRadius="50"
 							alt="Members Image"
 							style={{ width: 48, height: 48, borderRadius: 50 }}
