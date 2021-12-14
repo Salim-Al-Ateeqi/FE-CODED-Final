@@ -42,7 +42,7 @@ class ProfileStore {
 				title: "Profile Updated",
 				status: "success",
 				placement: "top",
-				duration: 1500,
+				duration: 1800,
 				isClosable: false,
 			});
 		} catch (error) {

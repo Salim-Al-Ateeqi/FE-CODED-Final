@@ -29,7 +29,7 @@ const HelpAndFeedBack = () => {
 				title: "Thank you for your feedback.",
 				status: "success",
 				placement: "top",
-				duration: 2500,
+				duration: 2000,
 				isClosable: false,
 			});
 		}

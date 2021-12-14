@@ -34,7 +34,7 @@ class AuthStore {
 				status: "success",
 				title: `Account Created`,
 				placement: "top",
-				duration: 1500,
+				duration: 1800,
 				isClosable: false,
 			});
 		} catch (error) {
@@ -56,7 +56,7 @@ class AuthStore {
 					status: "success",
 					placement: "top",
 					title: `Welcome`,
-					duration: 1500,
+					duration: 1800,
 					isClosable: false,
 				});
 			}
@@ -116,7 +116,7 @@ class AuthStore {
 				title: "Logged out",
 				placement: "top",
 				description: "Hope to see you soon.",
-				duration: 1500,
+				duration: 1800,
 				isClosable: false,
 			});
 		} catch (error) {

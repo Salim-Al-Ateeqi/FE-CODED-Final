@@ -35,7 +35,7 @@ class GroupStore {
 				title: "Group Created",
 				status: "success",
 				placement: "top",
-				duration: 1500,
+				duration: 1800,
 				isClosable: false,
 			});
 
@@ -72,7 +72,7 @@ class GroupStore {
 				title: "Group Updated!",
 				status: "success",
 				placement: "top",
-				duration: 1500,
+				duration: 1800,
 				isClosable: false,
 			});
 		} catch (error) {
@@ -98,7 +98,7 @@ class GroupStore {
 				title: "Group Deleted.",
 				status: "success",
 				placement: "top",
-				duration: 1500,
+				duration: 1800,
 				isClosable: false,
 			});
 		} catch (error) {
@@ -163,7 +163,7 @@ class GroupStore {
 				title: "Poll Created!",
 				status: "success",
 				placement: "top",
-				duration: 1500,
+				duration: 1800,
 				isClosable: false,
 			});
 			navigation.navigate("GroupDetail", { group });
