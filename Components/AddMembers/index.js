@@ -1,99 +1,97 @@
 import React, { useState } from "react";
-import {
-	Box,
-	Button,
-	FormControl,
-	Heading,
-	VStack,
-	useToast,
-	Center,
-} from "native-base";
-import { ScrollView } from "react-native";
+// import { Text, View, Button } from "react-native";
+import SelectBox from "react-native-multi-selectbox";
+import { xorBy } from "lodash";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ScrollView } from "react-native";
+
 import IntlPhoneInput from "react-native-intl-phone-input";
-
-// components
+import profileStore from "../../stores/ProfileStore";
+// import ViewMembers from "../EditGroup/MemberItem";
 import { Colors } from "../../assets/Theme/Colors";
-
-// stores
+import {
+  Box,
+  Button,
+  FormControl,
+  Heading,
+  VStack,
+  useToast,
+  Center,
+  HStack,
+  Divider,
+  Text,
+} from "native-base";
+import SpinnerPage from "../SpinnerPage/index";
 import groupStore from "../../stores/groupStore";
 
 const AddMembers = ({ navigation, route }) => {
-	const { group } = route.params;
-	const [phoneNumber, setPhoneNumber] = useState({
-		phoneNumber: "",
-	});
+  const { group } = route.params;
+  const toast = useToast();
 
-	const toast = useToast();
+  if (profileStore.isloading) return <SpinnerPage />;
 
-	const handleNumber = ({
-		dialCode,
-		unmaskedPhoneNumber,
-		phoneNumber,
-		isVerified,
-	}) => {
-		const userNumber = phoneNumber.replace(" ", "");
-		const newNumber = `${dialCode}${userNumber}`;
-		setPhoneNumber({ ...phoneNumber, phoneNumber: newNumber.replace("-", "") });
-	};
+  const filteredProfiles = profileStore.profiles.filter(
+    (profile) => !group.members.includes(profile._id)
+  );
 
-	const handleSubmit = () => {
-		groupStore.addMembersToGroup(phoneNumber, group, navigation, toast);
-	};
-	return (
-		<KeyboardAwareScrollView>
-			<ScrollView>
-				<Center mt="20">
-					<Box safeArea p="2" py="8" w="100%" maxW="290">
-						<Heading
-							size="lg"
-							fontWeight="600"
-							color="coolGray.800"
-							_dark={{
-								color: "warmGray.50",
-							}}
-						>
-							Add Members
-						</Heading>
+  const K_OPTIONS = filteredProfiles.map((profile) => {
+    let profilesList = {
+      id: `${profile._id}`,
+      item: `${profile.profile.name}`,
+    };
+    return profilesList;
+  });
 
-						<VStack space={3} mt="5">
-							<FormControl>
-								<FormControl.Label>Phone Number</FormControl.Label>
-								<IntlPhoneInput
-									containerStyle={{
-										borderColor: "#d4d4d4",
-										borderWidth: 0.5,
-										height: 50,
-										borderBottomColor: "#D1D3D4",
-										borderRadius: 5,
-									}}
-									flagStyle={{ fontSize: 25 }}
-									phoneInputStyle={{
-										lineHeight: 18,
-										// if english or arabic
-										// textAlign: i18nStore.language === "en" ? "left" : "right",
-									}}
-									onChangeText={handleNumber}
-									defaultCountry="KW"
-									modalCountryItemCountryNameStyle={{
-										fontSize: 15,
-									}}
-								/>
-							</FormControl>
+  const [selectedMembers, setSelectedMembers] = useState([]);
 
-							<Button
-								mt="2"
-								style={{ backgroundColor: Colors.primary }}
-								onPress={handleSubmit}
-							>
-								Add Member
-							</Button>
-						</VStack>
-					</Box>
-				</Center>
-			</ScrollView>
-		</KeyboardAwareScrollView>
-	);
+  const handleSubmit = () => {
+    let membersId = [];
+    selectedMembers.map((member) => membersId.push(member.id));
+    // console.log("membersId:", membersId);
+    groupStore.addMembersToGroup(membersId, group, navigation, toast);
+  };
+
+  return (
+    <KeyboardAwareScrollView>
+      <ScrollView>
+        <Center mt="10">
+          <Box safeArea p="2" py="2" w="100%" maxW="90%">
+            <VStack space={3} mt="5">
+              <SelectBox
+                arrowIconColor={Colors.primary}
+                searchIconColor={Colors.primary}
+                toggleIconColor={Colors.primary}
+                multiOptionContainerStyle={{
+                  backgroundColor: Colors.primary,
+                }}
+                label="New Members List:"
+                options={K_OPTIONS}
+                selectedValues={selectedMembers}
+                onMultiSelect={onMultiChange()}
+                onTapClose={onMultiChange()}
+                isMulti
+              />
+            </VStack>
+            <Divider />
+            <VStack mb={5} p="5">
+              <Button
+                mt="2"
+                style={{ backgroundColor: Colors.primary }}
+                onPress={handleSubmit}
+              >
+                Add Members
+              </Button>
+            </VStack>
+          </Box>
+        </Center>
+      </ScrollView>
+    </KeyboardAwareScrollView>
+  );
+
+  function onMultiChange() {
+    return (item) => setSelectedMembers(xorBy(selectedMembers, [item], "id"));
+  }
 };
 
 export default AddMembers;
