@@ -27,8 +27,8 @@ import { Platform } from "react-native";
 
 const GroupDetail = ({ route, navigation }) => {
 	const [newMessage, setNewMessage] = useState("");
-	const { group } = route.params;
 	const { isOpen, onToggle, onClose } = useDisclose();
+	const { group } = route.params;
 
 	if (groupStore.isLoading) {
 		return <Spinner />;
@@ -47,6 +47,7 @@ const GroupDetail = ({ route, navigation }) => {
 	});
 
 	const handleSubmit = () => {
+		if (newMessage === "") return;
 		const message = {
 			sentFrom: authStore.user._id,
 			message: newMessage,
