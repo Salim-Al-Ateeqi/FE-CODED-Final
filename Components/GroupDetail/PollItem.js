@@ -23,6 +23,7 @@ import styles from "./styles";
 
 const PollItem = ({ pollData, group }) => {
   const [show, setShow] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(null);
   const pollCreator = profileStore.profiles.find(
     (user) => user._id === pollData.owner
   );
@@ -33,6 +34,13 @@ const PollItem = ({ pollData, group }) => {
     );
     if (userVoted) setShow(false);
   }, []);
+
+  setInterval(() => {
+    setTimeLeft(moment().to(pollData.expiration));
+  }, 2000);
+
+  const revealResult =
+    !show || moment().isAfter(pollData.expiration) ? true : false;
 
   const handleSubmit = (vote) => {
     const userVote = {
@@ -111,13 +119,13 @@ const PollItem = ({ pollData, group }) => {
               }}
               fontWeight="400"
             >
-              Poll Expiration:{" "}
-              {moment(pollData.expiration).format("DD-MM-YYYY")}
+              Poll Expiration: {timeLeft}
+              {/* {moment(pollData.expiration).format("DD-MM-YYYY")} */}
             </Text>
           </HStack>
         </HStack>
       </Stack>
-      {show && (
+      {show && moment().isBefore(pollData.expiration) && (
         <HStack style={styles.center}>
           <Button style={styles.button} onPress={() => handleSubmit("yes")}>
             Yes
@@ -127,7 +135,7 @@ const PollItem = ({ pollData, group }) => {
           </Button>
         </HStack>
       )}
-      {!show && (
+      {revealResult && (
         <HStack style={styles.center}>
           <Center style={styles.voteCount}>
             <Text style={styles.color}>
