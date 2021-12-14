@@ -42,8 +42,6 @@ const EditGroup = ({ route, navigation }) => {
 		groupStore.updateGroup(group._id, updatedGroup, navigation, toast);
 	};
 
-	console.log(updatedGroup);
-
 	return (
 		<Box flex="1" w="100%" bg="#fff">
 			<ScrollView>

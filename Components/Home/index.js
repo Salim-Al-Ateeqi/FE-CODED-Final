@@ -10,7 +10,7 @@ import {
 	Button,
 	Text,
 } from "native-base";
-import { TouchableHighlight, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 // components
 import GroupItem from "./GroupItem";
