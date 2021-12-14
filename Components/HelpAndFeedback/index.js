@@ -8,7 +8,7 @@ import {
 	Button,
 	Center,
 	useToast,
-	Avatar,
+	Image,
 	HStack,
 } from "native-base";
 import { Platform } from "react-native";
@@ -63,9 +63,8 @@ const HelpAndFeedBack = () => {
 					>
 						Send Feedback
 					</Heading>
-					<Avatar
-						size={"sm"}
-						bg={"#fff"}
+					<Image
+						size={"xs"}
 						source={require("../../assets/Media/PollLogo.png")}
 					/>
 				</HStack>
