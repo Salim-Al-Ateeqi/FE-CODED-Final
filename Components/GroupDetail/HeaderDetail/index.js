@@ -1,11 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { Heading, HStack, Pressable } from "native-base";
-
-// components
-import ImageHeader from "./ImageHeader";
-import NameHeader from "./NameHeader";
+import { Image } from "react-native";
 import { Platform } from "react-native";
+
+// stores
+import { baseURL } from "../../../stores/baseURL";
 
 const HeaderDetail = ({ group, navigation }) => {
 	const leftMargin = Platform.OS === "ios" ? 20 : 0;
@@ -20,9 +20,34 @@ const HeaderDetail = ({ group, navigation }) => {
 				mr={leftMargin}
 				mb={bottomMargin}
 			>
-				<ImageHeader group={group} />
+				{group.image ? (
+					<Image
+						alt="Group Image."
+						style={{
+							width: 45,
+							height: 45,
+							borderRadius: 30,
+							marginBottom: 5,
+						}}
+						defaultSource={require("../../../assets/Media/defaultUserImage.jpg")}
+						source={{
+							uri: baseURL + group.image,
+						}}
+					/>
+				) : (
+					<Image
+						alt="Group Image."
+						style={{
+							width: 45,
+							height: 45,
+							borderRadius: 30,
+							marginBottom: 5,
+						}}
+						defaultSource={require("../../../assets/Media/defaultUserImage.jpg")}
+					/>
+				)}
 
-				<NameHeader group={group} />
+				<Heading fontSize={18}>{group.name}</Heading>
 			</HStack>
 		</Pressable>
 	);
