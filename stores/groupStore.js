@@ -340,6 +340,31 @@ class GroupStore {
       this.groups = this.groups.filter((group) => group._id !== data);
     });
   };
+
+  receiveleftuser = (data) => {
+    console.log(
+      "🚀 ~ file: groupStore.js ~ line 345 ~ GroupStore ~ data",
+      data
+    );
+    const group = this.groups.find((group) => group._id === data.targetGroup);
+    console.log(
+      "🚀 ~ file: groupStore.js ~ line 350 ~ GroupStore ~ group",
+      group
+    );
+    const userExists = group.members.find((user) => user === data.targetMember);
+    console.log(
+      "🚀 ~ file: groupStore.js ~ line 357 ~ GroupStore ~ userExists",
+      userExists
+    );
+    if (userExists) {
+      runInAction(() => {
+        group.members = group.members.filter(
+          (member) => member !== data.targetMember
+        );
+      });
+      console.log(group);
+    }
+  };
 }
 
 const groupStore = new GroupStore();
