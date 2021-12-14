@@ -129,15 +129,12 @@ class GroupStore {
     }
   };
 
-  addMembersToGroup = async (phoneNumber, group, navigation, toast) => {
+  addMembersToGroup = async (memberId, group, navigation, toast) => {
     try {
-      const res = await instance.put(`/groups/${group._id}/members`, {
-        phoneNumber: phoneNumber.phoneNumber,
-      });
-      runInAction(() => {
-        group.members.push(res.data.members[res.data.members.length - 1]);
-      });
-      socket.emit("adding-new-member", res.data);
+      let payload = {
+        members: memberId,
+      };
+      const res = await instance.put(`/groups/${group._id}/members`, payload);
       toast.show({
         title: "Member Added",
         status: "success",
@@ -145,6 +142,17 @@ class GroupStore {
         isClosable: false,
       });
       navigation.goBack();
+      runInAction(() => {
+        let newMembers = res.data.members.slice(payload.members.length * -1);
+        newMembers.forEach((member) => {
+          group.members.push(member);
+        });
+        const data = {
+          newMembersList: newMembers,
+          targetGroup: group._id,
+        };
+        socket.emit("adding-new-member", data);
+      });
     } catch (error) {
       console.log(error);
       const id = "id";
@@ -283,10 +291,18 @@ class GroupStore {
   };
 
   receiveUpdatedGroupMembers = (payload) => {
-    const group = this.groups.find((group) => group._id === payload._id);
-    const newestMember = payload.members[group.members.length - 1];
+    const group = this.groups.find(
+      (group) => group._id === payload.targetGroup
+    );
+
+    // const newestMember = payload.members[group.members.length - 1];
     runInAction(() => {
-      group.members.push(newestMember);
+      payload.newMembersList.forEach((member) => {
+        const userExists = group.members.find((user) => user === member);
+        if (!userExists) {
+          group.members.push(member);
+        }
+      });
     });
   };
 
