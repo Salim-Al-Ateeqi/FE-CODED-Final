@@ -128,6 +128,7 @@ class GroupStore {
 				placement: "top",
 				isClosable: false,
 			});
+			navigation.goBack();
 		} catch (error) {
 			console.log(error);
 		}
