@@ -15,7 +15,7 @@ import {
 	Badge,
 } from "native-base";
 
-import { Image, KeyboardAvoidingView } from "react-native";
+import { Image, KeyboardAvoidingView, Platform } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
@@ -31,6 +31,7 @@ const CreateGroup = ({ navigation }) => {
 		name: "",
 		image: "/media/defaultUserImage.jpg",
 	});
+	const [isInvalidStatus, setIsInvalidStatus] = useState(false);
 
 	// Check if the user change the image.
 	const [imageChanged, setImageChanged] = useState(false);
@@ -80,6 +81,7 @@ const CreateGroup = ({ navigation }) => {
 	};
 
 	const handleSubmit = () => {
+		if (group.name === "") return setIsInvalidStatus(true);
 		groupStore.createGroup(group, toast, navigation);
 	};
 
@@ -147,9 +149,11 @@ const CreateGroup = ({ navigation }) => {
 				<KeyboardAvoidingView keyboardVerticalOffset={5}>
 					<VStack>
 						<Center>
-							<FormControl w="90%">
+							<FormControl w="90%" isInvalid={isInvalidStatus}>
 								<FormControl.Label>Group Name</FormControl.Label>
 								<Input
+									maxLength={20}
+									py={Platform.OS === "ios" ? "4" : "2"}
 									_focus={{ borderColor: Colors.primary }}
 									defaultValue={groupStore.groups.name}
 									placeholder="Enter group name"
@@ -165,6 +169,10 @@ const CreateGroup = ({ navigation }) => {
 									}
 									onChangeText={(name) => setGroup({ ...group, name })}
 								/>
+
+								<FormControl.ErrorMessage>
+									Please enter group name
+								</FormControl.ErrorMessage>
 							</FormControl>
 						</Center>
 					</VStack>

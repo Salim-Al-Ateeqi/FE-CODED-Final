@@ -62,7 +62,7 @@ const AddMembers = ({ navigation, route }) => {
 								<IntlPhoneInput
 									containerStyle={{
 										borderColor: "#d4d4d4",
-										borderWidth: 1,
+										borderWidth: 0.5,
 										height: 50,
 										borderBottomColor: "#D1D3D4",
 										borderRadius: 5,
