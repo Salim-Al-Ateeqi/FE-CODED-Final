@@ -8,6 +8,8 @@ import {
 	Button,
 	Center,
 	useToast,
+	Image,
+	HStack,
 } from "native-base";
 import { Platform } from "react-native";
 
@@ -19,11 +21,22 @@ const HelpAndFeedBack = () => {
 		email: "",
 		feedback: "",
 	});
+	const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+	const [isInvalidFeedback, setIsInvalidFeedback] = useState(false);
 	const toast = useToast();
 	const id = "prevent-duplicate";
 
 	const handleSubmit = () => {
-		setFeedbackData("");
+		if (feedbackData.email === "") return setIsInvalidEmail(true);
+		if (feedbackData.feedback.trim() === "")
+			return setIsInvalidFeedback(true), setIsInvalidEmail(false);
+
+		setFeedbackData({
+			email: "",
+			feedback: "",
+		});
+		setIsInvalidEmail(false);
+		setIsInvalidFeedback(false);
 		if (!toast.isActive(id)) {
 			toast.show({
 				id,
@@ -39,16 +52,22 @@ const HelpAndFeedBack = () => {
 	return (
 		<Center flex={1} px="3">
 			<Box p="2" w="90%" maxW="400" py="8">
-				<Heading
-					size="lg"
-					color="coolGray.800"
-					_dark={{
-						color: "warmGray.50",
-					}}
-					fontWeight="semibold"
-				>
-					Send Feedback
-				</Heading>
+				<HStack space={4} alignItems={"center"}>
+					<Heading
+						size="lg"
+						color="coolGray.800"
+						_dark={{
+							color: "warmGray.50",
+						}}
+						fontWeight="semibold"
+					>
+						Send Feedback
+					</Heading>
+					<Image
+						size={"xs"}
+						source={require("../../assets/Media/PollLogo.png")}
+					/>
+				</HStack>
 				<Heading
 					mt="1"
 					color="coolGray.600"
@@ -61,11 +80,13 @@ const HelpAndFeedBack = () => {
 					Tell us what you love about the app, or what we could be doing better.
 				</Heading>
 				<VStack space={5} mt="5">
-					<FormControl>
+					<FormControl isInvalid={isInvalidEmail}>
 						<FormControl.Label>Email</FormControl.Label>
 						<Input
 							py={Platform.OS === "ios" ? "4" : "2"}
-							Value={feedbackData.email}
+							enablesReturnKeyAutomatically={true}
+							returnKeyType="next"
+							defaultValue={feedbackData.email}
 							placeholder="Enter email"
 							type="email"
 							bg={"#fff"}
@@ -75,14 +96,18 @@ const HelpAndFeedBack = () => {
 								setFeedbackData({ ...feedbackData, email })
 							}
 						/>
+						<FormControl.ErrorMessage>
+							Please enter your email.
+						</FormControl.ErrorMessage>
 					</FormControl>
 
-					<FormControl>
+					<FormControl isInvalid={isInvalidFeedback}>
 						<FormControl.Label>Describe Your Feedback</FormControl.Label>
 						<Input
-							numberOfLines={6}
+							returnKeyType="send"
+							enablesReturnKeyAutomatically={true}
 							multiline={true}
-							value={feedbackData.feedback}
+							defaultValue={feedbackData.feedback}
 							bg={"#fff"}
 							h={100}
 							placeholder="Enter feedback"
@@ -91,6 +116,9 @@ const HelpAndFeedBack = () => {
 								setFeedbackData({ ...feedbackData, feedback })
 							}
 						/>
+						<FormControl.ErrorMessage>
+							Please describe your feedback.
+						</FormControl.ErrorMessage>
 					</FormControl>
 
 					<Button

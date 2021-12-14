@@ -175,7 +175,7 @@ const Signup = ({ navigation }) => {
                     color: "warmGray.200",
                   }}
                 >
-                  I already have an account.
+                  I already have an account.{" "}
                 </Text>
                 <Link
                   _text={{

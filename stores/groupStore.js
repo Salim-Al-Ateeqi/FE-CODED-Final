@@ -183,6 +183,30 @@ class GroupStore {
     }
   };
 
+  leaveGroup = async (groupId, memberId, navigation, toast, home) => {
+    try {
+      const group = this.groups.find((group) => group._id === groupId);
+      await instance.put(`groups/${groupId}/leave`);
+      runInAction(() => {
+        group.members = group.members.filter((member) => member !== memberId);
+      });
+      socket.emit("leave-group", {
+        targetGroup: groupId,
+        targetMember: memberId,
+      });
+      toast.show({
+        title: `You left ${group.name}`,
+        status: "info",
+        placement: "top",
+        duration: 1800,
+        isClosable: false,
+      });
+      if (home) {
+        navigation.navigate("Tabs");
+      }
+    } catch (error) {}
+  };
+
   sendChatToGroup = async (groupId, newMessage) => {
     try {
       const group = this.groups.find((group) => group._id === groupId);

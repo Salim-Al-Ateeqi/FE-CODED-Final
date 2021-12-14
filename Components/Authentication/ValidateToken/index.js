@@ -41,7 +41,7 @@ const ValidateTokens = ({ navigation }) => {
 	const handleSubmit = () => {
 		checkMatchingToken();
 		authStore.validateToken(userInput, toast, navigation);
-		profileStore.fetchProfiles();
+		profileStore.getUserProfile();
 	};
 
 	return (

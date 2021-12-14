@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
-import { HStack, Center, Text, Button, Container } from "native-base";
+import {
+  HStack,
+  Center,
+  Container,
+  Text,
+  Heading,
+  Box,
+  AspectRatio,
+  Stack,
+  Button,
+  ScrollView,
+} from "native-base";
 import { Image } from "react-native";
-
+import { Colors } from "../../assets/Theme/Colors";
+import moment from "moment";
 // stores
 import authStore from "../../stores/authStore";
 import profileStore from "../../stores/ProfileStore";
@@ -30,17 +42,81 @@ const PollItem = ({ pollData, group }) => {
     groupStore.submitVote(group._id, pollData._id, userVote);
     setShow(false);
   };
+
   return (
-    <Container space={2} flex={1} m="1" style={styles.card}>
-      <Image
-        style={styles.image}
-        alt={`Image poster for the movie ${pollData.title}`}
-        source={{
-          uri: pollData.image,
-        }}
-      />
-      <Text style={styles.title}>{pollData.title}</Text>
-      <Text style={styles.by}>Created by {pollCreator.profile.name}</Text>
+    <Box
+      maxW="225"
+      rounded="lg"
+      // overflow="hidden"
+      borderColor="coolGray.200"
+      borderWidth="1"
+      _dark={{
+        borderColor: "coolGray.600",
+        backgroundColor: "gray.700",
+      }}
+      _web={{
+        shadow: 2,
+        borderWidth: 0,
+      }}
+      _light={{
+        backgroundColor: "gray.50",
+      }}
+      ml="auto"
+      mr="auto"
+      mt="5"
+      mb="5"
+    >
+      <Box>
+        <AspectRatio w="100%" ratio={8 / 12}>
+          <Image
+            source={{
+              uri: pollData.image,
+            }}
+            alt="image"
+            resizeMode="contain"
+          />
+        </AspectRatio>
+        <Center
+          bg={Colors.primary}
+          _text={{
+            color: Colors.lightBg,
+            fontWeight: "700",
+            fontSize: "xs",
+          }}
+          position="absolute"
+          bottom="0"
+          px="3"
+          py="1.5"
+          borderTopRightRadius="5"
+        >
+          {pollCreator.profile.name}
+        </Center>
+      </Box>
+      <Stack p="4" space={3}>
+        <Stack space={2}>
+          <Heading size="md" ml="-1">
+            {pollData.title}
+          </Heading>
+          <Text fontSize="xs" fontWeight="500" ml="-0.5" mt="-1">
+            Rating: {pollData.vote_average} ⭐
+          </Text>
+        </Stack>
+        <Text fontWeight="400">{pollData.overview}</Text>
+        <HStack alignItems="center" space={4} justifyContent="space-between">
+          <HStack alignItems="center">
+            <Text
+              color="red.500"
+              _dark={{
+                color: "warmGray.200",
+              }}
+              fontWeight="400"
+            >
+              Poll Expiration:{" "}
+              {moment(pollData.expiration).format("DD-MM-YYYY")}
+            </Text>
+          </HStack>
+        </HStack>
+      </Stack>
       {show && (
         <HStack style={styles.center}>
           <Button style={styles.button} onPress={() => handleSubmit("yes")}>
@@ -54,14 +130,18 @@ const PollItem = ({ pollData, group }) => {
       {!show && (
         <HStack style={styles.center}>
           <Center style={styles.voteCount}>
-            <Text>{!pollData.yesVotes ? 0 : pollData.yesVotes} Yes</Text>
+            <Text style={styles.color}>
+              {!pollData.yesVotes ? 0 : pollData.yesVotes} Yes
+            </Text>
           </Center>
           <Center style={styles.voteCount}>
-            <Text>{!pollData.noVotes ? 0 : pollData.noVotes} No</Text>
+            <Text style={styles.color}>
+              {!pollData.noVotes ? 0 : pollData.noVotes} No
+            </Text>
           </Center>
         </HStack>
       )}
-    </Container>
+    </Box>
   );
 };
 
