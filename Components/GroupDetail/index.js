@@ -41,11 +41,9 @@ const GroupDetail = ({ route, navigation }) => {
 
   const groupDetailContent = [...group.chat, ...group.polls];
 
-  //create a sort method using moment
   const sortedGroupContent = groupDetailContent.sort(
     (a, b) => moment(a.createdAt) - moment(b.createdAt)
   );
-  console.log(sortedGroupContent);
 
   const content = sortedGroupContent.map((element) => {
     if (element.contentType === "chat") {
