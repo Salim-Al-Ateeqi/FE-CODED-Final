@@ -53,6 +53,11 @@ const RootNavigator = () => {
 		groupStore.receivePollVote(data);
 	});
 
+	// Revieve New user profile
+	socket.on("recieve-new-user-profile", (data) => {
+		profileStore.recieveNewUserProfile(data);
+	});
+
 	// Recieve updated profile: User can
 	socket.on("recieve-updated-profile", (data) => {
 		profileStore.recieveUpdatedProfile(data);

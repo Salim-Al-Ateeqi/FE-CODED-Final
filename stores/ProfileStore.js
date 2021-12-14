@@ -80,9 +80,22 @@ class ProfileStore {
 	getUserProfile = async () => {
 		try {
 			const res = await instance.get("/newprofile");
-			this.profile.push(res.data);
+			socket.emit("pushNewUserProfile", res.data);
+			runInAction(() => {
+				this.profiles.push(res.data);
+			});
 		} catch (error) {
 			console.log(error);
+		}
+	};
+
+	recieveNewUserProfile = (data) => {
+		const profile = this.profiles.find((profile) => profile._id === data._id);
+
+		if (!profile) {
+			runInAction(() => {
+				this.profiles.push(data);
+			});
 		}
 	};
 
