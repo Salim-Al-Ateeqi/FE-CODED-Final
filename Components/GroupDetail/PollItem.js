@@ -127,22 +127,22 @@ const PollItem = ({ pollData, group }) => {
       </Stack>
       {show && moment().isBefore(pollData.expiration) && (
         <HStack style={styles.center}>
-          <Button style={styles.button} onPress={() => handleSubmit("yes")}>
+          <Button style={styles.buttonYes} onPress={() => handleSubmit("yes")}>
             Yes
           </Button>
-          <Button style={styles.button} onPress={() => handleSubmit("no")}>
+          <Button style={styles.buttonNo} onPress={() => handleSubmit("no")}>
             No
           </Button>
         </HStack>
       )}
       {revealResult && (
         <HStack style={styles.center}>
-          <Center style={styles.voteCount}>
+          <Center style={styles.voteCountYes}>
             <Text style={styles.color}>
               {!pollData.yesVotes ? 0 : pollData.yesVotes} Yes
             </Text>
           </Center>
-          <Center style={styles.voteCount}>
+          <Center style={styles.voteCountNo}>
             <Text style={styles.color}>
               {!pollData.noVotes ? 0 : pollData.noVotes} No
             </Text>

@@ -17,6 +17,7 @@ import GroupDetail from "../GroupDetail";
 import MenuIcon from "../GroupDetail/MenuIcon";
 import HeaderDetail from "../GroupDetail/HeaderDetail/index";
 import CreateGroup from "../CreateGroup";
+import { Colors } from "../../assets/Theme/Colors";
 
 // Stores
 import authStore from "../../stores/authStore";
@@ -121,6 +122,8 @@ const RootNavigator = () => {
             options={{
               headerShown: true,
               headerTitle: "Add Members",
+              headerStyle: { backgroundColor: Colors.primary },
+              headerTintColor: "white",
             }}
           />
 
@@ -144,6 +147,8 @@ const RootNavigator = () => {
             options={{
               headerShown: true,
               headerTitle: "Movie Poll",
+              headerStyle: { backgroundColor: Colors.primary },
+              headerTintColor: "white",
             }}
           />
 
@@ -163,6 +168,8 @@ const RootNavigator = () => {
                 headerRight: () => (
                   <MenuIcon navigation={navigation} group={foundGroup} />
                 ),
+                headerStyle: { backgroundColor: Colors.primary },
+                headerTintColor: "white",
               };
             }}
           />
@@ -171,6 +178,8 @@ const RootNavigator = () => {
             component={CreateGroup}
             options={{
               headerTitle: "Create Group",
+              headerStyle: { backgroundColor: Colors.primary },
+              headerTintColor: "white",
             }}
           />
           <Screen name="FinalizeMoviePoll" component={FinalizeMoviePoll} />
