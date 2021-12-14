@@ -10,8 +10,9 @@ import {
 	Box,
 	Divider,
 	useDisclose,
+	KeyboardAvoidingView,
 } from "native-base";
-import { KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { TouchableOpacity, Platform } from "react-native";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 // components
@@ -23,7 +24,6 @@ import StaggerButton from "./StaggerButton";
 // stores
 import groupStore from "../../stores/groupStore";
 import authStore from "../../stores/authStore";
-import { Platform } from "react-native";
 
 const GroupDetail = ({ route, navigation }) => {
 	const [newMessage, setNewMessage] = useState("");
@@ -59,66 +59,70 @@ const GroupDetail = ({ route, navigation }) => {
 	};
 
 	return (
-		<Box flex={1} bg="#dbd9dc">
+		<KeyboardAvoidingView
+			h={{
+				base: "full",
+			}}
+			behavior={Platform.OS === "ios" && "padding"}
+		>
 			<Divider />
+			<VStack flex={1} justifyContent="flex-end" bg={"#C3C3C3"}>
+				<ScrollView bg="#fff">{content}</ScrollView>
+				<StaggerButton
+					navigation={navigation}
+					group={group}
+					onToggle={onToggle}
+					isOpen={isOpen}
+					onClose={onClose}
+				/>
 
-			<VStack mt="5" flex={1}>
-				<ScrollView>{content}</ScrollView>
-			</VStack>
+				<Divider mb="2" />
 
-			<Divider mb="2" />
-
-			<StaggerButton
-				navigation={navigation}
-				group={group}
-				onToggle={onToggle}
-				isOpen={isOpen}
-				onClose={onClose}
-			/>
-
-			<KeyboardAvoidingView>
-				<VStack alignItems="center" mb="5">
-					<HStack alignItems="center">
-						<Input
-							returnKeyType="send"
-							returnKeyLabel="send"
-							onSubmitEditing={handleSubmit}
-							color="black"
-							placeholder="Message"
-							placeholderTextColor={Colors.darkBg}
-							variant="filled"
-							bg={Colors.lightBg}
-							borderRadius="50"
-							w="85%"
-							py={Platform.OS === "ios" ? "4" : "2"}
-							px="3"
-							mx="1"
-							_focus={{ borderColor: Colors.primary }}
-							value={newMessage}
-							onChangeText={(newMessage) => setNewMessage(newMessage)}
-							borderWidth="0"
-							InputLeftElement={
-								<TouchableOpacity>
-									<Icon
-										onPress={onToggle}
-										size="sm"
-										ml="3"
-										color={Colors.primary}
-										as={<AntDesign name="pluscircle" />}
-									/>
-								</TouchableOpacity>
-							}
-						/>
+				<HStack
+					alignItems="center"
+					justifyContent={"center"}
+					mb={Platform.OS === "ios" ? 6 : 3}
+					py={1}
+				>
+					<Input
+						returnKeyType="send"
+						returnKeyLabel="send"
+						onSubmitEditing={handleSubmit}
+						color="black"
+						placeholder="Message"
+						placeholderTextColor={Colors.darkBg}
+						variant="filled"
+						bg="#fff"
+						borderRadius="50"
+						w="85%"
+						py={Platform.OS === "ios" ? "4" : "2"}
+						px="3"
+						mx="1"
+						_focus={{ borderColor: Colors.primary }}
+						value={newMessage}
+						onChangeText={(newMessage) => setNewMessage(newMessage)}
+						borderWidth="0"
+						InputLeftElement={
+							<TouchableOpacity activeOpacity={0.7} onPress={onToggle}>
+								<Icon
+									size="sm"
+									ml="3"
+									color={Colors.primary}
+									as={<AntDesign name="pluscircle" />}
+								/>
+							</TouchableOpacity>
+						}
+					/>
+					<TouchableOpacity activeOpacity={0.7} onPress={handleSubmit}>
 						<MaterialCommunityIcons
 							name="send-circle-outline"
 							size={32}
 							color={Colors.primary}
-							onPress={handleSubmit}
 						/>
-					</HStack>
-				</VStack>
-			</KeyboardAvoidingView>
-		</Box>
+					</TouchableOpacity>
+				</HStack>
+			</VStack>
+		</KeyboardAvoidingView>
 	);
 };
 export default observer(GroupDetail);
