@@ -101,7 +101,6 @@ const PollItem = ({ pollData, group }) => {
           </Text>
         </Stack>
         <Text fontWeight="400">{pollData.overview}</Text>
-
         <HStack alignItems="center" space={4} justifyContent="space-between">
           <HStack alignItems="center">
             <Text
