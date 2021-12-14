@@ -36,11 +36,19 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     color: Colors.lightBg,
   },
-  button: {
+  buttonYes: {
     marginTop: 10,
     width: 70,
     marginHorizontal: 5,
     backgroundColor: Colors.primary,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+  buttonNo: {
+    marginTop: 10,
+    width: 70,
+    marginHorizontal: 5,
+    backgroundColor: Colors.secondary,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
   },
@@ -50,7 +58,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
   },
-  voteCount: {
+  voteCountYes: {
+    marginTop: 10,
+    height: 25,
+    width: 70,
+    marginHorizontal: 5,
+    backgroundColor: Colors.primary,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+  },
+  voteCountNo: {
     marginTop: 10,
     height: 25,
     width: 70,

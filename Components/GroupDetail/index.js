@@ -84,7 +84,9 @@ const GroupDetail = ({ route, navigation }) => {
     >
       <Divider />
       <VStack flex={1} justifyContent="flex-end" bg={"#C3C3C3"}>
-        <ScrollView bg="#fff">{content}</ScrollView>
+        <ScrollView bg="#fff" height="50%">
+          {content}
+        </ScrollView>
         <StaggerButton
           navigation={navigation}
           group={group}

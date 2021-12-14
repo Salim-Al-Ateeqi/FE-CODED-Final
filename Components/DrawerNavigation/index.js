@@ -11,6 +11,7 @@ import Home from "../Home/index";
 import Profile from "../Profile";
 import AboutUs from "../AboutUs";
 import HelpAndFeedback from "../HelpAndFeedback";
+import { Colors } from "../../assets/Theme/Colors";
 
 const Drawer = createDrawerNavigator();
 
@@ -21,10 +22,38 @@ const Tabs = () => {
         initialRouteName={Home}
         drawerContent={(props) => <CustomDrawerContent {...props} />}
       >
-        <Drawer.Screen name="Groups" component={Home} />
-        <Drawer.Screen name="Account" component={Profile} />
-        <Drawer.Screen name="About Us" component={AboutUs} />
-        <Drawer.Screen name="Feedback" component={HelpAndFeedback} />
+        <Drawer.Screen
+          name="Groups"
+          component={Home}
+          options={{
+            headerStyle: { backgroundColor: Colors.primary },
+            headerTintColor: "white",
+          }}
+        />
+        <Drawer.Screen
+          name="Account"
+          component={Profile}
+          options={{
+            headerStyle: { backgroundColor: Colors.primary },
+            headerTintColor: "white",
+          }}
+        />
+        <Drawer.Screen
+          name="About Us"
+          component={AboutUs}
+          options={{
+            headerStyle: { backgroundColor: Colors.primary },
+            headerTintColor: "white",
+          }}
+        />
+        <Drawer.Screen
+          name="Feedback"
+          component={HelpAndFeedback}
+          options={{
+            headerStyle: { backgroundColor: Colors.primary },
+            headerTintColor: "white",
+          }}
+        />
       </Drawer.Navigator>
     </Box>
   );
