@@ -10,6 +10,7 @@ import {
   AspectRatio,
   Stack,
   Button,
+  ScrollView,
 } from "native-base";
 import { Image } from "react-native";
 import { Colors } from "../../assets/Theme/Colors";
@@ -97,14 +98,14 @@ const PollItem = ({ pollData, group }) => {
             {pollData.title}
           </Heading>
           <Text fontSize="xs" fontWeight="500" ml="-0.5" mt="-1">
-            {pollData.vote_average}
+            Rating: {pollData.vote_average} ⭐
           </Text>
         </Stack>
         <Text fontWeight="400">{pollData.overview}</Text>
         <HStack alignItems="center" space={4} justifyContent="space-between">
           <HStack alignItems="center">
             <Text
-              color="coolGray.600"
+              color="red.500"
               _dark={{
                 color: "warmGray.200",
               }}

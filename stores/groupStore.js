@@ -182,6 +182,10 @@ class GroupStore {
       runInAction(() => {
         group.members = group.members.filter((member) => member !== memberId);
       });
+      socket.emit("leave-group", {
+        targetGroup: groupId,
+        targetMember: memberId,
+      });
       toast.show({
         title: `You left ${group.name}`,
         status: "info",
