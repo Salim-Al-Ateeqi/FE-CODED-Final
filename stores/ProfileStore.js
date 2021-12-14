@@ -25,6 +25,7 @@ class ProfileStore {
 	};
 
 	updateProfile = async (profileId, updateInfo, toast) => {
+		const id = "id";
 		try {
 			const formData = new FormData();
 			for (const key in updateInfo) {
@@ -38,21 +39,28 @@ class ProfileStore {
 				);
 			});
 			socket.emit("update-profile", res.data);
-			toast.show({
-				title: "Profile Updated",
-				status: "success",
-				placement: "top",
-				duration: 1800,
-				isClosable: false,
-			});
+
+			if (!toast.isActive(id)) {
+				toast.show({
+					id,
+					title: "Profile Updated",
+					status: "success",
+					placement: "top",
+					duration: 1800,
+					isClosable: false,
+				});
+			}
 		} catch (error) {
 			console.log(error);
-			toast.show({
-				title: "Please Try Again.",
-				status: "error",
-				placement: "top",
-				isClosable: false,
-			});
+			if (!toast.isActive(id)) {
+				toast.show({
+					id,
+					title: "Please Try Again.",
+					status: "error",
+					placement: "top",
+					isClosable: false,
+				});
+			}
 		}
 	};
 

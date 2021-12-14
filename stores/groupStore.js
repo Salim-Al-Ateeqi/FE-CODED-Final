@@ -21,6 +21,7 @@ class GroupStore {
 	};
 
 	createGroup = async (group, toast, navigation) => {
+		const id = "id";
 		try {
 			const formData = new FormData();
 			for (const key in group) {
@@ -31,28 +32,36 @@ class GroupStore {
 				this.groups.push(res.data);
 			});
 			socket.emit("new-group", res.data);
-			toast.show({
-				title: "Group Created",
-				status: "success",
-				placement: "top",
-				duration: 1800,
-				isClosable: false,
-			});
+
+			if (!toast.isActive(id)) {
+				toast.show({
+					id,
+					title: "Group Created",
+					status: "success",
+					placement: "top",
+					duration: 1800,
+					isClosable: false,
+				});
+			}
 
 			navigation.navigate("Tabs");
 		} catch (error) {
 			console.log(error);
-			toast.show({
-				title: "Something Went Wrong!",
-				description: "You Broke Something",
-				status: "error",
-				placement: "top",
-				isClosable: false,
-			});
+
+			if (!toast.isActive(id)) {
+				toast.show({
+					id,
+					title: "Please Try Again.",
+					status: "error",
+					placement: "top",
+					isClosable: false,
+				});
+			}
 		}
 	};
 
 	updateGroup = async (groupId, updatedGroup, navigation, toast) => {
+		const id = "id";
 		try {
 			const group = this.groups.find((group) => group._id === groupId);
 
@@ -68,22 +77,29 @@ class GroupStore {
 				);
 			});
 			socket.emit("edit-group", res.data);
-			toast.show({
-				title: "Group Updated!",
-				status: "success",
-				placement: "top",
-				duration: 1800,
-				isClosable: false,
-			});
+
+			if (!toast.isActive(id)) {
+				toast.show({
+					id,
+					title: "Group Updated!",
+					status: "success",
+					placement: "top",
+					duration: 1800,
+					isClosable: false,
+				});
+			}
 		} catch (error) {
 			console.log(error);
-			toast.show({
-				title: "Something Went Wrong!",
-				description: "You Broke Something",
-				status: "error",
-				placement: "top",
-				isClosable: false,
-			});
+
+			if (!toast.isActive(id)) {
+				toast.show({
+					id,
+					title: "Please Try Again.",
+					status: "error",
+					placement: "top",
+					isClosable: false,
+				});
+			}
 		}
 	};
 
@@ -131,22 +147,30 @@ class GroupStore {
 			navigation.goBack();
 		} catch (error) {
 			console.log(error);
+			const id = "id";
+
 			if (error.response.status === 401) {
-				toast.show({
-					title: "Unauthorized",
-					description: "You can't add members. You are not the admin.",
-					status: "warning",
-					placement: "top",
-					isClosable: false,
-				});
+				if (!toast.isActive(id)) {
+					toast.show({
+						id,
+						title: "Unauthorized",
+						description: "You can't add members. You are not the admin.",
+						status: "warning",
+						placement: "top",
+						isClosable: false,
+					});
+				}
 			} else if (error.response.status === 500) {
-				toast.show({
-					title: "Not Found",
-					description: "The number you entered is not found.",
-					status: "warning",
-					placement: "top",
-					isClosable: false,
-				});
+				if (!toast.isActive(id)) {
+					toast.show({
+						id,
+						title: "Not Found",
+						description: "The number you entered is not found.",
+						status: "warning",
+						placement: "top",
+						isClosable: false,
+					});
+				}
 			}
 		}
 	};
