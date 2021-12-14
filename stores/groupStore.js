@@ -123,14 +123,31 @@ class GroupStore {
 			});
 			socket.emit("adding-new-member", res.data);
 			toast.show({
-				title: "Member Added!",
+				title: "Member Added",
 				status: "success",
 				placement: "top",
 				isClosable: false,
 			});
 			navigation.goBack();
 		} catch (error) {
-			console.log(error.response);
+			console.log(error);
+			if (error.response.status === 401) {
+				toast.show({
+					title: "Unauthorized",
+					description: "You can't add members. You are not the admin.",
+					status: "warning",
+					placement: "top",
+					isClosable: false,
+				});
+			} else if (error.response.status === 500) {
+				toast.show({
+					title: "Not Found",
+					description: "The number you entered is not found.",
+					status: "warning",
+					placement: "top",
+					isClosable: false,
+				});
+			}
 		}
 	};
 

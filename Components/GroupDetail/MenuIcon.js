@@ -53,9 +53,7 @@ const MenuIcon = ({ navigation, group }) => {
 				<Box w="100%" px={3} justifyContent="center">
 					{/* Add Update Page for Group */}
 					<Menu.Item
-						onPress={() => {
-							navigation.navigate("EditGroup", { group });
-						}}
+						onPress={() => navigation.navigate("EditGroup", { group })}
 					>
 						Group Info
 					</Menu.Item>
