@@ -125,12 +125,10 @@ const GroupMenuIcon = ({ group, navigation, isOpen, onOpen, onClose }) => {
 			</Actionsheet>
 			<AlertOnDelete
 				group={group}
-				handleDelete={handleDelete}
-				handleLeave={handleLeave}
 				openAlert={openAlert}
 				setOpenAlert={setOpenAlert}
-				onClose={onClose}
-				navigation={navigation}
+				handleDelete={handleDelete}
+				handleLeave={handleLeave}
 			/>
 		</>
 	);

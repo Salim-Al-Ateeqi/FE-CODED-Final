@@ -16,6 +16,7 @@ import {
 } from "native-base";
 import IntlPhoneInput from "react-native-intl-phone-input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Platform } from "react-native";
 
 // components
 import { Colors } from "../../../assets/Theme/Colors";
@@ -78,7 +79,7 @@ const Signin = ({ navigation }) => {
 								<IntlPhoneInput
 									containerStyle={{
 										borderColor: "#d4d4d4",
-										borderWidth: 1,
+										borderWidth: 0.5,
 										height: 50,
 										borderBottomColor: "#D1D3D4",
 										borderRadius: 5,
@@ -100,8 +101,9 @@ const Signin = ({ navigation }) => {
 							<FormControl>
 								<FormControl.Label>Password</FormControl.Label>
 								<Input
+									py={Platform.OS === "ios" ? "4" : "2"}
 									onSubmitEditing={handleSubmit}
-									returnKeyType="go"
+									returnKeyType="send"
 									bg="#fff"
 									placeholder="Enter your password"
 									type="password"

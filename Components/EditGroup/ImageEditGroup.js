@@ -10,7 +10,6 @@ import { Colors } from "../../assets/Theme/Colors";
 
 // stores
 import { baseURL } from "../../stores/baseURL";
-import profileStore from "../../stores/ProfileStore";
 
 const ImageEditGroup = ({
 	group,

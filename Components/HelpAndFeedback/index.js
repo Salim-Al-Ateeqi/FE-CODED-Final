@@ -9,6 +9,7 @@ import {
 	Center,
 	useToast,
 } from "native-base";
+import { Platform } from "react-native";
 
 // components
 import { Colors } from "../../assets/Theme/Colors";
@@ -19,6 +20,7 @@ const HelpAndFeedBack = () => {
 		feedback: "",
 	});
 	const toast = useToast();
+	const id = "prevent-duplicate";
 
 	const handleSubmit = () => {
 		setFeedbackData("");
@@ -28,7 +30,8 @@ const HelpAndFeedBack = () => {
 				title: "Thank you for your feedback.",
 				status: "success",
 				placement: "top",
-				duration: 2500,
+				duration: 2000,
+				isClosable: false,
 			});
 		}
 	};
@@ -61,6 +64,7 @@ const HelpAndFeedBack = () => {
 					<FormControl>
 						<FormControl.Label>Email</FormControl.Label>
 						<Input
+							py={Platform.OS === "ios" ? "4" : "2"}
 							Value={feedbackData.email}
 							placeholder="Enter email"
 							type="email"
@@ -76,6 +80,8 @@ const HelpAndFeedBack = () => {
 					<FormControl>
 						<FormControl.Label>Describe Your Feedback</FormControl.Label>
 						<Input
+							numberOfLines={6}
+							multiline={true}
 							value={feedbackData.feedback}
 							bg={"#fff"}
 							h={100}

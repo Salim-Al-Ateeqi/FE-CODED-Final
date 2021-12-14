@@ -10,7 +10,7 @@ import {
 	Button,
 	Text,
 } from "native-base";
-import { TouchableHighlight, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 // components
 import GroupItem from "./GroupItem";
@@ -46,7 +46,7 @@ const Home = ({ navigation }) => {
 	};
 
 	return (
-		<Box bg="white" flex="1">
+		<Box bg="white" flex="1" mb={2}>
 			<ScrollView>
 				<Divider />
 				<VStack mt="1">

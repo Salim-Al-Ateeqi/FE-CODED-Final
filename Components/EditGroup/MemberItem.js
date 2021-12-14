@@ -20,6 +20,7 @@ const MemberItem = ({ member }) => {
 			<Box flex={1} justifyContent={"center"} pl="5" pr="5" py="2" h={55}>
 				<HStack alignItems="center" space={3}>
 					<Image
+						defaultSource={require("../../assets/Media/defaultUserImage.jpg")}
 						borderRadius="50"
 						alt="Members Image"
 						style={{ width: 40, height: 40, borderRadius: 50 }}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
 import {
 	Center,
 	Icon,
@@ -11,8 +12,7 @@ import {
 	Box,
 	useToast,
 } from "native-base";
-import { KeyboardAvoidingView } from "react-native";
-import { observer } from "mobx-react";
+import { KeyboardAvoidingView, Platform } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 
 // components
@@ -51,9 +51,9 @@ const Profile = () => {
 				<ImageProfile
 					userProfile={userProfile}
 					updatedProfile={updatedProfile}
+					setUpdatedProfile={setUpdatedProfile}
 					imageChanged={imageChanged}
 					setImageChanged={setImageChanged}
-					setUpdatedProfile={setUpdatedProfile}
 				/>
 
 				<KeyboardAvoidingView keyboardVerticalOffset={5}>
@@ -62,6 +62,7 @@ const Profile = () => {
 							<FormControl w="100%" mb="2">
 								<FormControl.Label ml="3">Name</FormControl.Label>
 								<Input
+									py={Platform.OS === "ios" ? "4" : "2"}
 									variant={"underlined"}
 									_focus={{ borderColor: Colors.primary }}
 									defaultValue={userProfile.profile.name}
@@ -83,7 +84,9 @@ const Profile = () => {
 										/>
 									}
 									onChangeText={(name) =>
-										setUpdatedProfile({ ...userProfile.profile, name: name })
+										imageChanged
+											? setUpdatedProfile({ ...updatedProfile, name })
+											: setUpdatedProfile({ ...userProfile.profile, name })
 									}
 								/>
 							</FormControl>
@@ -91,6 +94,7 @@ const Profile = () => {
 							<FormControl w="100%" my="2">
 								<FormControl.Label ml="3">Status</FormControl.Label>
 								<Input
+									py={Platform.OS === "ios" ? "4" : "2"}
 									variant={"underlined"}
 									_focus={{ borderColor: Colors.primary }}
 									defaultValue={userProfile.profile.status}
@@ -112,7 +116,9 @@ const Profile = () => {
 										/>
 									}
 									onChangeText={(status) =>
-										setUpdatedProfile({ ...userProfile.profile, status })
+										imageChanged
+											? setUpdatedProfile({ ...updatedProfile, status })
+											: setUpdatedProfile({ ...userProfile.profile, status })
 									}
 								/>
 							</FormControl>

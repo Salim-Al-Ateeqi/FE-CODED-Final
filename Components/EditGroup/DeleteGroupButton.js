@@ -41,7 +41,7 @@ const DeleteGroupButton = ({ group, navigation }) => {
 	};
 
 	return (
-		<Box flex={1} justifyContent={"center"} pl="5" pr="5" py="2" h={55}>
+		<Box flex={1} justifyContent={"center"} pl="6" pr="5" py="2" h={55}>
 			{authStore.user._id === group.owner ? (
 				<TouchableOpacity onPress={showAlert}>
 					<HStack alignItems="center" space={4}>

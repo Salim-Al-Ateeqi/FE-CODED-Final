@@ -9,10 +9,10 @@ import { baseURL } from "../../stores/baseURL";
 
 const ImageProfile = ({
 	userProfile,
-	imageChanged,
-	setImageChanged,
 	updatedProfile,
 	setUpdatedProfile,
+	imageChanged,
+	setImageChanged,
 }) => {
 	useEffect(() => {
 		(async () => {
@@ -44,7 +44,19 @@ const ImageProfile = ({
 					name: filename,
 					type: match ? `image/${match[1]}` : `image`,
 				};
-				setUpdatedProfile({ ...userProfile.profile, image: image });
+
+				setUpdatedProfile({
+					...updatedProfile,
+					image: image,
+					name:
+						updatedProfile.name === ""
+							? userProfile.profile.name
+							: updatedProfile.name,
+					status:
+						updatedProfile.status === ""
+							? userProfile.profile.status
+							: updatedProfile.status,
+				});
 				setImageChanged(true);
 			}
 		} catch (error) {
