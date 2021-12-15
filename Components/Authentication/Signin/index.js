@@ -81,19 +81,21 @@ const Signin = ({ navigation }) => {
 										borderColor: "#d4d4d4",
 										borderWidth: 0.5,
 										height: 50,
-										borderBottomColor: "#D1D3D4",
 										borderRadius: 5,
 									}}
-									flagStyle={{ fontSize: 25 }}
+									flagStyle={{ fontSize: 20, marginRight: 2 }}
 									phoneInputStyle={{
-										lineHeight: 18,
+										lineHeight: 20,
+										marginLeft: 5,
+
 										// if english or arabic
 										// textAlign: i18nStore.language === "en" ? "left" : "right",
 									}}
 									onChangeText={handleNumber}
 									defaultCountry="KW"
 									modalCountryItemCountryNameStyle={{
-										fontSize: 15,
+										fontSize: 13,
+										marginLeft: 8,
 									}}
 								/>
 							</FormControl>
