@@ -1,7 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { HStack, Center, Text, Box } from "native-base";
+import { HStack, VStack, Center, Text, Box } from "native-base";
 import { Image } from "react-native";
+
+import moment from "moment";
 
 // stores
 import authStore from "../../stores/authStore";
@@ -13,6 +15,8 @@ const ChatItem = ({ chatData, group }) => {
 	const userProfile = profileStore.profiles.find(
 		(profile) => profile._id === chatData.sentFrom
 	);
+
+
 
 	return (
 		<Box>
@@ -26,8 +30,16 @@ const ChatItem = ({ chatData, group }) => {
 							uri: baseURL + userProfile.profile.image,
 						}}
 					/>
-					<Center mx="2" bg={Colors.secondary} px={3} borderRadius={50}>
-						<Text color={Colors.lightBg}>{chatData.message}</Text>
+					<Center mx="2" bg={Colors.secondary} px={3} borderRadius={10} maxW={250}>
+						<VStack>
+							<Text color={Colors.primary} fontWeight={"bold"}>	
+								{userProfile.profile.name}
+							</Text>
+							<Text color={Colors.lightBg}>{chatData.message}</Text>
+							<Text size={5} width={250} m={2} ml={'auto'}>
+								{moment(chatData.createdAt).fromNow()}
+							</Text>
+						</VStack>
 					</Center>
 				</HStack>
 			) : (
@@ -40,8 +52,16 @@ const ChatItem = ({ chatData, group }) => {
 							uri: baseURL + userProfile.profile.image,
 						}}
 					/>
-					<Center mx="2" bg={Colors.tertiary} px={3} borderRadius={50}>
-						<Text color={Colors.lightBg}>{chatData.message}</Text>
+					<Center mx="2" bg={Colors.tertiary} px={3} borderRadius={10} maxW={250}>
+						<VStack>
+							<Text color={Colors.primary} fontWeight={"bold"}>	
+								{userProfile.profile.name}
+							</Text>
+							<Text color={Colors.lightBg}>{chatData.message}</Text>
+							<Text size={5} width={250} m={2} ml={'auto'}>
+								{moment(chatData.createdAt).fromNow()}
+							</Text>
+						</VStack>
 					</Center>
 				</HStack>
 			)}
