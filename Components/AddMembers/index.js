@@ -63,7 +63,7 @@ const AddMembers = ({ navigation, route }) => {
 								searchIconColor={Colors.tertiary}
 								toggleIconColor={Colors.tertiary}
 								multiOptionContainerStyle={{
-									backgroundColor: Colors.tertiary,
+									backgroundColor: Colors.primary,
 								}}
 								label="New Members List:"
 								options={K_OPTIONS}
@@ -77,7 +77,7 @@ const AddMembers = ({ navigation, route }) => {
 						<VStack mb={5} p="5">
 							<Button
 								mt="2"
-								style={{ backgroundColor: Colors.primary }}
+								style={{ backgroundColor: Colors.secondary }}
 								onPress={handleSubmit}
 							>
 								Add Members
