@@ -49,7 +49,7 @@ const Signin = ({ navigation }) => {
 	return (
 		<KeyboardAwareScrollView>
 			<ScrollView>
-				<Center mt="20">
+				<Center>
 					<Box safeArea p="2" py="8" w="100%" maxW="290">
 						<Heading
 							size="lg"
@@ -104,6 +104,8 @@ const Signin = ({ navigation }) => {
 									py={Platform.OS === "ios" ? "4" : "2"}
 									onSubmitEditing={handleSubmit}
 									returnKeyType="send"
+									enablesReturnKeyAutomatically={true}
+									KeyboardAwareScrollView={true}
 									bg="#fff"
 									placeholder="Enter your password"
 									type="password"

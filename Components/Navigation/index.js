@@ -87,14 +87,18 @@ const RootNavigator = () => {
 						name="Signup"
 						component={Signup}
 						options={{
-							headerShown: false,
+							headerTitle: "Register",
+							headerStyle: { backgroundColor: Colors.primary },
+							headerTintColor: Colors.lightBg,
 						}}
 					/>
 					<Screen
 						name="Signin"
 						component={Signin}
 						options={{
-							headerShown: false,
+							headerTitle: "Login",
+							headerStyle: { backgroundColor: Colors.primary },
+							headerTintColor: Colors.lightBg,
 						}}
 					/>
 
@@ -121,7 +125,7 @@ const RootNavigator = () => {
 						component={AddMembers}
 						options={{
 							headerShown: true,
-							headerTitle: "Add Members",
+							headerTitle: "Add Contacts",
 							headerStyle: { backgroundColor: Colors.primary },
 							headerTintColor: Colors.lightBg,
 						}}

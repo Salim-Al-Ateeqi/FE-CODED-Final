@@ -64,8 +64,8 @@ const Signup = ({ navigation }) => {
 	return (
 		<KeyboardAwareScrollView>
 			<ScrollView>
-				<Center mt="20">
-					<Box safeArea p="2" py="8" w="100%" maxW="290">
+				<Center>
+					<Box safeArea p="2" py="2" w="100%" maxW="290">
 						<Heading
 							size="lg"
 							fontWeight="600"
