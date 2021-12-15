@@ -17,6 +17,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import groupStore from "../../stores/groupStore";
 import styles from "./styles";
 import movieStore from "../../stores/movieStore";
+import moment from "moment";
 
 const FinalizeMoviePoll = ({ route, navigation }) => {
   const { movie } = route.params;
@@ -56,8 +57,20 @@ const FinalizeMoviePoll = ({ route, navigation }) => {
   };
 
   const handleSubmit = () => {
-    movieStore.clearSearchData();
-    groupStore.createPoll(group._id, pollData, navigation, toast);
+    if (moment(pollData.expiration).isSameOrAfter(moment())) {
+      movieStore.clearSearchData();
+      groupStore.createPoll(group._id, pollData, navigation, toast);
+    } else {
+      toast.show({
+        title: `Time Selection Error`,
+        description:
+          "Current date/time is set in the past. Please select a date/time in the future!",
+        status: "error",
+        placement: "top",
+        duration: 3000,
+        isClosable: false,
+      });
+    }
   };
 
   return (
