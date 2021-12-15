@@ -29,7 +29,7 @@ const HeaderDetail = ({ group, navigation }) => {
               borderRadius: 30,
               marginBottom: 5,
             }}
-            defaultSource={require("../../../assets/Media/defaultGroupImage.jpg")}
+            defaultSource={require("../../../assets/Media/defaultUserImage.jpg")}
             source={{
               uri: baseURL + group.image,
             }}
@@ -43,7 +43,7 @@ const HeaderDetail = ({ group, navigation }) => {
               borderRadius: 30,
               marginBottom: 5,
             }}
-            defaultSource={require("../../../assets/Media/defaultGroupImage.jpg")}
+            defaultSource={require("../../../assets/Media/defaultUserImage.jpg")}
           />
         )}
 

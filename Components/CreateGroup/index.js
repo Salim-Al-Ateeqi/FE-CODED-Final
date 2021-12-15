@@ -29,7 +29,7 @@ import { baseURL } from "../../stores/baseURL";
 const CreateGroup = ({ navigation }) => {
   const [group, setGroup] = useState({
     name: "",
-    image: "/media/defaultGroupImage.jpg",
+    image: "/media/defaultUserImage.jpg",
   });
   const [isInvalidStatus, setIsInvalidStatus] = useState(false);
 
