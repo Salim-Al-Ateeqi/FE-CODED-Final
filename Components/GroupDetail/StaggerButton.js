@@ -5,7 +5,7 @@ import styles from "./styles";
 
 const StaggerButton = ({ navigation, group, onToggle, isOpen, onClose }) => {
 	return (
-		<Box ml={5} alignItems="flex-start">
+		<Box alignItems="flex-start">
 			<Stagger
 				visible={isOpen}
 				initial={{
@@ -40,6 +40,7 @@ const StaggerButton = ({ navigation, group, onToggle, isOpen, onClose }) => {
 				}}
 			>
 				<IconButton
+					ml={5}
 					onPress={() => {
 						navigation.navigate("MoviePoll", { group });
 						onClose();

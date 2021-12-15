@@ -64,7 +64,7 @@ const Profile = () => {
 								<Input
 									py={Platform.OS === "ios" ? "4" : "2"}
 									variant={"underlined"}
-									_focus={{ borderColor: Colors.primary }}
+									_focus={{ borderColor: Colors.secondary }}
 									defaultValue={userProfile.profile.name}
 									placeholder="Edit your name"
 									InputLeftElement={
@@ -96,7 +96,7 @@ const Profile = () => {
 								<Input
 									py={Platform.OS === "ios" ? "4" : "2"}
 									variant={"underlined"}
-									_focus={{ borderColor: Colors.primary }}
+									_focus={{ borderColor: Colors.secondary }}
 									defaultValue={userProfile.profile.status}
 									placeholder="Edit your status"
 									InputLeftElement={
@@ -131,7 +131,7 @@ const Profile = () => {
 					mr={3}
 					mt={3}
 					alignSelf={"flex-end"}
-					style={{ backgroundColor: Colors.primary }}
+					style={{ backgroundColor: Colors.secondary }}
 					_text={{
 						color: Colors.lightBg,
 					}}

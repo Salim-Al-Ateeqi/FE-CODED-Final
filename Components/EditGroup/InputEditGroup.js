@@ -17,7 +17,9 @@ const InputEditGroup = ({
 }) => {
 	return (
 		<FormControl>
-			<FormControl.Label ml="3">Group Name</FormControl.Label>
+			<FormControl.Label ml="3" _text={{ color: Colors.primary }}>
+				Group Name
+			</FormControl.Label>
 			<HStack justifyContent="space-evenly">
 				<Input
 					py={Platform.OS === "ios" ? "4" : "2"}
@@ -25,7 +27,7 @@ const InputEditGroup = ({
 					// onSubmitEditing={handleUpdate}
 					autoFocus={focusOnInput}
 					w="100%"
-					_focus={{ borderColor: Colors.primary }}
+					_focus={{ borderColor: Colors.secondary }}
 					variant={"underlined"}
 					defaultValue={group.name}
 					placeholder="Edit your name"

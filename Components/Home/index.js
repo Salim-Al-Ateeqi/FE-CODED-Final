@@ -58,13 +58,13 @@ const Home = ({ navigation }) => {
 						my={2}
 					>
 						<TouchableOpacity activeOpacity={0.7}>
-							<Text fontWeight={"semibold"} underline color={Colors.primary}>
+							<Text fontWeight={"semibold"} underline color={Colors.secondary}>
 								Broadcast List
 							</Text>
 						</TouchableOpacity>
 
 						<TouchableOpacity activeOpacity={0.7} onPress={handlePress}>
-							<Text fontWeight={"semibold"} underline color={Colors.primary}>
+							<Text fontWeight={"semibold"} underline color={Colors.secondary}>
 								Create Group
 							</Text>
 						</TouchableOpacity>

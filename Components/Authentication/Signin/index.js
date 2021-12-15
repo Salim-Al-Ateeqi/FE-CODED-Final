@@ -107,7 +107,7 @@ const Signin = ({ navigation }) => {
 									bg="#fff"
 									placeholder="Enter your password"
 									type="password"
-									_focus={{ borderColor: Colors.primary }}
+									_focus={{ borderColor: Colors.secondary }}
 									onChangeText={(password) =>
 										setCredentials({ ...credentials, password })
 									}
@@ -116,7 +116,7 @@ const Signin = ({ navigation }) => {
 
 							<Button
 								mt="2"
-								style={{ backgroundColor: Colors.primary }}
+								style={{ backgroundColor: Colors.secondary }}
 								onPress={handleSubmit}
 							>
 								Login
@@ -133,7 +133,7 @@ const Signin = ({ navigation }) => {
 								</Text>
 								<Link
 									_text={{
-										color: "#52525b",
+										color: Colors.primary,
 										fontWeight: "bold",
 										fontSize: "sm",
 									}}

@@ -91,7 +91,7 @@ const HelpAndFeedBack = () => {
 							type="email"
 							bg={"#fff"}
 							keyboardType="email-address"
-							_focus={{ borderColor: Colors.primary }}
+							_focus={{ borderColor: Colors.secondary }}
 							onChangeText={(email) =>
 								setFeedbackData({ ...feedbackData, email })
 							}
@@ -111,7 +111,7 @@ const HelpAndFeedBack = () => {
 							bg={"#fff"}
 							h={100}
 							placeholder="Enter feedback"
-							_focus={{ borderColor: Colors.primary }}
+							_focus={{ borderColor: Colors.secondary }}
 							onChangeText={(feedback) =>
 								setFeedbackData({ ...feedbackData, feedback })
 							}
@@ -123,7 +123,7 @@ const HelpAndFeedBack = () => {
 
 					<Button
 						mt="2"
-						style={{ backgroundColor: Colors.primary }}
+						style={{ backgroundColor: Colors.yellow }}
 						onPress={handleSubmit}
 					>
 						Send
