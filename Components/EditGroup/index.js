@@ -38,7 +38,9 @@ const EditGroup = ({ route, navigation }) => {
 
 	const groupMembers = profileStore.profiles
 		.filter((profile) => group.members.includes(profile._id))
-		.map((member) => <MemberItem key={member._id} member={member} />);
+		.map((member) => (
+			<MemberItem key={member._id} member={member} group={group} />
+		));
 
 	const groupOwner = profileStore.profiles.find(
 		(profile) => profile._id === group.owner
