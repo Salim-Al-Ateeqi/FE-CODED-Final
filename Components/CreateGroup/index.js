@@ -100,12 +100,12 @@ const CreateGroup = ({ navigation }) => {
 										rounded={50}
 										alignSelf="flex-end"
 										zIndex={1}
-										colorScheme="coolGray"
+										style={{ backgroundColor: Colors.tertiary }}
 									>
 										<Icon
 											as={<MaterialIcons name="edit" />}
 											size={6}
-											color="muted.400"
+											color={Colors.lightBg}
 										/>
 									</Badge>
 									<Image
@@ -124,12 +124,12 @@ const CreateGroup = ({ navigation }) => {
 										rounded={50}
 										alignSelf="flex-end"
 										zIndex={1}
-										colorScheme="coolGray"
+										style={{ backgroundColor: Colors.tertiary }}
 									>
 										<Icon
 											as={<MaterialIcons name="edit" />}
 											size={6}
-											color="muted.400"
+											color={Colors.lightBg}
 										/>
 									</Badge>
 									<Image

@@ -74,12 +74,12 @@ const ImageEditGroup = ({
 								rounded={50}
 								alignSelf="flex-end"
 								zIndex={1}
-								style={{ backgroundColor: Colors.lightBg }}
+								style={{ backgroundColor: Colors.tertiary }}
 							>
 								<Icon
 									as={<MaterialIcons name="edit" />}
 									size={6}
-									color="muted.400"
+									color={Colors.lightBg}
 								/>
 							</Badge>
 							<Image
@@ -100,12 +100,12 @@ const ImageEditGroup = ({
 								rounded={50}
 								alignSelf="flex-end"
 								zIndex={1}
-								style={{ backgroundColor: Colors.lightBg }}
+								style={{ backgroundColor: Colors.tertiary }}
 							>
 								<Icon
 									as={<MaterialIcons name="edit" />}
 									size={6}
-									color="muted.400"
+									color={Colors.lightBg}
 								/>
 							</Badge>
 							<Image

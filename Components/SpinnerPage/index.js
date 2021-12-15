@@ -8,8 +8,8 @@ const SpinnerPage = () => {
 	return (
 		<Center flex={1} alignItems={"center"}>
 			<HStack space={2} alignItems="center">
-				<Spinner accessibilityLabel="Loading posts" color={Colors.primary} />
-				<Heading color={Colors.primary} fontSize="lg">
+				<Spinner accessibilityLabel="Loading posts" color={Colors.secondary} />
+				<Heading color={Colors.secondary} fontSize="lg">
 					Loading
 				</Heading>
 			</HStack>

@@ -4,6 +4,9 @@ import { Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
 
+// components
+import { Colors } from "../../assets/Theme/Colors";
+
 // stores
 import { baseURL } from "../../stores/baseURL";
 
@@ -76,12 +79,12 @@ const ImageProfile = ({
 							rounded={50}
 							alignSelf="flex-end"
 							zIndex={1}
-							colorScheme="coolGray"
+							style={{ backgroundColor: Colors.tertiary }}
 						>
 							<Icon
 								as={<MaterialIcons name="edit" />}
 								size={6}
-								color="muted.400"
+								color={Colors.lightBg}
 							/>
 						</Badge>
 
@@ -99,12 +102,12 @@ const ImageProfile = ({
 							rounded={50}
 							alignSelf="flex-end"
 							zIndex={1}
-							colorScheme="coolGray"
+							style={{ backgroundColor: Colors.primary }}
 						>
 							<Icon
 								as={<MaterialIcons name="edit" />}
 								size={6}
-								color="muted.400"
+								color={Colors.lightBg}
 							/>
 						</Badge>
 						<Image
