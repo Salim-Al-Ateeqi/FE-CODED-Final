@@ -10,6 +10,7 @@ import {
 	HStack,
 	useToast,
 } from "native-base";
+import moment from "moment";
 
 // components
 import { Colors } from "../../assets/Theme/Colors";
@@ -38,6 +39,12 @@ const EditGroup = ({ route, navigation }) => {
 	const groupMembers = profileStore.profiles
 		.filter((profile) => group.members.includes(profile._id))
 		.map((member) => <MemberItem key={member._id} member={member} />);
+
+	const groupOwner = profileStore.profiles.find(
+		(profile) => profile._id === group.owner
+	);
+
+	const groupCreated = moment(group.updatedAt).format("DD MMM yyyy");
 
 	const handleUpdate = () => {
 		groupStore.updateGroup(group._id, updatedGroup, navigation, toast);
@@ -89,7 +96,13 @@ const EditGroup = ({ route, navigation }) => {
 
 					<VStack mb={5}>
 						<HStack w="100%">
-							<Text fontSize={12} ml="3" mb="2">
+							<Text
+								fontSize={12}
+								ml="3"
+								mb="2"
+								color={"#8B939C"}
+								fontWeight={"semibold"}
+							>
 								{group.members.length} Contacts
 							</Text>
 						</HStack>
@@ -103,6 +116,14 @@ const EditGroup = ({ route, navigation }) => {
 				<Divider mt={5} />
 				<DeleteGroupButton group={group} navigation={navigation} />
 				<Divider mb={2} />
+				<VStack ml="3" mb={5}>
+					<Text fontWeight={"semibold"} color={"#8B939C"}>
+						Created By {groupOwner.profile.name}
+					</Text>
+					<Text fontWeight={"semibold"} color={"#8B939C"}>
+						Created {groupCreated}
+					</Text>
+				</VStack>
 			</ScrollView>
 		</Box>
 	);
