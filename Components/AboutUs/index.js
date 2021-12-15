@@ -54,10 +54,10 @@ const AboutUs = () => {
 							fontWeight="semibold"
 							fontSize="xs"
 							_light={{
-								color: Colors.primary,
+								color: Colors.secondary,
 							}}
 							_dark={{
-								color: Colors.primary,
+								color: Colors.tertiary,
 							}}
 							fontWeight="500"
 							ml="-0.5"
@@ -76,7 +76,7 @@ const AboutUs = () => {
 						mt={5}
 						alignSelf={"center"}
 						onPress={() => navigation.navigate("Feedback")}
-						style={{ backgroundColor: Colors.primary }}
+						style={{ backgroundColor: Colors.secondary }}
 					>
 						Send Feedback
 					</Button>

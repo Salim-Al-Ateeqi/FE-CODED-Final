@@ -84,7 +84,7 @@ const ValidateTokens = ({ navigation }) => {
 									h="50"
 									keyboardType={"number-pad"}
 									placeholder="Enter Your Token"
-									_focus={{ borderColor: Colors.primary }}
+									_focus={{ borderColor: Colors.secondary }}
 									onChangeText={(SMSToken) =>
 										setUserInput({ ...userInput, SMSToken })
 									}
@@ -93,7 +93,7 @@ const ValidateTokens = ({ navigation }) => {
 
 							<Button
 								mt="2"
-								style={{ backgroundColor: Colors.primary }}
+								style={{ backgroundColor: Colors.secondary }}
 								onPress={handleSubmit}
 							>
 								Register

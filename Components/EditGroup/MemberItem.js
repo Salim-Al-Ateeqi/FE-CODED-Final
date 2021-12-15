@@ -11,6 +11,9 @@ import {
 } from "native-base";
 import { Image } from "react-native";
 
+//components
+import { Colors } from "../../assets/Theme/Colors";
+
 // stores
 import { baseURL } from "../../stores/baseURL";
 
@@ -27,7 +30,7 @@ const MemberItem = ({ member }) => {
 						source={{ uri: baseURL + member.profile.image }}
 					/>
 					<VStack>
-						<Text color="coolGray.800" _dark={{ color: "warmGray.50" }} bold>
+						<Text color={Colors.primary} _dark={{ color: "warmGray.50" }} bold>
 							{member.profile.name}
 						</Text>
 					</VStack>
