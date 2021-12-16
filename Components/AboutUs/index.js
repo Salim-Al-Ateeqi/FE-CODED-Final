@@ -48,7 +48,7 @@ const AboutUs = () => {
         <Stack p="4" space={3}>
           <Stack space={2}>
             <Heading size="md" ml="-1">
-              Poll Up!***
+              Poll Up!
             </Heading>
             <Text
               fontWeight="semibold"
