@@ -82,6 +82,8 @@ const PollItem = ({ pollData, group }) => {
             }}
             alt="image"
             resizeMode="contain"
+            borderTopLeftRadius={5}
+            borderTopRightRadius={5}
           />
         </AspectRatio>
         <Center
