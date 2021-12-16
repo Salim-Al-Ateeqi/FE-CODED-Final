@@ -68,8 +68,7 @@ const AboutUs = () => {
           </Stack>
           <Text fontWeight="400">
             This application simplifies communication between family and
-            friends. Indecisive? Create a group poll and start voting
-            immediately with family and friends!
+            friends. Indecisive? Create a group poll and start voting now!
           </Text>
           <Button
             w={"45%"}
